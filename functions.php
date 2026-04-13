@@ -375,7 +375,7 @@ function fest_setting(string $key): string {
 function fest_social_icons(): array {
     return [
         'instagram' => [
-            'url' => fest_setting('fest_instagram') ?: 'https://instagram.com/afrobass.ca',
+            'url' => fest_setting('fest_instagram') ?: 'https://instagram.com/afrobassfest',
             'svg' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>',
         ],
         'youtube' => [
@@ -531,7 +531,7 @@ function fest_seo_meta() {
         "name": "Afrobass Inc.",
         "url": "https://afrobass.com",
         "sameAs": [
-          "https://instagram.com/afrobass.ca",
+          "https://instagram.com/afrobassfest",
           "https://www.youtube.com/@Afrobass",
           "https://www.tiktok.com/@afrobass",
           "https://facebook.com/afrobass.ca",
@@ -572,7 +572,7 @@ function fest_seo_meta() {
         "addressCountry": "CA"
       },
       "sameAs": [
-        "https://instagram.com/afrobass.ca",
+        "https://instagram.com/afrobassfest",
         "https://www.youtube.com/@Afrobass",
         "https://www.tiktok.com/@afrobass",
         "https://facebook.com/afrobass.ca",
