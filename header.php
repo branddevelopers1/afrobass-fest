@@ -32,16 +32,12 @@ $primary_nav = [
   ['About',   '/about'],
 ];
 
-/* Full menu — everything, shown in the fullscreen overlay */
+/* Full menu — essential pages only */
 $full_nav = [
-  ['Lineup',    '/lineup'],
-  ['Schedule',  '/schedule'],
-  ['Tickets',   '/tickets'],
-  ['About',     '/about'],
-  ['Sponsors',  '/sponsors'],
-  ['Apply',     '/submissions'],
-  ['FAQ',       '/faq'],
-  ['Contact',   '/contact'],
+  ['Lineup',   '/lineup'],
+  ['Tickets',  '/tickets'],
+  ['FAQ',      '/faq'],
+  ['Contact',  '/contact'],
 ];
 ?>
 
