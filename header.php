@@ -7,8 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
 <?php wp_head(); ?>
-<!-- Showpass SDK — loaded globally for ticket modal buttons -->
-<script src="https://www.showpass.com/static/libs/sdk.js" defer></script>
 </head>
 <body <?php body_class('fest-site'); ?> style="background:#0a0608;cursor:none;overflow-x:hidden;">
 <?php wp_body_open(); ?>
@@ -53,14 +51,12 @@
 
   <!-- Tickets CTA + Hamburger -->
   <div style="display:flex;align-items:center;gap:16px;">
-    <button
-      class="showpass-widget-trigger fest-topbar-ticket-btn"
-      data-sp-id="1521242"
-      data-sp-type="event"
-      style="font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:#FF2D8A;color:#fff;padding:12px 24px;border-radius:100px;border:none;white-space:nowrap;transition:box-shadow 0.2s;cursor:pointer;"
-      onmouseover="this.style.boxShadow='0 8px 24px rgba(255,45,138,0.4)'" onmouseout="this.style.boxShadow='none'">
+    <a href="<?php echo esc_url(home_url('/tickets')); ?>"
+       style="font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:#FF2D8A;color:#fff;padding:12px 24px;border-radius:100px;text-decoration:none;white-space:nowrap;transition:box-shadow 0.2s;"
+       onmouseover="this.style.boxShadow='0 8px 24px rgba(255,45,138,0.4)'" onmouseout="this.style.boxShadow='none'"
+       class="fest-topbar-ticket-btn">
       Get Tickets
-    </button>
+    </a>
     <!-- Hamburger (mobile) -->
     <button id="fest-hamburger" aria-label="Menu" style="display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;">
       <span style="width:22px;height:1.5px;background:#fff;display:block;transition:transform 0.3s,opacity 0.3s;"></span>
@@ -79,13 +75,10 @@
       <?php echo esc_html($link[0]); ?>
     </a>
   <?php endforeach; ?>
-  <button
-     class="showpass-widget-trigger"
-     data-sp-id="1521242"
-     data-sp-type="event"
-     style="margin-top:32px;display:inline-block;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:#FF2D8A;color:#fff;padding:18px 40px;border-radius:100px;border:none;cursor:pointer;">
+  <a href="<?php echo esc_url(home_url('/tickets')); ?>"
+     style="margin-top:32px;display:inline-block;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:#FF2D8A;color:#fff;padding:18px 40px;border-radius:100px;text-decoration:none;">
     Get Tickets &rarr;
-  </button>
+  </a>
 </div>
 
 <style>
