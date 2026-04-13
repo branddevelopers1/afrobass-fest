@@ -25,19 +25,18 @@
 $current     = $_SERVER['REQUEST_URI'] ?? '';
 $ticket_url  = home_url('/tickets');
 
-/* Primary nav — 3 links only */
+/* Primary nav — 2 links only, clean */
 $primary_nav = [
   ['Lineup',  '/lineup'],
-  ['Schedule','/schedule'],
-  ['About',   '/about'],
+  ['Tickets', '/tickets'],
 ];
 
-/* Full menu — essential pages only */
+/* Full menu — 4 items */
 $full_nav = [
-  ['Lineup',   '/lineup'],
-  ['Tickets',  '/tickets'],
-  ['FAQ',      '/faq'],
-  ['Contact',  '/contact'],
+  ['Line Up', '/lineup'],
+  ['FAQ',     '/faq'],
+  ['Contact', '/contact'],
+  ['Join',    '/submissions'],
 ];
 ?>
 
