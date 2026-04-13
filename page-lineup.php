@@ -14,15 +14,9 @@ $artists = new WP_Query([
 ]);
 ?>
 
-<div style="padding-top:72px;">
+<div style="padding-top:96px;">
   <!-- Page Hero -->
-  <div class="fest-lineup-hero">
-    <div class="fest-kicker fest-reveal">Afrobass Music Festival 2026</div>
-    <h1 class="fest-title fest-reveal" style="margin-bottom:20px;">The Lineup</h1>
-    <p style="font-size:16px;font-weight:300;color:rgba(255,255,255,0.4);max-width:480px;line-height:1.7;" class="fest-reveal">
-      International artists, DJs, and performers celebrating Afrobeats, Amapiano, and Afro-Caribbean music. Toronto, August 15, 2026.
-    </p>
-  </div>
+  
 
   <!-- Artists Grid -->
   <section style="padding:0 0 120px;">

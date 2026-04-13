@@ -9,16 +9,10 @@ $phone = fest_setting('fest_phone') ?: '416.846.6483';
 $ig    = fest_setting('fest_instagram') ?: 'https://instagram.com/afrobass.ca';
 ?>
 
-<div style="padding-top:72px;">
+<div style="padding-top:96px;">
 
   <!-- Hero -->
-  <div class="fest-lineup-hero">
-    <div class="fest-kicker fest-reveal">Afrobass Music Festival 2026</div>
-    <h1 class="fest-title fest-reveal" style="margin-bottom:20px;">Get In<br>Touch</h1>
-    <p style="font-size:16px;font-weight:300;color:rgba(255,255,255,0.4);max-width:480px;line-height:1.7;" class="fest-reveal">
-      General enquiries, press, sponsorship, or just want to say hello — we're here.
-    </p>
-  </div>
+  
 
   <!-- Contact Grid -->
   <section style="padding:0 56px 120px;">

@@ -95,16 +95,10 @@ $faqs = [
 ];
 ?>
 
-<div style="padding-top:72px;">
+<div style="padding-top:96px;">
 
   <!-- Hero -->
-  <div class="fest-lineup-hero">
-    <div class="fest-kicker fest-reveal">Afrobass Music Festival 2026</div>
-    <h1 class="fest-title fest-reveal" style="margin-bottom:20px;">Frequently<br>Asked<br>Questions</h1>
-    <p style="font-size:16px;font-weight:300;color:rgba(255,255,255,0.4);max-width:480px;line-height:1.7;" class="fest-reveal">
-      Everything you need to know about Afrobass Music Festival. Can't find your answer? <a href="mailto:<?php echo esc_attr($email); ?>" style="color:#FF4500;text-decoration:none;">Email us directly</a>.
-    </p>
-  </div>
+  
 
   <!-- FAQ Content -->
   <section style="padding:0 56px 120px;display:grid;grid-template-columns:280px 1fr;gap:80px;align-items:start;">

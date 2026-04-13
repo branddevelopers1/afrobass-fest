@@ -251,18 +251,10 @@ $email = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
 }
 </style>
 
-<div style="padding-top:72px;">
+<div style="padding-top:96px;">
 
   <!-- ── HERO ── -->
-  <div class="join-hero fest-reveal">
-    <div class="fest-kicker">Afrobass Music Festival 2026</div>
-    <h1 style="font-family:'Unbounded',sans-serif;font-size:clamp(48px,8vw,120px);font-weight:900;text-transform:uppercase;letter-spacing:-2px;line-height:0.9;color:#fff;margin-top:16px;margin-bottom:24px;">
-      Join the<br><em style="color:#FF2D8A;font-style:italic;">Festival</em>
-    </h1>
-    <p style="font-size:16px;font-weight:300;color:rgba(255,255,255,0.4);max-width:480px;line-height:1.7;">
-      Whether you want to perform, set up shop, or give your time — there's a place for you at Afrobass Music Festival 2026.
-    </p>
-  </div>
+  
 
   <!-- ── THREE CARDS ── -->
   <div class="join-cards">

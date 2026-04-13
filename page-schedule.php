@@ -14,16 +14,10 @@ $artists = new WP_Query([
 ]);
 ?>
 
-<div style="padding-top:72px;">
+<div style="padding-top:96px;">
 
   <!-- Hero -->
-  <div class="fest-lineup-hero">
-    <div class="fest-kicker fest-reveal">August 15, 2026 · Rebel Entertainment Complex</div>
-    <h1 class="fest-title fest-reveal" style="margin-bottom:20px;">Schedule</h1>
-    <p style="font-size:16px;font-weight:300;color:rgba(255,255,255,0.4);max-width:480px;line-height:1.7;" class="fest-reveal">
-      One stage. One night. Full performance timetable for Afrobass Music Festival 2026.
-    </p>
-  </div>
+  
 
   <!-- Date / Stage Banner -->
   <div style="background:#0d0d0d;border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;padding:28px 56px;display:flex;align-items:center;gap:48px;flex-wrap:wrap;">

@@ -8,16 +8,10 @@ $contact_email = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
 $showpass_url  = 'https://www.showpass.com/afrobass-music-festival/';
 ?>
 
-<div style="padding-top:72px;">
+<div style="padding-top:96px;">
 
   <!-- ── HERO ── -->
-  <div class="fest-lineup-hero">
-    <div class="fest-kicker fest-reveal">Afrobass Music Festival 2026</div>
-    <h1 class="fest-title fest-reveal" style="margin-bottom:20px;">Get Your<br>Tickets</h1>
-    <p style="font-size:16px;font-weight:300;color:rgba(255,255,255,0.4);max-width:560px;line-height:1.7;" class="fest-reveal">
-      Saturday, August 15, 2026 &middot; Rebel Entertainment Complex &middot; Toronto &middot; 19+
-    </p>
-  </div>
+  
 
   <!-- ── TICKET TIERS ── -->
   <section class="fest-tickets-section">
