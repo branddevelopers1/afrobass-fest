@@ -5,7 +5,7 @@
  */
 get_header();
 $contact_email = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
-$showpass_url  = 'https://www.showpass.com/afrobass-music-festival/';
+$showpass_url  = 'https://www.showpass.com/afrobass-festival/';
 ?>
 
 <div style="padding-top:96px;">
@@ -28,10 +28,10 @@ $showpass_url  = 'https://www.showpass.com/afrobass-music-festival/';
           <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Food &amp; vendor access</div>
           <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>19+ valid ID required</div>
         </div>
-        <a href="<?php echo esc_url($showpass_url); ?>" target="_blank" rel="noopener"
-           class="fest-tier-btn fest-tier-btn-outline" style="display:block;text-align:center;">
+        <button onclick="showpass.tickets.eventPurchaseWidget('afrobass-festival', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
+           class="fest-tier-btn fest-tier-btn-outline" style="display:block;width:100%;text-align:center;border:1px solid rgba(255,255,255,0.15);background:transparent;cursor:pointer;">
           Buy Tickets &rarr;
-        </a>
+        </button>
       </div>
 
       <!-- VIP -->
@@ -45,10 +45,10 @@ $showpass_url  = 'https://www.showpass.com/afrobass-music-festival/';
           <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Priority entry &mdash; skip the line</div>
           <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Exclusive VIP lounge access</div>
         </div>
-        <a href="<?php echo esc_url($showpass_url); ?>" target="_blank" rel="noopener"
-           class="fest-tier-btn fest-tier-btn-fill" style="display:block;text-align:center;">
+        <button onclick="showpass.tickets.eventPurchaseWidget('afrobass-festival', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
+           class="fest-tier-btn fest-tier-btn-fill" style="display:block;width:100%;text-align:center;border:none;cursor:pointer;">
           Buy Tickets &rarr;
-        </a>
+        </button>
       </div>
 
       <!-- Table Package -->

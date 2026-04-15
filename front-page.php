@@ -73,9 +73,9 @@ $sponsors = new WP_Query([
     </div>
 
     <div class="factions">
-      <a href="<?php echo esc_url(home_url('/tickets')); ?>" class="fbtn-main">
+      <button class="fbtn-main" onclick="showpass.tickets.eventPurchaseWidget('afrobass-festival', {'theme-primary': '#FF2D8A', 'keep-shopping': false})" style="border:none;cursor:pointer;">
         Buy Tickets Now &rarr;
-      </a>
+      </button>
       <a href="<?php echo esc_url(home_url('/lineup')); ?>" class="fbtn-ghost">
         See the Lineup
       </a>
@@ -224,10 +224,10 @@ $sponsors = new WP_Query([
           </div>
         <?php endforeach; ?>
       </div>
-      <a href="<?php echo esc_url(home_url('/tickets')); ?>"
-         style="display:block;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);padding:15px;border-radius:2px;text-align:center;text-decoration:none;transition:color 0.2s,border-color 0.2s;"
+      <button onclick="showpass.tickets.eventPurchaseWidget('afrobass-festival', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
+         style="display:block;width:100%;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);padding:15px;border-radius:2px;text-align:center;cursor:pointer;transition:color 0.2s,border-color 0.2s;"
          onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.3)'"
-         onmouseout="this.style.color='rgba(255,255,255,0.4)';this.style.borderColor='rgba(255,255,255,0.1)'">Buy Tickets &rarr;</a>
+         onmouseout="this.style.color='rgba(255,255,255,0.4)';this.style.borderColor='rgba(255,255,255,0.1)'">Buy Tickets &rarr;</button>
     </div>
 
     <div class="fest-reveal fest-d1" style="background:#0d0d0d;padding:40px 36px 48px;position:relative;">
@@ -242,9 +242,9 @@ $sponsors = new WP_Query([
           </div>
         <?php endforeach; ?>
       </div>
-      <a href="<?php echo esc_url(home_url('/tickets')); ?>"
-         style="display:block;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:#FF2D8A;color:#fff;padding:15px;border-radius:2px;text-align:center;text-decoration:none;transition:box-shadow 0.2s;"
-         onmouseover="this.style.boxShadow='0 8px 28px rgba(255,45,138,0.4)'" onmouseout="this.style.boxShadow='none'">Buy Tickets &rarr;</a>
+      <button onclick="showpass.tickets.eventPurchaseWidget('afrobass-festival', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
+         style="display:block;width:100%;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:#FF2D8A;color:#fff;padding:15px;border-radius:2px;text-align:center;border:none;cursor:pointer;transition:box-shadow 0.2s;"
+         onmouseover="this.style.boxShadow='0 8px 28px rgba(255,45,138,0.4)'" onmouseout="this.style.boxShadow='none'">Buy Tickets &rarr;</button>
     </div>
 
     <div class="fest-reveal fest-d2" style="background:#080808;padding:40px 36px 48px;position:relative;">
