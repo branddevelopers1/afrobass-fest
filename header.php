@@ -44,17 +44,19 @@
 $current     = $_SERVER['REQUEST_URI'] ?? '';
 $ticket_url  = home_url('/tickets');
 
-/* Primary nav — desktop, no Tickets */
+/* Primary nav — desktop */
 $primary_nav = [
-  ['Lineup', '/lineup'],
-  ['FAQ',    '/faq'],
-  ['Join',   '/submissions'],
-  ['Contact','/contact'],
+  ['Lineup',  '/lineup'],
+  ['Tickets', '/tickets'],
+  ['FAQ',     '/faq'],
+  ['Join',    '/submissions'],
+  ['Contact', '/contact'],
 ];
 
 /* Full menu */
 $full_nav = [
   ['Line Up', '/lineup'],
+  ['Tickets', '/tickets'],
   ['FAQ',     '/faq'],
   ['Join',    '/submissions'],
   ['Contact', '/contact'],
