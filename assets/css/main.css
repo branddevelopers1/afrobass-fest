@@ -997,9 +997,9 @@ input, textarea, select { font-family: var(--font-body); }
   .fcd-block:nth-child(2)::after { display:none; }
   .fcd-block:nth-child(3)::after { content:':'; display:block; }
   .fcd-num { font-size: clamp(40px,12vw,72px); }
-  /* Content sections */
-  .fest-content-section { padding: 72px 24px; }
-  .fest-section-hdr { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .fest-tier-grid { grid-template-columns: 1fr; background: transparent; gap: 2px; }
-  .fsignup-grid { grid-template-columns: 1fr; gap: 48px; }
+  /* Content sections — !important overrides the inline styles on these elements */
+  .fest-content-section { padding: 72px 24px !important; }
+  .fest-section-hdr { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; margin-bottom: 32px !important; }
+  .fest-tier-grid { grid-template-columns: 1fr !important; background: transparent !important; }
+  .fsignup-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
 }
