@@ -903,6 +903,34 @@ input, textarea, select { font-family: var(--font-body); }
 .fcd-num.ftick { transform:scale(1.06); color:#FF2D8A; }
 .fcd-lbl { display:block; margin-top:12px; font-size:10px; font-weight:500; letter-spacing:4px; text-transform:uppercase; color:rgba(255,255,255,0.25); }
 
+/* ── CONTENT SECTIONS (lineup, tickets) ── */
+.fest-content-section {
+  position: relative;
+  z-index: 2;
+  padding: 100px 56px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.fest-section-hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 56px;
+}
+.fest-tier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: rgba(255,255,255,0.04);
+}
+.fsignup-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 /* ── EMAIL CAPTURE ── */
 .fcapture {
   position: relative; z-index: 2;
@@ -969,4 +997,9 @@ input, textarea, select { font-family: var(--font-body); }
   .fcd-block:nth-child(2)::after { display:none; }
   .fcd-block:nth-child(3)::after { content:':'; display:block; }
   .fcd-num { font-size: clamp(40px,12vw,72px); }
+  /* Content sections */
+  .fest-content-section { padding: 72px 24px; }
+  .fest-section-hdr { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .fest-tier-grid { grid-template-columns: 1fr; background: transparent; gap: 2px; }
+  .fsignup-grid { grid-template-columns: 1fr; gap: 48px; }
 }

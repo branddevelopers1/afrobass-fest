@@ -122,9 +122,9 @@ $sponsors = new WP_Query([
 <!-- ═══════════════════════════════════════════
      3. LINEUP TEASER
 ════════════════════════════════════════════ -->
-<section style="position:relative;z-index:2;padding:100px 56px;border-top:1px solid rgba(255,255,255,0.04);">
+<section class="fest-content-section">
 
-  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;" class="fest-reveal">
+  <div class="fest-section-hdr fest-reveal">
     <div>
       <div class="fest-kicker">Afrobass Music Festival 2026</div>
       <h2 style="font-family:'Unbounded',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:900;letter-spacing:-1px;color:#fff;text-transform:uppercase;line-height:0.95;margin-top:12px;">The<br><em style="color:#FF2D8A;font-style:italic;">Lineup</em></h2>
@@ -134,7 +134,7 @@ $sponsors = new WP_Query([
        onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Full Lineup &rarr;</a>
   </div>
 
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.04);">
+  <div class="fest-tier-grid">
     <?php
     if ($artists->have_posts()):
       while ($artists->have_posts()): $artists->the_post();
@@ -199,9 +199,9 @@ $sponsors = new WP_Query([
 <!-- ═══════════════════════════════════════════
      5. TICKET TIERS
 ════════════════════════════════════════════ -->
-<section style="position:relative;z-index:2;padding:100px 56px;border-top:1px solid rgba(255,255,255,0.04);">
+<section class="fest-content-section">
 
-  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;" class="fest-reveal">
+  <div class="fest-section-hdr fest-reveal">
     <div>
       <div class="fest-kicker">Get In</div>
       <h2 style="font-family:'Unbounded',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:900;letter-spacing:-1px;color:#fff;text-transform:uppercase;line-height:0.95;margin-top:12px;">Your<br><em style="color:#FF2D8A;font-style:italic;">Tickets</em></h2>
@@ -211,7 +211,7 @@ $sponsors = new WP_Query([
        onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">All Ticket Options &rarr;</a>
   </div>
 
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.04);">
+  <div class="fest-tier-grid">
 
     <div class="fest-reveal" style="background:#080808;padding:40px 36px 48px;position:relative;">
       <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);display:block;margin-bottom:20px;">General Admission</span>
@@ -272,7 +272,7 @@ $sponsors = new WP_Query([
      8. EMAIL SIGNUP
 ════════════════════════════════════════════ -->
 <section style="position:relative;z-index:2;padding:100px 56px;border-top:1px solid rgba(255,255,255,0.04);" id="notify">
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1200px;margin:0 auto;">
+  <div class="fsignup-grid">
 
     <div class="fest-reveal">
       <div class="fcap-tag" style="display:inline-flex;margin-bottom:28px;">
