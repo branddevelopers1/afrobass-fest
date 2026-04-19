@@ -4,77 +4,107 @@
  * Template Post Type: page
  */
 get_header();
-$contact_email = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
-$showpass_url  = 'https://www.showpass.com/afrobass-festival/';
+$contact_email = fest_setting('fest_email')       ?: 'contact@afrobassfestival.com';
+$day1_slug     = fest_setting('fest_day1_slug')   ?: 'afrobass-festival-day1';
+$day2_slug     = fest_setting('fest_day2_slug')   ?: '';
+
+$prices = [
+    'day1' => [
+        'ga'    => fest_setting('fest_day1_ga_price')    ?: 'TBA',
+        'vip'   => fest_setting('fest_day1_vip_price')   ?: 'TBA',
+        'table' => fest_setting('fest_day1_table_price') ?: 'TBA',
+    ],
+    'day2' => [
+        'ga'    => fest_setting('fest_day2_ga_price')    ?: 'TBA',
+        'vip'   => fest_setting('fest_day2_vip_price')   ?: 'TBA',
+        'table' => fest_setting('fest_day2_table_price') ?: 'TBA',
+    ],
+];
+
+$ticket_days = [['day1', $day1_slug, true]];
+if ($day2_slug) $ticket_days[] = ['day2', $day2_slug, false];
 ?>
 
 <div style="padding-top:96px;">
 
-  <!-- ── HERO ── -->
-  
-
   <!-- ── TICKET TIERS ── -->
   <section class="fest-tickets-section">
-    <div class="fest-tickets-grid">
 
-      <!-- General Admission -->
-      <div class="fest-ticket-tier fest-reveal">
-        <span class="fest-tier-badge">General</span>
-        <div class="fest-tier-name">General Admission</div>
-        <div class="fest-tier-desc">Full access to the festival grounds, all performances, and vendor areas.</div>
-        <div class="fest-tier-perks">
-          <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>All performances &mdash; full night</div>
-          <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>General standing floor</div>
-          <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Food &amp; vendor access</div>
-          <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>19+ valid ID required</div>
-        </div>
-        <button onclick="showpass.tickets.eventPurchaseWidget('afrobass-festival', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
-           class="fest-tier-btn fest-tier-btn-outline" style="display:block;width:100%;text-align:center;border:1px solid rgba(255,255,255,0.15);background:transparent;cursor:pointer;">
-          Buy Tickets &rarr;
-        </button>
-      </div>
-
-      <!-- VIP -->
-      <div class="fest-ticket-tier featured fest-reveal fest-d1">
-        <span class="fest-tier-badge">Most Popular</span>
-        <div class="fest-tier-name">VIP Experience</div>
-        <div class="fest-tier-desc">Premium access with exclusive areas, dedicated bar, and priority entry.</div>
-        <div class="fest-tier-perks">
-          <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Everything in General Admission</div>
-          <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Dedicated VIP area &amp; bar</div>
-          <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Priority entry &mdash; skip the line</div>
-          <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Exclusive VIP lounge access</div>
-        </div>
-        <button onclick="showpass.tickets.eventPurchaseWidget('afrobass-festival', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
-           class="fest-tier-btn fest-tier-btn-fill" style="display:block;width:100%;text-align:center;border:none;cursor:pointer;">
-          Buy Tickets &rarr;
-        </button>
-      </div>
-
-      <!-- Table Package -->
-      <div class="fest-ticket-tier fest-reveal fest-d2">
-        <span class="fest-tier-badge">Groups</span>
-        <div class="fest-tier-name">Table Package</div>
-        <div class="fest-tier-desc">Reserved table for your group with bottle service and a dedicated host.</div>
-        <div class="fest-tier-perks">
-          <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Table for 6&ndash;10 guests</div>
-          <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Bottle service included</div>
-          <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Dedicated event host</div>
-          <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Best views of the stage</div>
-        </div>
-        <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Table Package Enquiry — Afrobass Fest 2026"
-           class="fest-tier-btn fest-tier-btn-outline" style="display:block;text-align:center;">
-          Enquire &rarr;
-        </a>
-      </div>
-
+    <?php if ($day2_slug): ?>
+    <div class="fday-tabs" style="margin-bottom:40px;">
+      <button class="fday-tab fday-tab--active" data-day="day1">Day 1 <span>Aug 15</span></button>
+      <button class="fday-tab" data-day="day2">Day 2 <span>Aug 16</span></button>
     </div>
+    <?php endif; ?>
+
+    <?php foreach ($ticket_days as [$day_key, $slug, $is_active]): ?>
+    <div class="fday-panel<?php echo $is_active ? ' fday-panel--active' : ''; ?>" data-day="<?php echo esc_attr($day_key); ?>">
+      <div class="fest-tickets-grid">
+
+        <!-- General Admission -->
+        <div class="fest-ticket-tier fest-reveal">
+          <span class="fest-tier-badge">General</span>
+          <div class="fest-tier-name">General Admission</div>
+          <div class="fest-tier-price"><?php echo esc_html($prices[$day_key]['ga']); ?></div>
+          <div class="fest-tier-desc">Full access to the festival grounds, all performances, and vendor areas.</div>
+          <div class="fest-tier-perks">
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>All performances &mdash; full night</div>
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>General standing floor</div>
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Food &amp; vendor access</div>
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>19+ valid ID required</div>
+          </div>
+          <button onclick="showpass.tickets.eventPurchaseWidget('<?php echo esc_js($slug); ?>', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
+             class="fest-tier-btn fest-tier-btn-outline" style="display:block;width:100%;text-align:center;border:1px solid rgba(255,255,255,0.15);background:transparent;cursor:pointer;">
+            Buy Tickets &rarr;
+          </button>
+        </div>
+
+        <!-- VIP -->
+        <div class="fest-ticket-tier featured fest-reveal">
+          <span class="fest-tier-badge">Most Popular</span>
+          <div class="fest-tier-name">VIP Experience</div>
+          <div class="fest-tier-price"><?php echo esc_html($prices[$day_key]['vip']); ?></div>
+          <div class="fest-tier-desc">Premium access with exclusive areas, dedicated bar, and priority entry.</div>
+          <div class="fest-tier-perks">
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Everything in General Admission</div>
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Dedicated VIP area &amp; bar</div>
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Priority entry &mdash; skip the line</div>
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Exclusive VIP lounge access</div>
+          </div>
+          <button onclick="showpass.tickets.eventPurchaseWidget('<?php echo esc_js($slug); ?>', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
+             class="fest-tier-btn fest-tier-btn-fill" style="display:block;width:100%;text-align:center;border:none;cursor:pointer;">
+            Buy Tickets &rarr;
+          </button>
+        </div>
+
+        <!-- Table Package -->
+        <div class="fest-ticket-tier fest-reveal">
+          <span class="fest-tier-badge">Groups</span>
+          <div class="fest-tier-name">Table Package</div>
+          <div class="fest-tier-price"><?php echo esc_html($prices[$day_key]['table']); ?></div>
+          <div class="fest-tier-desc">Reserved table for your group with bottle service and a dedicated host.</div>
+          <div class="fest-tier-perks">
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Table for 6&ndash;10 guests</div>
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Bottle service included</div>
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Dedicated event host</div>
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Best views of the stage</div>
+          </div>
+          <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Table Package Enquiry — Afrobass Fest 2026"
+             class="fest-tier-btn fest-tier-btn-outline" style="display:block;text-align:center;">
+            Enquire &rarr;
+          </a>
+        </div>
+
+      </div>
+    </div>
+    <?php endforeach; ?>
+
   </section>
 
   <!-- ── EVENT INFO STRIP ── -->
   <div style="border-top:1px solid rgba(255,255,255,0.04);display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,0.04);margin-top:80px;" class="fest-reveal">
     <?php foreach([
-      ['Date',    'Saturday, August 15, 2026'],
+      ['Date',    $day2_slug ? 'Aug 15–16, 2026' : 'Saturday, August 15, 2026'],
       ['Venue',   'Rebel Entertainment Complex'],
       ['Address', '11 Polson St, Toronto, ON'],
       ['Age',     '19+ Valid ID Required'],
