@@ -40,10 +40,15 @@ endif;
 
     <div class="fday-tabs" style="max-width:1400px;margin:0 auto 32px;">
       <button class="fday-tab fday-tab--active" data-day="day1">Day 1 <span>Aug 15</span></button>
+      <?php if (!empty($lineup_artists['day2'])): ?>
       <button class="fday-tab" data-day="day2">Day 2 <span>Aug 16</span></button>
+      <?php endif; ?>
     </div>
 
-    <?php foreach (['day1' => true, 'day2' => false] as $day_key => $is_active): ?>
+    <?php
+    $days_to_show = ['day1' => true];
+    if (!empty($lineup_artists['day2'])) $days_to_show['day2'] = false;
+    foreach ($days_to_show as $day_key => $is_active): ?>
     <div class="fday-panel<?php echo $is_active ? ' fday-panel--active' : ''; ?>" data-day="<?php echo esc_attr($day_key); ?>">
       <div class="fest-artists-grid">
         <?php if (!empty($lineup_artists[$day_key])):

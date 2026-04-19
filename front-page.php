@@ -3,7 +3,20 @@ $ticket_url    = fest_setting('fest_ticket_url') ?: home_url('/tickets');
 $contact_email = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
 
 $day1_slug = fest_setting('fest_day1_slug') ?: 'afrobass-festival-day1';
-$day2_slug = fest_setting('fest_day2_slug') ?: 'afrobass-festival-day2';
+$day2_slug = fest_setting('fest_day2_slug') ?: '';
+
+$prices = [
+    'day1' => [
+        'ga'    => fest_setting('fest_day1_ga_price')    ?: 'TBA',
+        'vip'   => fest_setting('fest_day1_vip_price')   ?: 'TBA',
+        'table' => fest_setting('fest_day1_table_price') ?: 'TBA',
+    ],
+    'day2' => [
+        'ga'    => fest_setting('fest_day2_ga_price')    ?: 'TBA',
+        'vip'   => fest_setting('fest_day2_vip_price')   ?: 'TBA',
+        'table' => fest_setting('fest_day2_table_price') ?: 'TBA',
+    ],
+];
 
 $_aq = new WP_Query([
     'post_type'      => 'fest_artist',
@@ -156,10 +169,15 @@ $sponsors = new WP_Query([
 
   <div class="fday-tabs">
     <button class="fday-tab fday-tab--active" data-day="day1">Day 1 <span>Aug 15</span></button>
+    <?php if (!empty($fp_artists['day2'])): ?>
     <button class="fday-tab" data-day="day2">Day 2 <span>Aug 16</span></button>
+    <?php endif; ?>
   </div>
 
-  <?php foreach (['day1' => true, 'day2' => false] as $day_key => $is_active):
+  <?php
+  $lineup_days = ['day1' => true];
+  if (!empty($fp_artists['day2'])) $lineup_days['day2'] = false;
+  foreach ($lineup_days as $day_key => $is_active):
     $day_artists = $fp_artists[$day_key]; ?>
   <div class="fday-panel<?php echo $is_active ? ' fday-panel--active' : ''; ?>" data-day="<?php echo esc_attr($day_key); ?>">
     <div class="fest-tier-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.04);">
@@ -242,16 +260,22 @@ $sponsors = new WP_Query([
 
   <div class="fday-tabs fest-reveal">
     <button class="fday-tab fday-tab--active" data-day="day1">Day 1 <span>Aug 15</span></button>
+    <?php if ($day2_slug): ?>
     <button class="fday-tab" data-day="day2">Day 2 <span>Aug 16</span></button>
+    <?php endif; ?>
   </div>
 
-  <?php foreach ([['day1', $day1_slug, true], ['day2', $day2_slug, false]] as [$day_key, $slug, $is_active]): ?>
+  <?php
+  $ticket_days = [['day1', $day1_slug, true]];
+  if ($day2_slug) $ticket_days[] = ['day2', $day2_slug, false];
+  foreach ($ticket_days as [$day_key, $slug, $is_active]):
+  ?>
   <div class="fday-panel<?php echo $is_active ? ' fday-panel--active' : ''; ?>" data-day="<?php echo esc_attr($day_key); ?>">
     <div class="fest-tier-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.04);">
 
       <div class="fest-reveal" style="background:#080808;padding:40px 36px 48px;position:relative;">
         <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);display:block;margin-bottom:20px;">General Admission</span>
-        <div style="font-family:'Unbounded',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:4px;">TBA</div>
+        <div style="font-family:'Unbounded',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:4px;"><?php echo esc_html($prices[$day_key]['ga']); ?></div>
         <div style="font-size:11px;color:rgba(255,255,255,0.2);margin-bottom:28px;">per person</div>
         <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:36px;">
           <?php foreach(['Full festival access','All performances','General standing floor','Access to all vendors'] as $p): ?>
@@ -269,7 +293,7 @@ $sponsors = new WP_Query([
       <div class="fest-reveal" style="background:#0d0d0d;padding:40px 36px 48px;position:relative;">
         <div style="position:absolute;top:0;left:0;right:0;height:2px;background:#FF2D8A;"></div>
         <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#FF2D8A;display:block;margin-bottom:20px;">VIP Experience &nbsp;&#9733;</span>
-        <div style="font-family:'Unbounded',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:4px;">TBA</div>
+        <div style="font-family:'Unbounded',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:4px;"><?php echo esc_html($prices[$day_key]['vip']); ?></div>
         <div style="font-size:11px;color:rgba(255,255,255,0.2);margin-bottom:28px;">per person</div>
         <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:36px;">
           <?php foreach(['Everything in GA','Dedicated VIP area & bar','Priority entry','Exclusive VIP lounge'] as $p): ?>
@@ -285,7 +309,7 @@ $sponsors = new WP_Query([
 
       <div class="fest-reveal" style="background:#080808;padding:40px 36px 48px;position:relative;">
         <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);display:block;margin-bottom:20px;">Table Package</span>
-        <div style="font-family:'Unbounded',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:4px;">TBA</div>
+        <div style="font-family:'Unbounded',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:4px;"><?php echo esc_html($prices[$day_key]['table']); ?></div>
         <div style="font-size:11px;color:rgba(255,255,255,0.2);margin-bottom:28px;">per table</div>
         <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:36px;">
           <?php foreach(['Table for 6-10 guests','Bottle service included','Dedicated event host','Best stage views'] as $p): ?>
