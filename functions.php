@@ -130,9 +130,9 @@ function fest_settings_page() {
 
     if (isset($_POST['fest_settings_nonce']) && wp_verify_nonce($_POST['fest_settings_nonce'], 'fest_save_settings')) {
         $fields = [
-            'fest_hero_video', 'fest_ticket_url',
-            'fest_day1_slug', 'fest_day1_ga_price', 'fest_day1_vip_price', 'fest_day1_table_price',
-            'fest_day2_slug', 'fest_day2_ga_price', 'fest_day2_vip_price', 'fest_day2_table_price',
+            'fest_hero_video',
+            'fest_day1_slug', 'fest_ticket_url', 'fest_day1_ga_price', 'fest_day1_vip_price', 'fest_day1_table_price',
+            'fest_day2_slug', 'fest_day2_ticket_url', 'fest_day2_ga_price', 'fest_day2_vip_price', 'fest_day2_table_price',
             'fest_phone', 'fest_email',
             'fest_instagram', 'fest_youtube', 'fest_tiktok', 'fest_facebook', 'fest_twitter',
         ];
@@ -182,10 +182,6 @@ function fest_settings_page() {
                         <div class="desc">Direct URL to the background video file.</div>
                     </div>
                     <div class="fest-row">
-                        <label>Ticket Purchase URL</label>
-                        <input type="url" name="fest_ticket_url" value="<?php echo fv($s,'fest_ticket_url'); ?>" placeholder="https://...">
-                    </div>
-                    <div class="fest-row">
                         <label>Phone</label>
                         <input type="text" name="fest_phone" value="<?php echo fv($s,'fest_phone'); ?>" placeholder="416.846.6483">
                     </div>
@@ -199,6 +195,11 @@ function fest_settings_page() {
             <!-- Day 1 Tickets -->
             <div class="fest-card">
                 <h2>Day 1 — Aug 15</h2>
+                <div class="fest-row">
+                    <label>Ticket URL</label>
+                    <input type="url" name="fest_ticket_url" value="<?php echo fv($s,'fest_ticket_url'); ?>" placeholder="https://...">
+                    <div class="desc">Link used on "Get Tickets" buttons across the site.</div>
+                </div>
                 <div class="fest-row">
                     <label>Showpass Slug</label>
                     <input type="text" name="fest_day1_slug" value="<?php echo fv($s,'fest_day1_slug'); ?>" placeholder="afrobass-festival-day1">
@@ -222,6 +223,10 @@ function fest_settings_page() {
             <!-- Day 2 Tickets -->
             <div class="fest-card">
                 <h2>Day 2 — Aug 16</h2>
+                <div class="fest-row">
+                    <label>Ticket URL</label>
+                    <input type="url" name="fest_day2_ticket_url" value="<?php echo fv($s,'fest_day2_ticket_url'); ?>" placeholder="https://...">
+                </div>
                 <div class="fest-row">
                     <label>Showpass Slug</label>
                     <input type="text" name="fest_day2_slug" value="<?php echo fv($s,'fest_day2_slug'); ?>" placeholder="afrobass-festival-day2">
