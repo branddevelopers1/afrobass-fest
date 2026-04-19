@@ -2,13 +2,33 @@
 $ticket_url    = fest_setting('fest_ticket_url') ?: home_url('/tickets');
 $contact_email = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
 
-$artists = new WP_Query([
+$day1_slug = fest_setting('fest_day1_slug') ?: 'afrobass-festival-day1';
+$day2_slug = fest_setting('fest_day2_slug') ?: 'afrobass-festival-day2';
+
+$_aq = new WP_Query([
     'post_type'      => 'fest_artist',
-    'posts_per_page' => 6,
+    'posts_per_page' => -1,
     'meta_key'       => 'fest_artist_order',
     'orderby'        => 'meta_value_num',
     'order'          => 'ASC',
 ]);
+$fp_artists = ['day1' => [], 'day2' => []];
+if ($_aq->have_posts()):
+    while ($_aq->have_posts()): $_aq->the_post();
+        $day_val = get_field('fest_artist_day') ?: 'day1';
+        $a = [
+            'post'   => get_post(),
+            'role'   => get_field('fest_artist_role')   ?: 'Headliner',
+            'origin' => get_field('fest_artist_origin') ?: '',
+            'tba'    => (bool) get_field('fest_artist_tba'),
+        ];
+        if (in_array($day_val, ['day1', 'both'])) $fp_artists['day1'][] = $a;
+        if (in_array($day_val, ['day2', 'both'])) $fp_artists['day2'][] = $a;
+    endwhile;
+    wp_reset_postdata();
+endif;
+$fp_artists['day1'] = array_slice($fp_artists['day1'], 0, 6);
+$fp_artists['day2'] = array_slice($fp_artists['day2'], 0, 6);
 
 $sponsors = new WP_Query([
     'post_type'      => 'fest_sponsor',
@@ -124,7 +144,7 @@ $sponsors = new WP_Query([
 ════════════════════════════════════════════ -->
 <section class="fest-content-section" style="position:relative;z-index:2;padding:100px 56px;border-top:1px solid rgba(255,255,255,0.04);">
 
-  <div class="fest-section-hdr fest-reveal" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;">
+  <div class="fest-section-hdr fest-reveal" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;">
     <div>
       <div class="fest-kicker">Afrobass Music Festival 2026</div>
       <h2 style="font-family:'Unbounded',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:900;letter-spacing:-1px;color:#fff;text-transform:uppercase;line-height:0.95;margin-top:12px;">The<br><em style="color:#FF2D8A;font-style:italic;">Lineup</em></h2>
@@ -134,56 +154,65 @@ $sponsors = new WP_Query([
        onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Full Lineup &rarr;</a>
   </div>
 
-  <div class="fest-tier-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.04);">
-    <?php
-    if ($artists->have_posts()):
-      while ($artists->have_posts()): $artists->the_post();
-        $role = get_field('fest_artist_role') ?: 'Headliner';
-        $origin = get_field('fest_artist_origin') ?: '';
-        $tba  = get_field('fest_artist_tba');
-        $head = in_array($role, ['Headliner','Co-Headliner']);
-    ?>
-      <div class="fest-reveal" style="background:#080808;position:relative;overflow:hidden;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;">
-        <?php if (!$tba && has_post_thumbnail()): ?>
-          <?php the_post_thumbnail('fest-artist',['style'=>'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(15%);']); ?>
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.95) 0%,rgba(8,8,8,0.3) 55%,transparent 100%);"></div>
-        <?php else: ?>
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
-            <div style="width:68px;height:68px;border-radius:50%;border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+  <div class="fday-tabs">
+    <button class="fday-tab fday-tab--active" data-day="day1">Day 1 <span>Aug 15</span></button>
+    <button class="fday-tab" data-day="day2">Day 2 <span>Aug 16</span></button>
+  </div>
+
+  <?php foreach (['day1' => true, 'day2' => false] as $day_key => $is_active):
+    $day_artists = $fp_artists[$day_key]; ?>
+  <div class="fday-panel<?php echo $is_active ? ' fday-panel--active' : ''; ?>" data-day="<?php echo esc_attr($day_key); ?>">
+    <div class="fest-tier-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.04);">
+      <?php if (!empty($day_artists)):
+        foreach ($day_artists as $a):
+          setup_postdata($GLOBALS['post'] = $a['post']);
+          $role   = $a['role'];
+          $origin = $a['origin'];
+          $tba    = $a['tba'];
+          $head   = in_array($role, ['Headliner','Co-Headliner']); ?>
+        <div class="fest-reveal" style="background:#080808;position:relative;overflow:hidden;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;">
+          <?php if (!$tba && has_post_thumbnail()): ?>
+            <?php the_post_thumbnail('fest-artist',['style'=>'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(15%);']); ?>
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.95) 0%,rgba(8,8,8,0.3) 55%,transparent 100%);"></div>
+          <?php else: ?>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
+              <div style="width:68px;height:68px;border-radius:50%;border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+              </div>
+              <div style="font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;color:rgba(255,255,255,0.08);text-transform:uppercase;">Coming Soon</div>
             </div>
-            <div style="font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;color:rgba(255,255,255,0.08);text-transform:uppercase;">Coming Soon</div>
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.98) 0%,transparent 60%);"></div>
+          <?php endif; ?>
+          <div style="position:absolute;top:16px;left:16px;background:<?php echo $head ? '#FF2D8A' : 'rgba(255,255,255,0.07)'; ?>;padding:4px 12px;border-radius:1px;">
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($role); ?></span>
+          </div>
+          <div style="position:relative;z-index:2;padding:20px 24px;">
+            <div style="font-family:'Unbounded',sans-serif;font-size:clamp(16px,1.8vw,24px);font-weight:900;color:<?php echo $tba?'rgba(255,255,255,0.12)':'#fff'; ?>;text-transform:uppercase;letter-spacing:-0.5px;line-height:1.1;"><?php echo $tba ? 'TBA' : get_the_title(); ?></div>
+            <?php if ($origin && !$tba): ?><div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:5px;"><?php echo esc_html($origin); ?></div><?php endif; ?>
+          </div>
+        </div>
+      <?php endforeach; wp_reset_postdata();
+      else:
+        for ($s=0;$s<6;$s++): $head = $s < 2; ?>
+        <div class="fest-reveal" style="background:#080808;position:relative;overflow:hidden;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
+            <div style="width:68px;height:68px;border-radius:50%;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+            </div>
+            <div style="font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;color:rgba(255,255,255,0.07);text-transform:uppercase;">Coming Soon</div>
           </div>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.98) 0%,transparent 60%);"></div>
-        <?php endif; ?>
-        <div style="position:absolute;top:16px;left:16px;background:<?php echo $head ? '#FF2D8A' : 'rgba(255,255,255,0.07)'; ?>;padding:4px 12px;border-radius:1px;">
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($role); ?></span>
-        </div>
-        <div style="position:relative;z-index:2;padding:20px 24px;">
-          <div style="font-family:'Unbounded',sans-serif;font-size:clamp(16px,1.8vw,24px);font-weight:900;color:<?php echo $tba?'rgba(255,255,255,0.12)':'#fff'; ?>;text-transform:uppercase;letter-spacing:-0.5px;line-height:1.1;"><?php echo $tba ? 'TBA' : get_the_title(); ?></div>
-          <?php if ($origin && !$tba): ?><div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:5px;"><?php echo esc_html($origin); ?></div><?php endif; ?>
-        </div>
-      </div>
-    <?php endwhile; wp_reset_postdata();
-    else:
-      for ($s=0;$s<6;$s++): $head = $s < 2; ?>
-      <div class="fest-reveal" style="background:#080808;position:relative;overflow:hidden;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;">
-        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
-          <div style="width:68px;height:68px;border-radius:50%;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          <div style="position:absolute;top:16px;left:16px;background:<?php echo $head?'rgba(255,45,138,0.15)':'rgba(255,255,255,0.05)'; ?>;border:1px solid <?php echo $head?'rgba(255,45,138,0.25)':'rgba(255,255,255,0.05)'; ?>;padding:4px 12px;border-radius:1px;">
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:<?php echo $head?'rgba(255,45,138,0.7)':'rgba(255,255,255,0.2)'; ?>;"><?php echo $head?'Headliner':'Artist'; ?></span>
           </div>
-          <div style="font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;color:rgba(255,255,255,0.07);text-transform:uppercase;">Coming Soon</div>
+          <div style="position:relative;z-index:2;padding:20px 24px;">
+            <div style="font-family:'Unbounded',sans-serif;font-size:22px;font-weight:900;color:rgba(255,255,255,0.1);text-transform:uppercase;">TBA</div>
+          </div>
         </div>
-        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.98) 0%,transparent 60%);"></div>
-        <div style="position:absolute;top:16px;left:16px;background:<?php echo $head?'rgba(255,45,138,0.15)':'rgba(255,255,255,0.05)'; ?>;border:1px solid <?php echo $head?'rgba(255,45,138,0.25)':'rgba(255,255,255,0.05)'; ?>;padding:4px 12px;border-radius:1px;">
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:<?php echo $head?'rgba(255,45,138,0.7)':'rgba(255,255,255,0.2)'; ?>;"><?php echo $head?'Headliner':'Artist'; ?></span>
-        </div>
-        <div style="position:relative;z-index:2;padding:20px 24px;">
-          <div style="font-family:'Unbounded',sans-serif;font-size:22px;font-weight:900;color:rgba(255,255,255,0.1);text-transform:uppercase;">TBA</div>
-        </div>
-      </div>
-    <?php endfor; endif; ?>
+      <?php endfor; endif; ?>
+    </div>
   </div>
+  <?php endforeach; ?>
 
   <div style="margin-top:36px;text-align:center;" class="fest-reveal">
     <a href="<?php echo esc_url(home_url('/lineup')); ?>"
@@ -211,60 +240,69 @@ $sponsors = new WP_Query([
        onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">All Ticket Options &rarr;</a>
   </div>
 
-  <div class="fest-tier-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.04);">
-
-    <div class="fest-reveal" style="background:#080808;padding:40px 36px 48px;position:relative;">
-      <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);display:block;margin-bottom:20px;">General Admission</span>
-      <div style="font-family:'Unbounded',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:4px;">TBA</div>
-      <div style="font-size:11px;color:rgba(255,255,255,0.2);margin-bottom:28px;">per person</div>
-      <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:36px;">
-        <?php foreach(['Full festival access','All performances','General standing floor','Access to all vendors'] as $p): ?>
-          <div style="display:flex;gap:11px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,0.45);">
-            <div style="width:4px;height:4px;border-radius:50%;background:#FF6B1A;margin-top:6px;flex-shrink:0;"></div><?php echo esc_html($p); ?>
-          </div>
-        <?php endforeach; ?>
-      </div>
-      <button onclick="showpass.tickets.eventPurchaseWidget('afrobass-festival', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
-         style="display:block;width:100%;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);padding:15px;border-radius:2px;text-align:center;cursor:pointer;transition:color 0.2s,border-color 0.2s;"
-         onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.3)'"
-         onmouseout="this.style.color='rgba(255,255,255,0.4)';this.style.borderColor='rgba(255,255,255,0.1)'">Buy Tickets &rarr;</button>
-    </div>
-
-    <div class="fest-reveal fest-d1" style="background:#0d0d0d;padding:40px 36px 48px;position:relative;">
-      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:#FF2D8A;"></div>
-      <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#FF2D8A;display:block;margin-bottom:20px;">VIP Experience &nbsp;&#9733;</span>
-      <div style="font-family:'Unbounded',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:4px;">TBA</div>
-      <div style="font-size:11px;color:rgba(255,255,255,0.2);margin-bottom:28px;">per person</div>
-      <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:36px;">
-        <?php foreach(['Everything in GA','Dedicated VIP area & bar','Priority entry','Exclusive VIP lounge'] as $p): ?>
-          <div style="display:flex;gap:11px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,0.55);">
-            <div style="width:4px;height:4px;border-radius:50%;background:#FF2D8A;margin-top:6px;flex-shrink:0;"></div><?php echo esc_html($p); ?>
-          </div>
-        <?php endforeach; ?>
-      </div>
-      <button onclick="showpass.tickets.eventPurchaseWidget('afrobass-festival', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
-         style="display:block;width:100%;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:#FF2D8A;color:#fff;padding:15px;border-radius:2px;text-align:center;border:none;cursor:pointer;transition:box-shadow 0.2s;"
-         onmouseover="this.style.boxShadow='0 8px 28px rgba(255,45,138,0.4)'" onmouseout="this.style.boxShadow='none'">Buy Tickets &rarr;</button>
-    </div>
-
-    <div class="fest-reveal fest-d2" style="background:#080808;padding:40px 36px 48px;position:relative;">
-      <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);display:block;margin-bottom:20px;">Table Package</span>
-      <div style="font-family:'Unbounded',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:4px;">TBA</div>
-      <div style="font-size:11px;color:rgba(255,255,255,0.2);margin-bottom:28px;">per table</div>
-      <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:36px;">
-        <?php foreach(['Table for 6-10 guests','Bottle service included','Dedicated event host','Best stage views'] as $p): ?>
-          <div style="display:flex;gap:11px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,0.45);">
-            <div style="width:4px;height:4px;border-radius:50%;background:#a855f7;margin-top:6px;flex-shrink:0;"></div><?php echo esc_html($p); ?>
-          </div>
-        <?php endforeach; ?>
-      </div>
-      <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Table Package Enquiry"
-         style="display:block;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);padding:15px;border-radius:2px;text-align:center;text-decoration:none;transition:color 0.2s,border-color 0.2s;"
-         onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.3)'"
-         onmouseout="this.style.color='rgba(255,255,255,0.4)';this.style.borderColor='rgba(255,255,255,0.1)'">Enquire &rarr;</a>
-    </div>
-
+  <div class="fday-tabs fest-reveal">
+    <button class="fday-tab fday-tab--active" data-day="day1">Day 1 <span>Aug 15</span></button>
+    <button class="fday-tab" data-day="day2">Day 2 <span>Aug 16</span></button>
   </div>
+
+  <?php foreach ([['day1', $day1_slug, true], ['day2', $day2_slug, false]] as [$day_key, $slug, $is_active]): ?>
+  <div class="fday-panel<?php echo $is_active ? ' fday-panel--active' : ''; ?>" data-day="<?php echo esc_attr($day_key); ?>">
+    <div class="fest-tier-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.04);">
+
+      <div class="fest-reveal" style="background:#080808;padding:40px 36px 48px;position:relative;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);display:block;margin-bottom:20px;">General Admission</span>
+        <div style="font-family:'Unbounded',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:4px;">TBA</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.2);margin-bottom:28px;">per person</div>
+        <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:36px;">
+          <?php foreach(['Full festival access','All performances','General standing floor','Access to all vendors'] as $p): ?>
+            <div style="display:flex;gap:11px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,0.45);">
+              <div style="width:4px;height:4px;border-radius:50%;background:#FF6B1A;margin-top:6px;flex-shrink:0;"></div><?php echo esc_html($p); ?>
+            </div>
+          <?php endforeach; ?>
+        </div>
+        <button onclick="showpass.tickets.eventPurchaseWidget('<?php echo esc_js($slug); ?>', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
+           style="display:block;width:100%;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);padding:15px;border-radius:2px;text-align:center;cursor:pointer;transition:color 0.2s,border-color 0.2s;"
+           onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.3)'"
+           onmouseout="this.style.color='rgba(255,255,255,0.4)';this.style.borderColor='rgba(255,255,255,0.1)'">Buy Tickets &rarr;</button>
+      </div>
+
+      <div class="fest-reveal" style="background:#0d0d0d;padding:40px 36px 48px;position:relative;">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:#FF2D8A;"></div>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#FF2D8A;display:block;margin-bottom:20px;">VIP Experience &nbsp;&#9733;</span>
+        <div style="font-family:'Unbounded',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:4px;">TBA</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.2);margin-bottom:28px;">per person</div>
+        <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:36px;">
+          <?php foreach(['Everything in GA','Dedicated VIP area & bar','Priority entry','Exclusive VIP lounge'] as $p): ?>
+            <div style="display:flex;gap:11px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,0.55);">
+              <div style="width:4px;height:4px;border-radius:50%;background:#FF2D8A;margin-top:6px;flex-shrink:0;"></div><?php echo esc_html($p); ?>
+            </div>
+          <?php endforeach; ?>
+        </div>
+        <button onclick="showpass.tickets.eventPurchaseWidget('<?php echo esc_js($slug); ?>', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
+           style="display:block;width:100%;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:#FF2D8A;color:#fff;padding:15px;border-radius:2px;text-align:center;border:none;cursor:pointer;transition:box-shadow 0.2s;"
+           onmouseover="this.style.boxShadow='0 8px 28px rgba(255,45,138,0.4)'" onmouseout="this.style.boxShadow='none'">Buy Tickets &rarr;</button>
+      </div>
+
+      <div class="fest-reveal" style="background:#080808;padding:40px 36px 48px;position:relative;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);display:block;margin-bottom:20px;">Table Package</span>
+        <div style="font-family:'Unbounded',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:4px;">TBA</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.2);margin-bottom:28px;">per table</div>
+        <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:36px;">
+          <?php foreach(['Table for 6-10 guests','Bottle service included','Dedicated event host','Best stage views'] as $p): ?>
+            <div style="display:flex;gap:11px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,0.45);">
+              <div style="width:4px;height:4px;border-radius:50%;background:#a855f7;margin-top:6px;flex-shrink:0;"></div><?php echo esc_html($p); ?>
+            </div>
+          <?php endforeach; ?>
+        </div>
+        <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Table Package Enquiry"
+           style="display:block;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);padding:15px;border-radius:2px;text-align:center;text-decoration:none;transition:color 0.2s,border-color 0.2s;"
+           onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.3)'"
+           onmouseout="this.style.color='rgba(255,255,255,0.4)';this.style.borderColor='rgba(255,255,255,0.1)'">Enquire &rarr;</a>
+      </div>
+
+    </div>
+  </div>
+  <?php endforeach; ?>
 
 </section>
 

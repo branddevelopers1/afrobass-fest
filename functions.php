@@ -85,6 +85,9 @@ function fest_register_acf() {
             ['key'=>'field_fest_artist_apple_music', 'label'=>'Apple Music URL',        'name'=>'fest_artist_apple_music', 'type'=>'url'],
             ['key'=>'field_fest_artist_order',       'label'=>'Display Order',          'name'=>'fest_artist_order',       'type'=>'number',   'default_value'=>10],
             ['key'=>'field_fest_artist_tba',         'label'=>'TBA (hide name/photo)',  'name'=>'fest_artist_tba',         'type'=>'true_false','default_value'=>0],
+            ['key'=>'field_fest_artist_day',         'label'=>'Festival Day',           'name'=>'fest_artist_day',         'type'=>'select',
+             'choices'=>['day1'=>'Day 1 (Aug 15)','day2'=>'Day 2 (Aug 16)','both'=>'Both Days'],
+             'default_value'=>'day1'],
         ],
         'location' => [[ ['param'=>'post_type','operator'=>'==','value'=>'fest_artist'] ]],
     ]);
@@ -120,6 +123,8 @@ function fest_register_acf() {
             'fields' => [
                 ['key'=>'field_fest_hero_video',    'label'=>'Hero Video (MP4)',     'name'=>'fest_hero_video',    'type'=>'file',  'return_format'=>'array', 'mime_types'=>'mp4,webm'],
                 ['key'=>'field_fest_ticket_url',    'label'=>'Ticket Purchase URL',  'name'=>'fest_ticket_url',    'type'=>'url'],
+                ['key'=>'field_fest_day1_slug',     'label'=>'Day 1 Showpass Slug',  'name'=>'fest_day1_slug',     'type'=>'text', 'placeholder'=>'e.g. afrobass-festival-day1'],
+                ['key'=>'field_fest_day2_slug',     'label'=>'Day 2 Showpass Slug',  'name'=>'fest_day2_slug',     'type'=>'text', 'placeholder'=>'e.g. afrobass-festival-day2'],
                 ['key'=>'field_fest_phone',         'label'=>'Phone',                'name'=>'fest_phone',         'type'=>'text',  'default_value'=>'416.846.6483'],
                 ['key'=>'field_fest_email',         'label'=>'Email',                'name'=>'fest_email',         'type'=>'email', 'default_value'=>'signup@afrobassfestival.com'],
                 ['key'=>'field_fest_instagram',     'label'=>'Instagram',            'name'=>'fest_instagram',     'type'=>'url'],

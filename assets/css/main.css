@@ -903,6 +903,34 @@ input, textarea, select { font-family: var(--font-body); }
 .fcd-num.ftick { transform:scale(1.06); color:#FF2D8A; }
 .fcd-lbl { display:block; margin-top:12px; font-size:10px; font-weight:500; letter-spacing:4px; text-transform:uppercase; color:rgba(255,255,255,0.25); }
 
+/* ── DAY TABS ── */
+.fday-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.fday-tab {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  background: transparent; border: none;
+  padding: 14px 28px; cursor: pointer;
+  position: relative; transition: color 0.2s;
+}
+.fday-tab::after {
+  content: '';
+  position: absolute; bottom: -1px; left: 0; right: 0; height: 2px;
+  background: #FF2D8A;
+  transform: scaleX(0); transition: transform 0.25s ease;
+}
+.fday-tab--active { color: #fff; }
+.fday-tab--active::after { transform: scaleX(1); }
+.fday-tab span { color: rgba(255,255,255,0.2); margin-left: 8px; font-size: 9px; }
+.fday-tab--active span { color: #FF2D8A; }
+.fday-panel { display: none; }
+.fday-panel--active { display: block; }
+
 /* ── CONTENT SECTIONS (lineup, tickets) ── */
 .fest-content-section {
   position: relative;

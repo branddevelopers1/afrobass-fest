@@ -176,4 +176,20 @@
     });
   });
 
+  /* ── DAY TABS ── */
+  document.querySelectorAll('.fday-tabs').forEach(function(tabsEl) {
+    var tabs    = tabsEl.querySelectorAll('.fday-tab');
+    var section = tabsEl.closest('.fest-content-section, section') || tabsEl.parentElement;
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var day = this.getAttribute('data-day');
+        tabs.forEach(function(t) { t.classList.remove('fday-tab--active'); });
+        this.classList.add('fday-tab--active');
+        section.querySelectorAll('.fday-panel').forEach(function(panel) {
+          panel.classList.toggle('fday-panel--active', panel.getAttribute('data-day') === day);
+        });
+      });
+    });
+  });
+
 })();
