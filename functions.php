@@ -108,42 +108,168 @@ function fest_register_acf() {
         'location' => [[ ['param'=>'post_type','operator'=>'==','value'=>'fest_sponsor'] ]],
     ]);
 
-    /* Homepage / Site Settings */
-    if (function_exists('acf_add_options_page')) {
-        acf_add_options_page([
-            'page_title' => 'Festival Settings',
-            'menu_title' => 'Festival Settings',
-            'menu_slug'  => 'fest-settings',
-            'capability' => 'manage_options',
-            'icon_url'   => 'dashicons-tickets-alt',
-        ]);
-        acf_add_local_field_group([
-            'key'    => 'group_fest_settings',
-            'title'  => 'Festival Settings',
-            'fields' => [
-                ['key'=>'field_fest_hero_video',    'label'=>'Hero Video (MP4)',     'name'=>'fest_hero_video',    'type'=>'file',  'return_format'=>'array', 'mime_types'=>'mp4,webm'],
-                ['key'=>'field_fest_ticket_url',         'label'=>'Ticket Purchase URL',       'name'=>'fest_ticket_url',         'type'=>'url'],
-                ['key'=>'field_fest_day1_slug',          'label'=>'Day 1 Showpass Slug',       'name'=>'fest_day1_slug',          'type'=>'text', 'placeholder'=>'e.g. afrobass-festival-day1'],
-                ['key'=>'field_fest_day1_ga_price',      'label'=>'Day 1 — GA Price',          'name'=>'fest_day1_ga_price',      'type'=>'text', 'placeholder'=>'e.g. $49'],
-                ['key'=>'field_fest_day1_vip_price',     'label'=>'Day 1 — VIP Price',         'name'=>'fest_day1_vip_price',     'type'=>'text', 'placeholder'=>'e.g. $99'],
-                ['key'=>'field_fest_day1_table_price',   'label'=>'Day 1 — Table Price',       'name'=>'fest_day1_table_price',   'type'=>'text', 'placeholder'=>'e.g. $499'],
-                ['key'=>'field_fest_day2_slug',          'label'=>'Day 2 Showpass Slug',       'name'=>'fest_day2_slug',          'type'=>'text', 'placeholder'=>'e.g. afrobass-festival-day2 (leave blank to hide Day 2)'],
-                ['key'=>'field_fest_day2_ga_price',      'label'=>'Day 2 — GA Price',          'name'=>'fest_day2_ga_price',      'type'=>'text', 'placeholder'=>'e.g. $49'],
-                ['key'=>'field_fest_day2_vip_price',     'label'=>'Day 2 — VIP Price',         'name'=>'fest_day2_vip_price',     'type'=>'text', 'placeholder'=>'e.g. $99'],
-                ['key'=>'field_fest_day2_table_price',   'label'=>'Day 2 — Table Price',       'name'=>'fest_day2_table_price',   'type'=>'text', 'placeholder'=>'e.g. $499'],
-                ['key'=>'field_fest_phone',         'label'=>'Phone',                'name'=>'fest_phone',         'type'=>'text',  'default_value'=>'416.846.6483'],
-                ['key'=>'field_fest_email',         'label'=>'Email',                'name'=>'fest_email',         'type'=>'email', 'default_value'=>'signup@afrobassfestival.com'],
-                ['key'=>'field_fest_instagram',     'label'=>'Instagram',            'name'=>'fest_instagram',     'type'=>'url'],
-                ['key'=>'field_fest_youtube',       'label'=>'YouTube',              'name'=>'fest_youtube',       'type'=>'url'],
-                ['key'=>'field_fest_tiktok',        'label'=>'TikTok',               'name'=>'fest_tiktok',        'type'=>'url'],
-                ['key'=>'field_fest_facebook',      'label'=>'Facebook',             'name'=>'fest_facebook',      'type'=>'url'],
-                ['key'=>'field_fest_twitter',       'label'=>'X / Twitter',          'name'=>'fest_twitter',       'type'=>'url'],
-            ],
-            'location' => [[ ['param'=>'options_page','operator'=>'==','value'=>'fest-settings'] ]],
-        ]);
-    }
 }
 add_action('acf/init', 'fest_register_acf');
+
+/* ─── FESTIVAL SETTINGS ADMIN PAGE ─── */
+function fest_settings_menu() {
+    add_menu_page(
+        'Festival Settings',
+        'Festival Settings',
+        'manage_options',
+        'fest-settings',
+        'fest_settings_page',
+        'dashicons-tickets-alt',
+        60
+    );
+}
+add_action('admin_menu', 'fest_settings_menu');
+
+function fest_settings_page() {
+    if (!current_user_can('manage_options')) return;
+
+    if (isset($_POST['fest_settings_nonce']) && wp_verify_nonce($_POST['fest_settings_nonce'], 'fest_save_settings')) {
+        $fields = [
+            'fest_hero_video', 'fest_ticket_url',
+            'fest_day1_slug', 'fest_day1_ga_price', 'fest_day1_vip_price', 'fest_day1_table_price',
+            'fest_day2_slug', 'fest_day2_ga_price', 'fest_day2_vip_price', 'fest_day2_table_price',
+            'fest_phone', 'fest_email',
+            'fest_instagram', 'fest_youtube', 'fest_tiktok', 'fest_facebook', 'fest_twitter',
+        ];
+        $saved = [];
+        foreach ($fields as $f) {
+            $saved[$f] = isset($_POST[$f]) ? sanitize_text_field(wp_unslash($_POST[$f])) : '';
+        }
+        // email field gets email sanitization
+        if (!empty($saved['fest_email'])) {
+            $saved['fest_email'] = sanitize_email($saved['fest_email']);
+        }
+        update_option('fest_settings', $saved);
+        echo '<div class="notice notice-success is-dismissible"><p>Settings saved.</p></div>';
+    }
+
+    $s = get_option('fest_settings', []);
+    function fv($s, $k) { return esc_attr($s[$k] ?? ''); }
+    ?>
+    <div class="wrap">
+    <h1 style="display:flex;align-items:center;gap:10px;">🎟️ Festival Settings</h1>
+    <form method="post">
+        <?php wp_nonce_field('fest_save_settings', 'fest_settings_nonce'); ?>
+
+        <style>
+            .fest-settings-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:900px; }
+            .fest-settings-grid .full { grid-column:1/-1; }
+            .fest-card { background:#fff; border:1px solid #ddd; border-radius:6px; padding:20px 24px; }
+            .fest-card h2 { font-size:14px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:#1d2327; margin:0 0 16px; padding-bottom:10px; border-bottom:2px solid #FF2D8A; display:inline-block; }
+            .fest-row { margin-bottom:14px; }
+            .fest-row label { display:block; font-size:12px; font-weight:600; color:#50575e; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.5px; }
+            .fest-row input[type=text],
+            .fest-row input[type=url],
+            .fest-row input[type=email] { width:100%; padding:8px 10px; border:1px solid #ddd; border-radius:4px; font-size:13px; }
+            .fest-row .desc { font-size:11px; color:#999; margin-top:3px; }
+            .fest-divider { border:none; border-top:1px solid #eee; margin:14px 0; }
+        </style>
+
+        <div class="fest-settings-grid" style="margin-top:20px;">
+
+            <!-- General -->
+            <div class="fest-card full">
+                <h2>General</h2>
+                <div class="fest-settings-grid" style="margin-top:0;">
+                    <div class="fest-row">
+                        <label>Hero Video URL (MP4)</label>
+                        <input type="url" name="fest_hero_video" value="<?php echo fv($s,'fest_hero_video'); ?>" placeholder="https://...video.mp4">
+                        <div class="desc">Direct URL to the background video file.</div>
+                    </div>
+                    <div class="fest-row">
+                        <label>Ticket Purchase URL</label>
+                        <input type="url" name="fest_ticket_url" value="<?php echo fv($s,'fest_ticket_url'); ?>" placeholder="https://...">
+                    </div>
+                    <div class="fest-row">
+                        <label>Phone</label>
+                        <input type="text" name="fest_phone" value="<?php echo fv($s,'fest_phone'); ?>" placeholder="416.846.6483">
+                    </div>
+                    <div class="fest-row">
+                        <label>Email</label>
+                        <input type="email" name="fest_email" value="<?php echo fv($s,'fest_email'); ?>" placeholder="signup@afrobassfestival.com">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 1 Tickets -->
+            <div class="fest-card">
+                <h2>Day 1 — Aug 15</h2>
+                <div class="fest-row">
+                    <label>Showpass Slug</label>
+                    <input type="text" name="fest_day1_slug" value="<?php echo fv($s,'fest_day1_slug'); ?>" placeholder="afrobass-festival-day1">
+                    <div class="desc">The event slug from your Showpass dashboard.</div>
+                </div>
+                <hr class="fest-divider">
+                <div class="fest-row">
+                    <label>GA Price</label>
+                    <input type="text" name="fest_day1_ga_price" value="<?php echo fv($s,'fest_day1_ga_price'); ?>" placeholder="e.g. $49">
+                </div>
+                <div class="fest-row">
+                    <label>VIP Price</label>
+                    <input type="text" name="fest_day1_vip_price" value="<?php echo fv($s,'fest_day1_vip_price'); ?>" placeholder="e.g. $99">
+                </div>
+                <div class="fest-row">
+                    <label>Table Price</label>
+                    <input type="text" name="fest_day1_table_price" value="<?php echo fv($s,'fest_day1_table_price'); ?>" placeholder="e.g. $499">
+                </div>
+            </div>
+
+            <!-- Day 2 Tickets -->
+            <div class="fest-card">
+                <h2>Day 2 — Aug 16</h2>
+                <div class="fest-row">
+                    <label>Showpass Slug</label>
+                    <input type="text" name="fest_day2_slug" value="<?php echo fv($s,'fest_day2_slug'); ?>" placeholder="afrobass-festival-day2">
+                    <div class="desc">Leave blank to hide Day 2 from the site.</div>
+                </div>
+                <hr class="fest-divider">
+                <div class="fest-row">
+                    <label>GA Price</label>
+                    <input type="text" name="fest_day2_ga_price" value="<?php echo fv($s,'fest_day2_ga_price'); ?>" placeholder="e.g. $49">
+                </div>
+                <div class="fest-row">
+                    <label>VIP Price</label>
+                    <input type="text" name="fest_day2_vip_price" value="<?php echo fv($s,'fest_day2_vip_price'); ?>" placeholder="e.g. $99">
+                </div>
+                <div class="fest-row">
+                    <label>Table Price</label>
+                    <input type="text" name="fest_day2_table_price" value="<?php echo fv($s,'fest_day2_table_price'); ?>" placeholder="e.g. $499">
+                </div>
+            </div>
+
+            <!-- Social Media -->
+            <div class="fest-card full">
+                <h2>Social Media</h2>
+                <div class="fest-settings-grid" style="margin-top:0;">
+                    <?php foreach([
+                        'fest_instagram' => 'Instagram URL',
+                        'fest_youtube'   => 'YouTube URL',
+                        'fest_tiktok'    => 'TikTok URL',
+                        'fest_facebook'  => 'Facebook URL',
+                        'fest_twitter'   => 'X / Twitter URL',
+                    ] as $key => $label): ?>
+                    <div class="fest-row">
+                        <label><?php echo $label; ?></label>
+                        <input type="url" name="<?php echo $key; ?>" value="<?php echo fv($s,$key); ?>" placeholder="https://...">
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+        </div>
+
+        <p style="margin-top:24px;">
+            <input type="submit" class="button button-primary button-large" value="Save Settings">
+        </p>
+    </form>
+    </div>
+    <?php
+}
 
 /* ─── EMAIL CAPTURE AJAX ─── */
 function fest_email_capture() {
@@ -379,8 +505,8 @@ add_action('admin_init', 'fest_export_submissions');
 
 /* ─── HELPERS ─── */
 function fest_setting(string $key): string {
-    if (!function_exists('get_field')) return '';
-    return (string)(get_field($key, 'option') ?: '');
+    $settings = get_option('fest_settings', []);
+    return (string)($settings[$key] ?? '');
 }
 
 function fest_social_icons(): array {

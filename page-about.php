@@ -4,7 +4,7 @@
  * Template Post Type: page
  */
 get_header();
-$hero_video = fest_setting('fest_hero_video') ? get_field('fest_hero_video', 'option') : null;
+$hero_video_url = fest_setting('fest_hero_video');
 ?>
 <div style="padding-top:72px;">
 
@@ -12,9 +12,9 @@ $hero_video = fest_setting('fest_hero_video') ? get_field('fest_hero_video', 'op
   <section class="fest-about-section">
     <div class="fest-about-visual">
       <div class="fest-about-visual-inner">
-        <?php if (!empty($hero_video['url'])): ?>
+        <?php if ($hero_video_url): ?>
           <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;opacity:0.6;">
-            <source src="<?php echo esc_url($hero_video['url']); ?>" type="video/mp4">
+            <source src="<?php echo esc_url($hero_video_url); ?>" type="video/mp4">
           </video>
         <?php endif; ?>
         <div class="fest-about-visual-fallback"></div>
