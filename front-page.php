@@ -40,8 +40,8 @@ if ($_aq->have_posts()):
     endwhile;
     wp_reset_postdata();
 endif;
-$fp_artists['day1'] = array_slice($fp_artists['day1'], 0, 6);
-$fp_artists['day2'] = array_slice($fp_artists['day2'], 0, 6);
+$fp_artists['day1'] = array_slice($fp_artists['day1'], 0, 1);
+$fp_artists['day2'] = array_slice($fp_artists['day2'], 0, 1);
 
 $sponsors = new WP_Query([
     'post_type'      => 'fest_sponsor',
@@ -162,55 +162,47 @@ $sponsors = new WP_Query([
   foreach ($lineup_days as $day_key => $is_active):
     $day_artists = $fp_artists[$day_key]; ?>
   <div class="fday-panel<?php echo $is_active ? ' fday-panel--active' : ''; ?>" data-day="<?php echo esc_attr($day_key); ?>">
-    <div class="fest-tier-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.04);">
-      <?php if (!empty($day_artists)):
-        foreach ($day_artists as $a):
-          setup_postdata($GLOBALS['post'] = $a['post']);
-          $role   = $a['role'];
-          $origin = $a['origin'];
-          $tba    = $a['tba'];
-          $head   = in_array($role, ['Headliner','Co-Headliner']); ?>
-        <div class="fest-reveal" style="background:#080808;position:relative;overflow:hidden;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;">
-          <?php if (!$tba && has_post_thumbnail()): ?>
-            <?php the_post_thumbnail('fest-artist',['style'=>'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(15%);']); ?>
-            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.95) 0%,rgba(8,8,8,0.3) 55%,transparent 100%);"></div>
-          <?php else: ?>
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
-              <div style="width:68px;height:68px;border-radius:50%;border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
-              </div>
-              <div style="font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;color:rgba(255,255,255,0.08);text-transform:uppercase;">Coming Soon</div>
-            </div>
-            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.98) 0%,transparent 60%);"></div>
-          <?php endif; ?>
-          <div style="position:absolute;top:16px;left:16px;background:<?php echo $head ? '#FF2D8A' : 'rgba(255,255,255,0.07)'; ?>;padding:4px 12px;border-radius:1px;">
-            <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($role); ?></span>
-          </div>
-          <div style="position:relative;z-index:2;padding:20px 24px;">
-            <div style="font-family:'Unbounded',sans-serif;font-size:clamp(16px,1.8vw,24px);font-weight:900;color:<?php echo $tba?'rgba(255,255,255,0.12)':'#fff'; ?>;text-transform:uppercase;letter-spacing:-0.5px;line-height:1.1;"><?php echo $tba ? 'TBA' : get_the_title(); ?></div>
-            <?php if ($origin && !$tba): ?><div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:5px;"><?php echo esc_html($origin); ?></div><?php endif; ?>
-          </div>
+    <?php if (!empty($day_artists)):
+      foreach ($day_artists as $a):
+        setup_postdata($GLOBALS['post'] = $a['post']);
+        $role   = $a['role'];
+        $origin = $a['origin'];
+        $tba    = $a['tba'];
+        $head   = in_array($role, ['Headliner','Co-Headliner']); ?>
+      <div class="fest-reveal" style="background:#080808;position:relative;overflow:hidden;height:480px;display:flex;flex-direction:column;justify-content:flex-end;">
+        <?php if (!$tba && has_post_thumbnail()): ?>
+          <?php the_post_thumbnail('fest-hero',['style'=>'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(15%);']); ?>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.96) 0%,rgba(8,8,8,0.2) 60%,transparent 100%);"></div>
+        <?php else: ?>
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,45,138,0.06) 0%,transparent 70%);"></div>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.99) 0%,transparent 60%);"></div>
+        <?php endif; ?>
+        <div style="position:absolute;top:24px;left:24px;background:#FF2D8A;padding:5px 14px;border-radius:1px;">
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;">Headliner</span>
         </div>
-      <?php endforeach; wp_reset_postdata();
-      else:
-        for ($s=0;$s<6;$s++): $head = $s < 2; ?>
-        <div class="fest-reveal" style="background:#080808;position:relative;overflow:hidden;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;">
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
-            <div style="width:68px;height:68px;border-radius:50%;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
-            </div>
-            <div style="font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;color:rgba(255,255,255,0.07);text-transform:uppercase;">Coming Soon</div>
-          </div>
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.98) 0%,transparent 60%);"></div>
-          <div style="position:absolute;top:16px;left:16px;background:<?php echo $head?'rgba(255,45,138,0.15)':'rgba(255,255,255,0.05)'; ?>;border:1px solid <?php echo $head?'rgba(255,45,138,0.25)':'rgba(255,255,255,0.05)'; ?>;padding:4px 12px;border-radius:1px;">
-            <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:<?php echo $head?'rgba(255,45,138,0.7)':'rgba(255,255,255,0.2)'; ?>;"><?php echo $head?'Headliner':'Artist'; ?></span>
-          </div>
-          <div style="position:relative;z-index:2;padding:20px 24px;">
-            <div style="font-family:'Unbounded',sans-serif;font-size:22px;font-weight:900;color:rgba(255,255,255,0.1);text-transform:uppercase;">TBA</div>
-          </div>
+        <div style="position:relative;z-index:2;padding:36px 40px;">
+          <div style="font-family:'Unbounded',sans-serif;font-size:clamp(28px,4vw,56px);font-weight:900;color:<?php echo $tba?'rgba(255,255,255,0.12)':'#fff'; ?>;text-transform:uppercase;letter-spacing:-1px;line-height:1;"><?php echo $tba ? 'TBA' : get_the_title(); ?></div>
+          <?php if ($origin && !$tba): ?><div style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:10px;letter-spacing:1px;"><?php echo esc_html($origin); ?></div><?php endif; ?>
         </div>
-      <?php endfor; endif; ?>
-    </div>
+      </div>
+    <?php endforeach; wp_reset_postdata();
+    else: ?>
+      <div class="fest-reveal" style="background:#080808;position:relative;overflow:hidden;height:480px;display:flex;flex-direction:column;justify-content:flex-end;">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+          <div style="width:80px;height:80px;border-radius:50%;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          </div>
+          <div style="font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;color:rgba(255,255,255,0.07);text-transform:uppercase;">Headliner Coming Soon</div>
+        </div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.99) 0%,transparent 60%);"></div>
+        <div style="position:absolute;top:24px;left:24px;background:rgba(255,45,138,0.15);border:1px solid rgba(255,45,138,0.25);padding:5px 14px;border-radius:1px;">
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,45,138,0.7);">Headliner</span>
+        </div>
+        <div style="position:relative;z-index:2;padding:36px 40px;">
+          <div style="font-family:'Unbounded',sans-serif;font-size:clamp(28px,4vw,56px);font-weight:900;color:rgba(255,255,255,0.08);text-transform:uppercase;letter-spacing:-1px;">TBA</div>
+        </div>
+      </div>
+    <?php endif; ?>
   </div>
   <?php endforeach; ?>
 
