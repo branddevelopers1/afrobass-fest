@@ -86,7 +86,7 @@ function fest_register_acf() {
             ['key'=>'field_fest_artist_order',       'label'=>'Display Order',          'name'=>'fest_artist_order',       'type'=>'number',   'default_value'=>10],
             ['key'=>'field_fest_artist_tba',         'label'=>'TBA (hide name/photo)',  'name'=>'fest_artist_tba',         'type'=>'true_false','default_value'=>0],
             ['key'=>'field_fest_artist_day',         'label'=>'Festival Day',           'name'=>'fest_artist_day',         'type'=>'select',
-             'choices'=>['day1'=>'Day 1 (Aug 15)','day2'=>'Day 2 (Aug 16)','both'=>'Both Days'],
+             'choices'=>['day1'=>"Day 1 — Obi's House (Aug 15)",'day2'=>'Day 2 — Afrobass Music Festival (Aug 16)','both'=>'Both Days'],
              'default_value'=>'day1'],
         ],
         'location' => [[ ['param'=>'post_type','operator'=>'==','value'=>'fest_artist'] ]],
@@ -131,8 +131,8 @@ function fest_settings_page() {
     if (isset($_POST['fest_settings_nonce']) && wp_verify_nonce($_POST['fest_settings_nonce'], 'fest_save_settings')) {
         $fields = [
             'fest_hero_video',
-            'fest_day1_slug', 'fest_ticket_url', 'fest_day1_ga_price', 'fest_day1_vip_price', 'fest_day1_table_price',
-            'fest_day2_slug', 'fest_day2_ticket_url', 'fest_day2_ga_price', 'fest_day2_vip_price', 'fest_day2_table_price',
+            'fest_day1_slug', 'fest_ticket_url', 'fest_day1_ga_price', 'fest_day1_vip_price', 'fest_day1_table_price', 'fest_day1_flyer_url',
+            'fest_day2_slug', 'fest_day2_ticket_url', 'fest_day2_ga_price', 'fest_day2_vip_price', 'fest_day2_table_price', 'fest_day2_flyer_url',
             'fest_phone', 'fest_email',
             'fest_instagram', 'fest_youtube', 'fest_tiktok', 'fest_facebook', 'fest_twitter',
         ];
@@ -194,7 +194,7 @@ function fest_settings_page() {
 
             <!-- Day 1 Tickets -->
             <div class="fest-card">
-                <h2>Day 1 — Aug 15</h2>
+                <h2>Day 1 — Obi's House (Aug 15)</h2>
                 <div class="fest-row">
                     <label>Ticket URL</label>
                     <input type="url" name="fest_ticket_url" value="<?php echo fv($s,'fest_ticket_url'); ?>" placeholder="https://...">
@@ -204,6 +204,11 @@ function fest_settings_page() {
                     <label>Showpass Slug</label>
                     <input type="text" name="fest_day1_slug" value="<?php echo fv($s,'fest_day1_slug'); ?>" placeholder="afrobass-festival-day1">
                     <div class="desc">The event slug from your Showpass dashboard.</div>
+                </div>
+                <div class="fest-row">
+                    <label>Event Flyer URL</label>
+                    <input type="url" name="fest_day1_flyer_url" value="<?php echo fv($s,'fest_day1_flyer_url'); ?>" placeholder="https://...flyer-day1.jpg">
+                    <div class="desc">Upload the flyer to Media Library, then paste the URL here. Displayed on the Schedule page.</div>
                 </div>
                 <hr class="fest-divider">
                 <div class="fest-row">
@@ -222,7 +227,7 @@ function fest_settings_page() {
 
             <!-- Day 2 Tickets -->
             <div class="fest-card">
-                <h2>Day 2 — Aug 16</h2>
+                <h2>Day 2 — Afrobass Music Festival (Aug 16)</h2>
                 <div class="fest-row">
                     <label>Ticket URL</label>
                     <input type="url" name="fest_day2_ticket_url" value="<?php echo fv($s,'fest_day2_ticket_url'); ?>" placeholder="https://...">
@@ -230,7 +235,12 @@ function fest_settings_page() {
                 <div class="fest-row">
                     <label>Showpass Slug</label>
                     <input type="text" name="fest_day2_slug" value="<?php echo fv($s,'fest_day2_slug'); ?>" placeholder="afrobass-festival-day2">
-                    <div class="desc">Leave blank to hide Day 2 from the site.</div>
+                    <div class="desc">Leave blank to hide Day 2 from tickets/lineup sections.</div>
+                </div>
+                <div class="fest-row">
+                    <label>Event Flyer URL</label>
+                    <input type="url" name="fest_day2_flyer_url" value="<?php echo fv($s,'fest_day2_flyer_url'); ?>" placeholder="https://...flyer-day2.jpg">
+                    <div class="desc">Upload the flyer to Media Library, then paste the URL here. Displayed on the Schedule page.</div>
                 </div>
                 <hr class="fest-divider">
                 <div class="fest-row">
@@ -552,8 +562,8 @@ add_action('wp_head', 'fest_favicon', 1);
 /* ── SEO — META, OG, TWITTER, SCHEMA ── */
 function fest_seo_meta() {
     $site_name   = 'Afrobass Music Festival';
-    $title       = 'Afrobass Music Festival — Toronto 2026 | August 15';
-    $description = 'The first edition of Afrobass Music Festival. Toronto, Canada. August 15, 2026. Celebrating Afrobeats, Amapiano, and Afro-Caribbean music. Be the first to know.';
+    $title       = 'Afrobass Music Festival — Toronto 2026 | August 15–16';
+    $description = 'The first edition of Afrobass Music Festival. A 2-day event in Toronto, Canada. August 15–16, 2026. Celebrating Afrobeats, Amapiano, and Afro-Caribbean music. Be the first to know.';
     $url         = home_url('/');
     $og_img      = get_template_directory_uri() . '/assets/images/og-image.jpg';
     $ticket_url  = fest_setting('fest_ticket_url') ?: home_url('/tickets');
@@ -561,15 +571,15 @@ function fest_seo_meta() {
     // Per-page overrides
     if (is_page('lineup')) {
         $title       = 'Lineup — Afrobass Music Festival Toronto 2026';
-        $description = 'Meet the artists performing at Afrobass Music Festival. International Afrobeats, Amapiano, and Afro-Caribbean artists live in Toronto. August 15, 2026.';
+        $description = 'Meet the artists performing at Afrobass Music Festival. International Afrobeats, Amapiano, and Afro-Caribbean artists live in Toronto. August 15–16, 2026.';
         $url         = get_permalink();
     } elseif (is_page('schedule') || is_page('timetable')) {
         $title       = 'Schedule — Afrobass Music Festival Toronto 2026';
-        $description = "Full performance schedule and timetable for Afrobass Music Festival. See who's playing and when. Toronto, August 15, 2026.";
+        $description = "Full 2-day performance schedule for Afrobass Music Festival. Day 1: Obi's House (Aug 15). Day 2: Afrobass Music Festival (Aug 16). Toronto, Ontario.";
         $url         = get_permalink();
     } elseif (is_page('tickets')) {
         $title       = 'Tickets — Afrobass Music Festival Toronto 2026';
-        $description = 'Get your tickets for Afrobass Music Festival. General Admission, VIP, and Table packages available. Toronto, August 15, 2026.';
+        $description = 'Get your tickets for Afrobass Music Festival. General Admission, VIP, and Table packages available for both days. Toronto, August 15–16, 2026.';
         $url         = get_permalink();
     } elseif (is_page('sponsors')) {
         $title       = 'Sponsorship — Afrobass Music Festival Toronto 2026';
@@ -577,7 +587,7 @@ function fest_seo_meta() {
         $url         = get_permalink();
     } elseif (is_page('about') || is_page('the-festival')) {
         $title       = 'About — Afrobass Music Festival Toronto 2026';
-        $description = 'Afrobass Music Festival is a live music and cultural event in Toronto celebrating Afrobeats, Amapiano, and Afro-Caribbean music. First edition: August 15, 2026.';
+        $description = 'Afrobass Music Festival is a 2-day live music and cultural event in Toronto celebrating Afrobeats, Amapiano, and Afro-Caribbean music. First edition: August 15–16, 2026.';
         $url         = get_permalink();
     } elseif (is_page('contact')) {
         $title       = 'Contact — Afrobass Music Festival Toronto 2026';
@@ -643,7 +653,7 @@ function fest_seo_meta() {
       "name": "Afrobass Music Festival 2026",
       "description": "<?php echo esc_js($description); ?>",
       "startDate": "2026-08-15T20:00:00-04:00",
-      "endDate": "2026-08-16T03:00:00-04:00",
+      "endDate": "2026-08-17T03:00:00-04:00",
       "eventStatus": "https://schema.org/EventScheduled",
       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
       "image": "<?php echo esc_js($og_img); ?>",

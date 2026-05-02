@@ -76,7 +76,7 @@ $sponsors = new WP_Query([
     </defs>
     <text fill="rgba(255,255,255,0.5)" font-family="'Space Grotesk',sans-serif" font-size="13" font-weight="500" letter-spacing="8">
       <textPath href="#fcp">
-        AFROBASS MUSIC FESTIVAL · TORONTO 2026 · AUGUST 15 · REBEL ENTERTAINMENT COMPLEX · AFROBEATS · AMAPIANO · AFRO-CARIBBEAN ·
+        AFROBASS MUSIC FESTIVAL · TORONTO 2026 · AUG 15–16 · REBEL ENTERTAINMENT COMPLEX · AFROBEATS · AMAPIANO · AFRO-CARIBBEAN ·
       </textPath>
     </text>
   </svg>
@@ -93,7 +93,7 @@ $sponsors = new WP_Query([
     <div class="fmeta">
       <div class="fpill">
         <div class="fpill-dot" style="background:#FF6B1A;"></div>
-        <span>August 15, 2026</span>
+        <span>Aug 15–16, 2026</span>
       </div>
       <div class="fpill">
         <div class="fpill-dot" style="background:#FF2D8A;"></div>
@@ -127,14 +127,13 @@ $sponsors = new WP_Query([
     <?php for($i=0;$i<2;$i++): ?>
     <div class="fti hot">Afrobeats <div class="ftdot"></div></div>
     <div class="fti">Amapiano <div class="ftdot"></div></div>
-    <div class="fti hot">Afro-Caribbean <div class="ftdot"></div></div>
-    <div class="fti">August 15, 2026 <div class="ftdot"></div></div>
-    <div class="fti hot">Toronto <div class="ftdot"></div></div>
-    <div class="fti">Rebel Entertainment Complex <div class="ftdot"></div></div>
-    <div class="fti hot">3,000+ Fans <div class="ftdot"></div></div>
-    <div class="fti">First Edition <div class="ftdot"></div></div>
-    <div class="fti hot">19+ Event <div class="ftdot"></div></div>
-    <div class="fti">Live DJs <div class="ftdot"></div></div>
+    <div class="fti">Aug 15–16, 2026 <div class="ftdot"></div></div>
+    <div class="fti hot">2-Day Festival <div class="ftdot"></div></div>
+    <div class="fti">Toronto <div class="ftdot"></div></div>
+    <div class="fti hot">Rebel Entertainment Complex <div class="ftdot"></div></div>
+    <div class="fti hot">First Edition <div class="ftdot"></div></div>
+    <div class="fti">19+ Event <div class="ftdot"></div></div>
+    <div class="fti hot">International Artists &amp; DJs <div class="ftdot"></div></div>
     <?php endfor; ?>
   </div>
 </div>
@@ -143,7 +142,7 @@ $sponsors = new WP_Query([
      2. COUNTDOWN
 ════════════════════════════════════════════ -->
 <div class="fcount-section" style="position:relative;z-index:2;">
-  <div class="fcount-label">Counting Down to August 15, 2026</div>
+  <div class="fcount-label">Counting Down to August 15, 2026 — Day 1: Obi's House</div>
   <div class="fcount-grid">
     <div class="fcd-block"><span class="fcd-num" id="cd-days">--</span><span class="fcd-lbl">Days</span></div>
     <div class="fcd-block"><span class="fcd-num" id="cd-hours">--</span><span class="fcd-lbl">Hours</span></div>

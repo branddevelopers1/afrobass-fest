@@ -118,7 +118,7 @@ $full_nav = [
     <!-- Menu footer -->
     <div class="fest-menu-footer">
       <div class="fest-menu-footer-info">
-        <div class="fest-menu-footer-date">August 15, 2026</div>
+        <div class="fest-menu-footer-date">August 15–16, 2026</div>
         <div class="fest-menu-footer-venue">Rebel Entertainment Complex · Toronto</div>
       </div>
       <button onclick="showpass.tickets.eventPurchaseWidget('afrobass-festival', {'theme-primary': '#FF2D8A', 'keep-shopping': false})" class="fest-menu-cta" style="border:none;cursor:pointer;">
