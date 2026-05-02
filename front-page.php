@@ -149,26 +149,35 @@ $sponsors = new WP_Query([
        onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Full Lineup &rarr;</a>
   </div>
 
-  <div class="fday-tabs">
-    <button class="fday-tab fday-tab--active" data-day="day1">Day 1 <span>Aug 15</span></button>
-    <?php if (!empty($fp_artists['day2'])): ?>
-    <button class="fday-tab" data-day="day2">Day 2 <span>Aug 16</span></button>
-    <?php endif; ?>
+  <?php
+  $fp_days = [
+    'day1' => ['label' => 'Day 1', 'name' => "Obi's House",         'date' => 'Aug 15', 'color' => '#FF4500'],
+    'day2' => ['label' => 'Day 2', 'name' => 'Amapiano Day Party',   'date' => 'Aug 16', 'color' => '#FF2D8A'],
+  ];
+  ?>
+
+  <!-- Day headers -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);margin-bottom:2px;">
+    <?php foreach ($fp_days as $fp_day): ?>
+    <div style="background:#0d0d0d;padding:20px 32px;display:flex;align-items:center;gap:14px;">
+      <div style="width:7px;height:7px;border-radius:50%;background:<?php echo esc_attr($fp_day['color']); ?>;flex-shrink:0;"></div>
+      <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:<?php echo esc_attr($fp_day['color']); ?>;"><?php echo esc_html($fp_day['label']); ?></span>
+      <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);"><?php echo esc_html($fp_day['date']); ?></span>
+      <span style="margin-left:auto;font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.5px;color:rgba(255,255,255,0.15);text-transform:uppercase;"><?php echo esc_html($fp_day['name']); ?></span>
+    </div>
+    <?php endforeach; ?>
   </div>
 
-  <?php
-  $lineup_days = ['day1' => true];
-  if (!empty($fp_artists['day2'])) $lineup_days['day2'] = false;
-  foreach ($lineup_days as $day_key => $is_active):
-    $day_artists = $fp_artists[$day_key]; ?>
-  <div class="fday-panel<?php echo $is_active ? ' fday-panel--active' : ''; ?>" data-day="<?php echo esc_attr($day_key); ?>">
-    <?php if (!empty($day_artists)):
-      foreach ($day_artists as $a):
+  <!-- Artist columns -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
+    <?php foreach ($fp_days as $fp_day_key => $fp_day):
+      $day_artists = $fp_artists[$fp_day_key];
+      $a = !empty($day_artists) ? $day_artists[0] : null;
+      if ($a):
         setup_postdata($GLOBALS['post'] = $a['post']);
         $role   = $a['role'];
         $origin = $a['origin'];
-        $tba    = $a['tba'];
-        $head   = in_array($role, ['Headliner','Co-Headliner']); ?>
+        $tba    = $a['tba']; ?>
       <div class="fest-reveal" style="background:#080808;position:relative;overflow:hidden;height:480px;display:flex;flex-direction:column;justify-content:flex-end;">
         <?php if (!$tba && has_post_thumbnail()): ?>
           <?php the_post_thumbnail('fest-hero',['style'=>'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(15%);']); ?>
@@ -177,34 +186,32 @@ $sponsors = new WP_Query([
           <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,45,138,0.06) 0%,transparent 70%);"></div>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.99) 0%,transparent 60%);"></div>
         <?php endif; ?>
-        <div style="position:absolute;top:24px;left:24px;background:#FF2D8A;padding:5px 14px;border-radius:1px;">
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;">Headliner</span>
+        <div style="position:absolute;top:20px;left:20px;background:<?php echo esc_attr($fp_day['color']); ?>;padding:5px 14px;border-radius:1px;">
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($role); ?></span>
         </div>
-        <div style="position:relative;z-index:2;padding:36px 40px;">
-          <div style="font-family:'Unbounded',sans-serif;font-size:clamp(28px,4vw,56px);font-weight:900;color:<?php echo $tba?'rgba(255,255,255,0.12)':'#fff'; ?>;text-transform:uppercase;letter-spacing:-1px;line-height:1;"><?php echo $tba ? 'TBA' : get_the_title(); ?></div>
-          <?php if ($origin && !$tba): ?><div style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:10px;letter-spacing:1px;"><?php echo esc_html($origin); ?></div><?php endif; ?>
+        <div style="position:relative;z-index:2;padding:32px 36px;">
+          <div style="font-family:'Unbounded',sans-serif;font-size:clamp(24px,3vw,48px);font-weight:900;color:<?php echo $tba?'rgba(255,255,255,0.12)':'#fff'; ?>;text-transform:uppercase;letter-spacing:-1px;line-height:1;"><?php echo $tba ? 'TBA' : get_the_title(); ?></div>
+          <?php if ($origin && !$tba): ?><div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:8px;letter-spacing:1px;"><?php echo esc_html($origin); ?></div><?php endif; ?>
         </div>
       </div>
-    <?php endforeach; wp_reset_postdata();
-    else: ?>
+      <?php wp_reset_postdata();
+      else: ?>
       <div class="fest-reveal" style="background:#080808;position:relative;overflow:hidden;height:480px;display:flex;flex-direction:column;justify-content:flex-end;">
-        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
-          <div style="width:80px;height:80px;border-radius:50%;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <div style="width:80px;height:80px;border-radius:50%;border:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
           </div>
-          <div style="font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;color:rgba(255,255,255,0.07);text-transform:uppercase;">Headliner Coming Soon</div>
         </div>
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.99) 0%,transparent 60%);"></div>
-        <div style="position:absolute;top:24px;left:24px;background:rgba(255,45,138,0.15);border:1px solid rgba(255,45,138,0.25);padding:5px 14px;border-radius:1px;">
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,45,138,0.7);">Headliner</span>
+        <div style="position:absolute;top:20px;left:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);padding:5px 14px;border-radius:1px;">
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);">Headliner</span>
         </div>
-        <div style="position:relative;z-index:2;padding:36px 40px;">
-          <div style="font-family:'Unbounded',sans-serif;font-size:clamp(28px,4vw,56px);font-weight:900;color:rgba(255,255,255,0.08);text-transform:uppercase;letter-spacing:-1px;">TBA</div>
+        <div style="position:relative;z-index:2;padding:32px 36px;">
+          <div style="font-family:'Unbounded',sans-serif;font-size:clamp(24px,3vw,48px);font-weight:900;color:rgba(255,255,255,0.08);text-transform:uppercase;letter-spacing:-1px;">TBA</div>
         </div>
       </div>
-    <?php endif; ?>
+      <?php endif; endforeach; ?>
   </div>
-  <?php endforeach; ?>
 
   <div style="margin-top:36px;text-align:center;" class="fest-reveal">
     <a href="<?php echo esc_url(home_url('/lineup')); ?>"
