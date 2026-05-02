@@ -139,19 +139,6 @@ $sponsors = new WP_Query([
 </div>
 
 <!-- ═══════════════════════════════════════════
-     2. COUNTDOWN
-════════════════════════════════════════════ -->
-<div class="fcount-section" style="position:relative;z-index:2;">
-  <div class="fcount-label">Counting Down to August 15, 2026 — Day 1: Obi's House</div>
-  <div class="fcount-grid">
-    <div class="fcd-block"><span class="fcd-num" id="cd-days">--</span><span class="fcd-lbl">Days</span></div>
-    <div class="fcd-block"><span class="fcd-num" id="cd-hours">--</span><span class="fcd-lbl">Hours</span></div>
-    <div class="fcd-block"><span class="fcd-num" id="cd-mins">--</span><span class="fcd-lbl">Minutes</span></div>
-    <div class="fcd-block"><span class="fcd-num" id="cd-secs">--</span><span class="fcd-lbl">Seconds</span></div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════
      3. LINEUP TEASER
 ════════════════════════════════════════════ -->
 <section class="fest-content-section" style="position:relative;z-index:2;padding:100px 56px;border-top:1px solid rgba(255,255,255,0.04);">
@@ -328,6 +315,19 @@ $sponsors = new WP_Query([
   <?php endforeach; ?>
 
 </section>
+
+<!-- ═══════════════════════════════════════════
+     COUNTDOWN
+════════════════════════════════════════════ -->
+<div class="fcount-section" style="position:relative;z-index:2;">
+  <div class="fcount-label">Counting Down to August 15, 2026 — Day 1: Obi's House</div>
+  <div class="fcount-grid">
+    <div class="fcd-block"><span class="fcd-num" id="cd-days">--</span><span class="fcd-lbl">Days</span></div>
+    <div class="fcd-block"><span class="fcd-num" id="cd-hours">--</span><span class="fcd-lbl">Hours</span></div>
+    <div class="fcd-block"><span class="fcd-num" id="cd-mins">--</span><span class="fcd-lbl">Minutes</span></div>
+    <div class="fcd-block"><span class="fcd-num" id="cd-secs">--</span><span class="fcd-lbl">Seconds</span></div>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════════════════
      8. EMAIL SIGNUP
