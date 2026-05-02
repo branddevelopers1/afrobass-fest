@@ -96,10 +96,6 @@ $sponsors = new WP_Query([
         <span>Aug 15–16, 2026</span>
       </div>
       <div class="fpill">
-        <div class="fpill-dot" style="background:#FF2D8A;"></div>
-        <span>Rebel Entertainment Complex</span>
-      </div>
-      <div class="fpill">
         <div class="fpill-dot" style="background:#a855f7;"></div>
         <span>Toronto, Canada</span>
       </div>
