@@ -35,7 +35,7 @@
 
 <?php if (is_front_page()): ?>
 <div id="fest-loader" aria-hidden="true">
-  <div id="fest-loader-logo">AFROBASS<span>MUSIC FESTIVAL</span></div>
+  <div id="fest-loader-logo">AFROBASS<span>MUSIC FEST</span></div>
   <div id="fest-loader-bar-wrap"><div id="fest-loader-bar"></div></div>
 </div>
 <?php endif; ?>

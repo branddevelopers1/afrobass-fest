@@ -87,7 +87,7 @@ $sponsors = new WP_Query([
     <h1 class="fh1">
       <span class="fh1-1">AFROBASS</span>
       <span class="fh1-2">MUSIC</span>
-      <span class="fh1-3">FESTIVAL</span>
+      <span class="fh1-3">FEST</span>
     </h1>
 
     <div class="fmeta">
