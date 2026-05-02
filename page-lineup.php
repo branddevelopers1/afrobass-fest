@@ -33,7 +33,7 @@ endif;
 
 $days = [
   'day1' => ['label' => 'Day 1', 'name' => "Obi's House",            'date' => 'Aug 15, 2026', 'color' => '#FF4500'],
-  'day2' => ['label' => 'Day 2', 'name' => 'Afrobass Music Festival', 'date' => 'Aug 16, 2026', 'color' => '#FF2D8A'],
+  'day2' => ['label' => 'Day 2', 'name' => 'Amapiano Day Party',      'date' => 'Aug 16, 2026', 'color' => '#FF2D8A'],
 ];
 ?>
 
