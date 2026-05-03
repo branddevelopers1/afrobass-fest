@@ -1030,6 +1030,9 @@ input, textarea, select { font-family: var(--font-body); }
   .fest-section-hdr { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; margin-bottom: 32px !important; }
   .fest-tier-grid { grid-template-columns: 1fr !important; background: transparent !important; }
   .fsignup-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+/* Showpass widget — hide generated element */
+.chakra-wwc4we { display: none !important; }
+
   /* Day columns — lineup & front page teaser */
   .fday-col-grid { grid-template-columns: 1fr !important; }
   .fday-col-name { display: none !important; }
