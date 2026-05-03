@@ -44,16 +44,20 @@ $days = [
     'flyer'  => $day1_flyer,
     'color'  => '#FF4500',
     'active' => true,
+    'venue'  => 'Rebel Entertainment Complex',
+    'hours'  => '10pm – 2am',
   ],
   'day2' => [
     'query'  => $day2_q,
-    'name'   => 'Afrobass Music Festival',
+    'name'   => 'Amapiano Day Party',
     'label'  => 'Day 2',
     'date'   => 'Sunday, August 16, 2026',
     'span'   => 'Aug 16',
     'flyer'  => $day2_flyer,
     'color'  => '#FF2D8A',
     'active' => false,
+    'venue'  => 'Noir',
+    'hours'  => '5pm – 11pm',
   ],
 ];
 ?>
@@ -84,7 +88,7 @@ $days = [
       </div>
       <div style="display:flex;align-items:center;gap:14px;">
         <div style="width:8px;height:8px;border-radius:50%;background:<?php echo esc_attr($day['color']); ?>;flex-shrink:0;"></div>
-        <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.6);">Rebel Entertainment Complex · Toronto</span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.6);"><?php echo esc_html($day['venue']); ?> · Toronto</span>
       </div>
       <div style="display:flex;align-items:center;gap:14px;">
         <div style="width:8px;height:8px;border-radius:50%;background:<?php echo esc_attr($day['color']); ?>;flex-shrink:0;"></div>
@@ -101,7 +105,7 @@ $days = [
       <div style="padding-top:8px;">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:14px;"><?php echo esc_html($day['label']); ?> &mdash; <?php echo esc_html($day['date']); ?></div>
         <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,56px);letter-spacing:2px;color:#fff;text-transform:uppercase;line-height:1;margin:0 0 16px;"><?php echo esc_html($day['name']); ?></h2>
-        <div style="font-size:13px;color:rgba(255,255,255,0.3);">Rebel Entertainment Complex · Toronto, ON</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.3);"><?php echo esc_html($day['venue']); ?> · Toronto, ON</div>
         <div style="font-size:12px;color:rgba(255,255,255,0.18);margin-top:6px;">www.afrobassfest.com</div>
       </div>
     </div>
@@ -192,8 +196,8 @@ $days = [
 
           <!-- Footer row -->
           <div style="border-top:1px solid #1a1a1a;padding:20px 32px;display:flex;justify-content:space-between;align-items:center;background:transparent;">
-            <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.15);">Doors Open TBA · Age 19+</span>
-            <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.15);">Rebel Entertainment Complex</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.15);"><?php echo esc_html($day['hours']); ?> · Age 19+</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.15);"><?php echo esc_html($day['venue']); ?></span>
           </div>
 
         </div>
@@ -222,7 +226,7 @@ $days = [
     <?php
     $facts = [
       ['Dates', 'August 15–16, 2026'],
-      ['Venue', 'Rebel Entertainment Complex'],
+      ['Venue', 'Rebel (Day 1) · Noir (Day 2)'],
       ['City',  'Toronto, Ontario'],
       ['Age',   '19+ Event'],
     ];

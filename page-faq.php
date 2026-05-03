@@ -33,15 +33,15 @@ $faqs = [
   'The Event' => [
     [
       'q' => 'When and where is Afrobass Music Festival?',
-      'a' => 'Afrobass Music Festival takes place on Saturday, August 15, 2026 at Rebel Entertainment Complex, 11 Polson St, Toronto, Ontario.'
+      'a' => 'Afrobass Music Festival is a 2-day event taking place August 15–16, 2026 in Toronto. Day 1 (Aug 15) is Obi\'s House at Rebel Entertainment Complex, 11 Polson St — doors 10pm to 2am. Day 2 (Aug 16) is Amapiano Day Party at Noir, 11 Polson St — 5pm to 11pm.'
     ],
     [
       'q' => 'What time do doors open?',
-      'a' => 'Door opening times will be confirmed closer to the event date. Follow us on Instagram @afrobass.ca or sign up to our mailing list for the latest updates.'
+      'a' => 'Day 1 — Obi\'s House doors open at 10pm (until 2am). Day 2 — Amapiano Day Party runs 5pm to 11pm.'
     ],
     [
       'q' => 'Who is performing?',
-      'a' => 'The full lineup will be announced in stages on our Lineup page and via our social channels. Our confirmed headliners are Tion Wayne, Zaylevelten, and Jeleel, with additional artists to be announced.'
+      'a' => 'The full lineup will be announced in stages on our Lineup page and via our social channels. Our confirmed headliners for Day 1 are Obi\'s House + more, and our Day 2 headliner will be announced soon. Additional artists for Day 1 are also to be announced soon.'
     ],
     [
       'q' => 'What genres of music will be played?',
@@ -49,7 +49,7 @@ $faqs = [
     ],
     [
       'q' => 'How many stages are there?',
-      'a' => 'This is a single-stage, single-night experience. One stage, all night — no split decisions, no FOMO. Every artist performs for the full crowd.'
+      'a' => '1 main stage, both days. No split decisions, no FOMO — every artist performs for the full crowd.'
     ],
   ],
   'Venue & Getting There' => [
