@@ -21,8 +21,14 @@ $prices = [
     ],
 ];
 
-$ticket_days = [['day1', $day1_slug, true]];
-if ($day2_slug) $ticket_days[] = ['day2', $day2_slug, false];
+$days_meta = [
+  'day1' => ['name' => "Obi's House",       'date' => 'Aug 15', 'hours' => '10pm – 2am', 'venue' => 'Rebel Entertainment Complex', 'color' => '#FF4500'],
+  'day2' => ['name' => 'Amapiano Day Party', 'date' => 'Aug 16', 'hours' => '5pm – 11pm',  'venue' => 'Noir',                        'color' => '#FF2D8A'],
+];
+$ticket_days = [
+  ['day1', $day1_slug, true],
+  ['day2', $day2_slug, false],
+];
 ?>
 
 <div style="padding-top:96px;">
@@ -30,15 +36,29 @@ if ($day2_slug) $ticket_days[] = ['day2', $day2_slug, false];
   <!-- ── TICKET TIERS ── -->
   <section class="fest-tickets-section">
 
-    <?php if ($day2_slug): ?>
     <div class="fday-tabs" style="margin-bottom:40px;">
-      <button class="fday-tab fday-tab--active" data-day="day1">Day 1 <span>Aug 15</span></button>
-      <button class="fday-tab" data-day="day2">Day 2 <span>Aug 16</span></button>
+      <?php foreach ($days_meta as $dk => $dm): ?>
+      <button class="fday-tab<?php echo $dk === 'day1' ? ' fday-tab--active' : ''; ?>" data-day="<?php echo esc_attr($dk); ?>">
+        <?php echo esc_html($dm['name']); ?> <span><?php echo esc_html($dm['date']); ?></span>
+      </button>
+      <?php endforeach; ?>
     </div>
-    <?php endif; ?>
 
-    <?php foreach ($ticket_days as [$day_key, $slug, $is_active]): ?>
+    <?php foreach ($ticket_days as [$day_key, $slug, $is_active]):
+      $dm = $days_meta[$day_key];
+      $is_day_party = ($day_key === 'day2');
+    ?>
     <div class="fday-panel<?php echo $is_active ? ' fday-panel--active' : ''; ?>" data-day="<?php echo esc_attr($day_key); ?>">
+
+      <!-- Day context bar -->
+      <div style="display:flex;align-items:center;gap:24px;padding:16px 0 32px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:7px;height:7px;border-radius:50%;background:<?php echo esc_attr($dm['color']); ?>;flex-shrink:0;"></div>
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:<?php echo esc_attr($dm['color']); ?>;"><?php echo esc_html($dm['name']); ?></span>
+        </div>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25);"><?php echo esc_html($dm['date']); ?> &middot; <?php echo esc_html($dm['hours']); ?> &middot; <?php echo esc_html($dm['venue']); ?>, Toronto</span>
+      </div>
+
       <div class="fest-tickets-grid">
 
         <!-- General Admission -->
@@ -46,17 +66,21 @@ if ($day2_slug) $ticket_days[] = ['day2', $day2_slug, false];
           <span class="fest-tier-badge">General</span>
           <div class="fest-tier-name">General Admission</div>
           <div class="fest-tier-price"><?php echo esc_html($prices[$day_key]['ga']); ?></div>
-          <div class="fest-tier-desc">Full access to the festival grounds, all performances, and vendor areas.</div>
+          <div class="fest-tier-desc"><?php echo $is_day_party ? 'Full access to the day party, all performances, and vendor areas.' : 'Full access to the festival grounds, all performances, and vendor areas.'; ?></div>
           <div class="fest-tier-perks">
-            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>All performances &mdash; full night</div>
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>All performances &mdash; <?php echo $is_day_party ? '5pm to 11pm' : 'full night'; ?></div>
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>General standing floor</div>
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Food &amp; vendor access</div>
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>19+ valid ID required</div>
           </div>
+          <?php if ($slug): ?>
           <button onclick="showpass.tickets.eventPurchaseWidget('<?php echo esc_js($slug); ?>', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
              class="fest-tier-btn fest-tier-btn-outline" style="display:block;width:100%;text-align:center;border:1px solid rgba(255,255,255,0.15);background:transparent;cursor:pointer;">
             Buy Tickets &rarr;
           </button>
+          <?php else: ?>
+          <div class="fest-tier-btn fest-tier-btn-outline" style="display:block;width:100%;text-align:center;opacity:0.4;cursor:default;">Tickets Coming Soon</div>
+          <?php endif; ?>
         </div>
 
         <!-- VIP -->
@@ -71,10 +95,14 @@ if ($day2_slug) $ticket_days[] = ['day2', $day2_slug, false];
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Priority entry &mdash; skip the line</div>
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Exclusive VIP lounge access</div>
           </div>
+          <?php if ($slug): ?>
           <button onclick="showpass.tickets.eventPurchaseWidget('<?php echo esc_js($slug); ?>', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
              class="fest-tier-btn fest-tier-btn-fill" style="display:block;width:100%;text-align:center;border:none;cursor:pointer;">
             Buy Tickets &rarr;
           </button>
+          <?php else: ?>
+          <div class="fest-tier-btn fest-tier-btn-fill" style="display:block;width:100%;text-align:center;opacity:0.5;cursor:default;">Tickets Coming Soon</div>
+          <?php endif; ?>
         </div>
 
         <!-- Table Package -->
@@ -89,7 +117,7 @@ if ($day2_slug) $ticket_days[] = ['day2', $day2_slug, false];
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Dedicated event host</div>
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Best views of the stage</div>
           </div>
-          <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Table Package Enquiry — Afrobass Fest 2026"
+          <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Table Package Enquiry — <?php echo esc_attr($dm['name']); ?> <?php echo esc_attr($dm['date']); ?>"
              class="fest-tier-btn fest-tier-btn-outline" style="display:block;text-align:center;">
             Enquire &rarr;
           </a>
@@ -104,10 +132,10 @@ if ($day2_slug) $ticket_days[] = ['day2', $day2_slug, false];
   <!-- ── EVENT INFO STRIP ── -->
   <div style="border-top:1px solid rgba(255,255,255,0.04);display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,0.04);margin-top:80px;" class="fest-reveal">
     <?php foreach([
-      ['Date',    $day2_slug ? 'Aug 15–16, 2026' : 'Saturday, August 15, 2026'],
-      ['Venue',   'Rebel Entertainment Complex'],
-      ['Address', '11 Polson St, Toronto, ON'],
-      ['Age',     '19+ Valid ID Required'],
+      ['Dates',      'Aug 15–16, 2026'],
+      ['Day 1 Venue', 'Rebel Entertainment Complex'],
+      ['Day 2 Venue', 'Noir — 11 Polson St, Toronto'],
+      ['Age',         '19+ Valid ID Required'],
     ] as $d): ?>
       <div style="background:#080808;padding:28px 32px;">
         <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:8px;"><?php echo esc_html($d[0]); ?></div>
