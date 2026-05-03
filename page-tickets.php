@@ -22,8 +22,8 @@ $prices = [
 ];
 
 $days_meta = [
-  'day1' => ['name' => "Obi's House",       'date' => 'Aug 15', 'hours' => '10pm – 2am', 'venue' => 'Rebel Entertainment Complex', 'color' => '#FF4500'],
-  'day2' => ['name' => 'Amapiano Day Party', 'date' => 'Aug 16', 'hours' => '5pm – 11pm',  'venue' => 'Noir',                        'color' => '#FF2D8A'],
+  'day1' => ['name' => "Obi's House",       'date' => 'Aug 15', 'hours' => '10pm – 2am', 'venue' => 'Rebel Entertainment Complex', 'color' => '#FF4500', 'ga_type' => 4354994],
+  'day2' => ['name' => 'Amapiano Day Party', 'date' => 'Aug 16', 'hours' => '5pm – 11pm',  'venue' => 'Noir',                        'color' => '#FF2D8A', 'ga_type' => null],
 ];
 $ticket_days = [
   ['day1', $day1_slug, true],
@@ -74,7 +74,12 @@ $ticket_days = [
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>19+ valid ID required</div>
           </div>
           <?php if ($slug): ?>
-          <button onclick="showpass.tickets.eventPurchaseWidget('<?php echo esc_js($slug); ?>', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
+          <?php
+            $ga_opts = "{'theme-primary': '#FF2D8A', 'keep-shopping': false";
+            if (!empty($dm['ga_type'])) $ga_opts .= ", 'ticket-type': " . intval($dm['ga_type']);
+            $ga_opts .= "}";
+          ?>
+          <button onclick="showpass.tickets.eventPurchaseWidget('<?php echo esc_js($slug); ?>', <?php echo $ga_opts; ?>)"
              class="fest-tier-btn fest-tier-btn-outline" style="display:block;width:100%;text-align:center;border:1px solid rgba(255,255,255,0.15);background:transparent;cursor:pointer;">
             Buy Tickets &rarr;
           </button>
