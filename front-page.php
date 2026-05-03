@@ -175,9 +175,9 @@ $sponsors = new WP_Query([
         $role   = $a['role'];
         $origin = $a['origin'];
         $tba    = $a['tba']; ?>
-      <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;height:480px;display:flex;flex-direction:column;justify-content:flex-end;">
+      <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;">
         <?php if (!$tba && has_post_thumbnail()): ?>
-          <?php the_post_thumbnail('fest-hero',['style'=>'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(15%);']); ?>
+          <?php the_post_thumbnail('fest-artist',['style'=>'display:block;width:100%;height:auto;filter:grayscale(15%);']); ?>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.96) 0%,rgba(8,8,8,0.2) 60%,transparent 100%);"></div>
         <?php else: ?>
           <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,45,138,0.06) 0%,transparent 70%);"></div>
@@ -186,7 +186,7 @@ $sponsors = new WP_Query([
         <div style="position:absolute;top:20px;left:20px;background:<?php echo esc_attr($fp_day['color']); ?>;padding:5px 14px;border-radius:1px;">
           <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($role); ?></span>
         </div>
-        <div style="position:relative;z-index:2;padding:32px 36px;">
+        <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;padding:32px 36px;">
           <div style="font-family:'Unbounded',sans-serif;font-size:clamp(24px,3vw,48px);font-weight:900;color:<?php echo $tba?'rgba(255,255,255,0.12)':'#fff'; ?>;text-transform:uppercase;letter-spacing:-1px;line-height:1;"><?php echo $tba ? 'TBA' : get_the_title(); ?></div>
           <?php if ($origin && !$tba): ?><div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:8px;letter-spacing:1px;"><?php echo esc_html($origin); ?></div><?php endif; ?>
         </div>

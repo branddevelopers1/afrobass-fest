@@ -1033,5 +1033,5 @@ input, textarea, select { font-family: var(--font-body); }
   /* Day columns — lineup & front page teaser */
   .fday-col-grid { grid-template-columns: 1fr !important; }
   .fday-col-name { display: none !important; }
-  .fday-col-card { height: 360px !important; min-height: 360px !important; }
+  .fday-col-card { height: auto !important; min-height: 0 !important; }
 }

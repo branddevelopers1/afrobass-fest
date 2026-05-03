@@ -69,9 +69,9 @@ $days = [
           $tba    = $a['tba'];
         ?>
 
-        <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;">
+        <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;">
           <?php if (!$tba && has_post_thumbnail()): ?>
-            <?php the_post_thumbnail('fest-hero', ['style'=>'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(10%);', 'alt'=>get_the_title()]); ?>
+            <?php the_post_thumbnail('fest-artist', ['style'=>'display:block;width:100%;height:auto;filter:grayscale(10%);', 'alt'=>get_the_title()]); ?>
             <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.97) 0%,rgba(8,8,8,0.3) 55%,transparent 100%);"></div>
           <?php else: ?>
             <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center top,rgba(255,255,255,0.02) 0%,transparent 70%);"></div>
@@ -84,7 +84,7 @@ $days = [
           </div>
 
           <!-- Info -->
-          <div style="position:relative;z-index:2;padding:40px;">
+          <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;padding:40px;">
             <div style="font-family:'Unbounded',sans-serif;font-size:clamp(28px,3.5vw,56px);font-weight:900;color:<?php echo $tba ? 'rgba(255,255,255,0.1)' : '#fff'; ?>;text-transform:uppercase;letter-spacing:-1.5px;line-height:0.95;">
               <?php echo $tba ? 'TBA' : get_the_title(); ?>
             </div>
