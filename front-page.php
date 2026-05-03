@@ -161,12 +161,22 @@ $sponsors = new WP_Query([
     <?php foreach ($fp_days as $fp_day_key => $fp_day):
       $day_artists = $fp_artists[$fp_day_key];
       $a = !empty($day_artists) ? $day_artists[0] : null;
-      if ($a):
+    ?>
+    <div style="display:flex;flex-direction:column;">
+
+      <!-- Day header strip -->
+      <div style="background:#0d0d0d;padding:18px 24px 16px;border-left:3px solid <?php echo esc_attr($fp_day['color']); ?>;">
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:<?php echo esc_attr($fp_day['color']); ?>;margin-bottom:5px;"><?php echo esc_html($fp_day['label']); ?></div>
+        <div style="font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.5px;"><?php echo esc_html($fp_day['name']); ?></div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:3px;letter-spacing:1px;"><?php echo esc_html($fp_day['date']); ?></div>
+      </div>
+
+      <?php if ($a):
         setup_postdata($GLOBALS['post'] = $a['post']);
         $role   = $a['role'];
         $origin = $a['origin'];
         $tba    = $a['tba']; ?>
-      <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;height:480px;display:flex;flex-direction:column;justify-content:flex-end;">
+      <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;height:480px;flex:1;display:flex;flex-direction:column;justify-content:flex-end;">
         <?php if (!$tba && has_post_thumbnail()): ?>
           <?php the_post_thumbnail('fest-hero',['style'=>'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(15%);']); ?>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.96) 0%,rgba(8,8,8,0.2) 60%,transparent 100%);"></div>
@@ -174,9 +184,6 @@ $sponsors = new WP_Query([
           <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,45,138,0.06) 0%,transparent 70%);"></div>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.99) 0%,transparent 60%);"></div>
         <?php endif; ?>
-        <div style="position:absolute;top:20px;left:20px;background:<?php echo esc_attr($fp_day['color']); ?>;padding:5px 14px;border-radius:1px;">
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($fp_day['label']); ?> &middot; <?php echo esc_html($fp_day['name']); ?></span>
-        </div>
         <div style="position:relative;z-index:2;padding:32px 36px;">
           <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px;"><?php echo esc_html($role); ?></div>
           <div style="font-family:'Unbounded',sans-serif;font-size:clamp(24px,3vw,48px);font-weight:900;color:<?php echo $tba?'rgba(255,255,255,0.12)':'#fff'; ?>;text-transform:uppercase;letter-spacing:-1px;line-height:1;"><?php echo $tba ? 'TBA' : get_the_title(); ?></div>
@@ -185,22 +192,22 @@ $sponsors = new WP_Query([
       </div>
       <?php wp_reset_postdata();
       else: ?>
-      <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;height:480px;display:flex;flex-direction:column;justify-content:flex-end;">
+      <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;height:480px;flex:1;display:flex;flex-direction:column;justify-content:flex-end;">
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
           <div style="width:80px;height:80px;border-radius:50%;border:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;">
             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
           </div>
         </div>
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.99) 0%,transparent 60%);"></div>
-        <div style="position:absolute;top:20px;left:20px;background:<?php echo esc_attr($fp_day['color']); ?>;padding:5px 14px;border-radius:1px;">
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($fp_day['label']); ?> &middot; <?php echo esc_html($fp_day['name']); ?></span>
-        </div>
         <div style="position:relative;z-index:2;padding:32px 36px;">
           <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:10px;">Headliner</div>
           <div style="font-family:'Unbounded',sans-serif;font-size:clamp(24px,3vw,48px);font-weight:900;color:rgba(255,255,255,0.08);text-transform:uppercase;letter-spacing:-1px;">TBA</div>
         </div>
       </div>
-      <?php endif; endforeach; ?>
+      <?php endif; ?>
+
+    </div>
+    <?php endforeach; ?>
   </div>
 
   <div style="margin-top:36px;text-align:center;" class="fest-reveal">

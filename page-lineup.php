@@ -47,8 +47,18 @@ $days = [
       <?php foreach ($days as $day_key => $day):
         $artists = $lineup_artists[$day_key];
         $a       = !empty($artists) ? $artists[0] : null;
+      ?>
 
-        if ($a):
+      <div style="display:flex;flex-direction:column;">
+
+        <!-- Day header strip -->
+        <div style="background:#0d0d0d;padding:22px 32px 20px;border-left:3px solid <?php echo esc_attr($day['color']); ?>;">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:<?php echo esc_attr($day['color']); ?>;margin-bottom:6px;"><?php echo esc_html($day['label']); ?></div>
+          <div style="font-family:'Unbounded',sans-serif;font-size:14px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.5px;"><?php echo esc_html($day['name']); ?></div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:4px;letter-spacing:1px;"><?php echo esc_html($day['date']); ?></div>
+        </div>
+
+        <?php if ($a):
           setup_postdata($GLOBALS['post'] = $a['post']);
           $role   = $a['role'];
           $origin = $a['origin'];
@@ -56,9 +66,9 @@ $days = [
           $ig     = $a['ig'];
           $sp     = $a['sp'];
           $tba    = $a['tba'];
-      ?>
+        ?>
 
-        <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;">
+        <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;min-height:600px;flex:1;display:flex;flex-direction:column;justify-content:flex-end;">
           <?php if (!$tba && has_post_thumbnail()): ?>
             <?php the_post_thumbnail('fest-hero', ['style'=>'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(10%);', 'alt'=>get_the_title()]); ?>
             <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.97) 0%,rgba(8,8,8,0.3) 55%,transparent 100%);"></div>
@@ -66,11 +76,6 @@ $days = [
             <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center top,rgba(255,255,255,0.02) 0%,transparent 70%);"></div>
             <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.99) 0%,transparent 60%);"></div>
           <?php endif; ?>
-
-          <!-- Day + event badge -->
-          <div style="position:absolute;top:24px;left:24px;background:<?php echo esc_attr($day['color']); ?>;padding:5px 14px;border-radius:1px;">
-            <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($day['label']); ?> &middot; <?php echo esc_html($day['name']); ?></span>
-          </div>
 
           <!-- Info -->
           <div style="position:relative;z-index:2;padding:40px;">
@@ -105,19 +110,15 @@ $days = [
 
         <?php wp_reset_postdata();
 
-      else: /* No artist added yet — TBA placeholder */ ?>
+        else: /* No artist added yet — TBA placeholder */ ?>
 
-        <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;">
+        <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;min-height:600px;flex:1;display:flex;flex-direction:column;justify-content:flex-end;">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
             <div style="width:90px;height:90px;border-radius:50%;border:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
             </div>
           </div>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.99) 0%,transparent 60%);"></div>
-
-          <div style="position:absolute;top:24px;left:24px;background:<?php echo esc_attr($day['color']); ?>;padding:5px 14px;border-radius:1px;">
-            <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($day['label']); ?> &middot; <?php echo esc_html($day['name']); ?></span>
-          </div>
 
           <div style="position:relative;z-index:2;padding:40px;">
             <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:10px;">Headliner</div>
@@ -126,7 +127,11 @@ $days = [
           </div>
         </div>
 
-      <?php endif; endforeach; ?>
+        <?php endif; ?>
+
+      </div>
+
+      <?php endforeach; ?>
 
     </div>
 
