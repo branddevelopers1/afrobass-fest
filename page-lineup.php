@@ -42,7 +42,7 @@ $days = [
   <section style="padding:0 0 120px;">
 
     <!-- Day headers -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
+    <div class="fday-col-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
       <?php foreach ($days as $day): ?>
       <div style="background:#0d0d0d;padding:24px 40px;display:flex;align-items:center;gap:16px;">
         <div style="width:8px;height:8px;border-radius:50%;background:<?php echo esc_attr($day['color']); ?>;flex-shrink:0;"></div>
@@ -50,13 +50,13 @@ $days = [
           <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:<?php echo esc_attr($day['color']); ?>;"><?php echo esc_html($day['label']); ?></span>
           <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-left:12px;"><?php echo esc_html($day['date']); ?></span>
         </div>
-        <div style="margin-left:auto;font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.15);text-transform:uppercase;"><?php echo esc_html($day['name']); ?></div>
+        <div class="fday-col-name" style="margin-left:auto;font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.15);text-transform:uppercase;"><?php echo esc_html($day['name']); ?></div>
       </div>
       <?php endforeach; ?>
     </div>
 
     <!-- Artist columns -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
+    <div class="fday-col-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
 
       <?php foreach ($days as $day_key => $day):
         $artists = $lineup_artists[$day_key];
@@ -72,7 +72,7 @@ $days = [
           $tba    = $a['tba'];
       ?>
 
-        <div class="fest-reveal" style="background:#080808;position:relative;overflow:hidden;min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;">
+        <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;">
           <?php if (!$tba && has_post_thumbnail()): ?>
             <?php the_post_thumbnail('fest-hero', ['style'=>'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(10%);', 'alt'=>get_the_title()]); ?>
             <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.97) 0%,rgba(8,8,8,0.3) 55%,transparent 100%);"></div>
@@ -120,7 +120,7 @@ $days = [
 
       else: /* No artist added yet — TBA placeholder */ ?>
 
-        <div class="fest-reveal" style="background:#080808;position:relative;overflow:hidden;min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;">
+        <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
             <div style="width:90px;height:90px;border-radius:50%;border:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>

@@ -157,19 +157,19 @@ $sponsors = new WP_Query([
   ?>
 
   <!-- Day headers -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);margin-bottom:2px;">
+  <div class="fday-col-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);margin-bottom:2px;">
     <?php foreach ($fp_days as $fp_day): ?>
     <div style="background:#0d0d0d;padding:20px 32px;display:flex;align-items:center;gap:14px;">
       <div style="width:7px;height:7px;border-radius:50%;background:<?php echo esc_attr($fp_day['color']); ?>;flex-shrink:0;"></div>
       <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:<?php echo esc_attr($fp_day['color']); ?>;"><?php echo esc_html($fp_day['label']); ?></span>
       <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);"><?php echo esc_html($fp_day['date']); ?></span>
-      <span style="margin-left:auto;font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.5px;color:rgba(255,255,255,0.15);text-transform:uppercase;"><?php echo esc_html($fp_day['name']); ?></span>
+      <span class="fday-col-name" style="margin-left:auto;font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.5px;color:rgba(255,255,255,0.15);text-transform:uppercase;"><?php echo esc_html($fp_day['name']); ?></span>
     </div>
     <?php endforeach; ?>
   </div>
 
   <!-- Artist columns -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
+  <div class="fday-col-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
     <?php foreach ($fp_days as $fp_day_key => $fp_day):
       $day_artists = $fp_artists[$fp_day_key];
       $a = !empty($day_artists) ? $day_artists[0] : null;
@@ -178,7 +178,7 @@ $sponsors = new WP_Query([
         $role   = $a['role'];
         $origin = $a['origin'];
         $tba    = $a['tba']; ?>
-      <div class="fest-reveal" style="background:#080808;position:relative;overflow:hidden;height:480px;display:flex;flex-direction:column;justify-content:flex-end;">
+      <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;height:480px;display:flex;flex-direction:column;justify-content:flex-end;">
         <?php if (!$tba && has_post_thumbnail()): ?>
           <?php the_post_thumbnail('fest-hero',['style'=>'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(15%);']); ?>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.96) 0%,rgba(8,8,8,0.2) 60%,transparent 100%);"></div>
@@ -196,7 +196,7 @@ $sponsors = new WP_Query([
       </div>
       <?php wp_reset_postdata();
       else: ?>
-      <div class="fest-reveal" style="background:#080808;position:relative;overflow:hidden;height:480px;display:flex;flex-direction:column;justify-content:flex-end;">
+      <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;height:480px;display:flex;flex-direction:column;justify-content:flex-end;">
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
           <div style="width:80px;height:80px;border-radius:50%;border:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;">
             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
