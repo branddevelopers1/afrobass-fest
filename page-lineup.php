@@ -41,28 +41,25 @@ $days = [
 
   <section style="padding:0 0 120px;">
 
-    <!-- Day headers -->
-    <div class="fday-col-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
-      <?php foreach ($days as $day): ?>
-      <div style="background:#0d0d0d;padding:24px 40px;display:flex;align-items:center;gap:16px;">
-        <div style="width:8px;height:8px;border-radius:50%;background:<?php echo esc_attr($day['color']); ?>;flex-shrink:0;"></div>
-        <div>
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:<?php echo esc_attr($day['color']); ?>;"><?php echo esc_html($day['label']); ?></span>
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-left:12px;"><?php echo esc_html($day['date']); ?></span>
-        </div>
-        <div class="fday-col-name" style="margin-left:auto;font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.15);text-transform:uppercase;"><?php echo esc_html($day['name']); ?></div>
-      </div>
-      <?php endforeach; ?>
-    </div>
-
-    <!-- Artist columns -->
+    <!-- Day headers + Artist columns -->
     <div class="fday-col-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
 
       <?php foreach ($days as $day_key => $day):
         $artists = $lineup_artists[$day_key];
         $a       = !empty($artists) ? $artists[0] : null;
+      ?>
 
-        if ($a):
+      <div>
+        <div style="background:#0d0d0d;padding:24px 40px;display:flex;align-items:center;gap:16px;">
+          <div style="width:8px;height:8px;border-radius:50%;background:<?php echo esc_attr($day['color']); ?>;flex-shrink:0;"></div>
+          <div>
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:<?php echo esc_attr($day['color']); ?>;"><?php echo esc_html($day['label']); ?></span>
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-left:12px;"><?php echo esc_html($day['date']); ?></span>
+          </div>
+          <div class="fday-col-name" style="margin-left:auto;font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.15);text-transform:uppercase;"><?php echo esc_html($day['name']); ?></div>
+        </div>
+
+        <?php if ($a):
           setup_postdata($GLOBALS['post'] = $a['post']);
           $role   = $a['role'];
           $origin = $a['origin'];
@@ -70,7 +67,7 @@ $days = [
           $ig     = $a['ig'];
           $sp     = $a['sp'];
           $tba    = $a['tba'];
-      ?>
+        ?>
 
         <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;">
           <?php if (!$tba && has_post_thumbnail()): ?>
@@ -118,7 +115,7 @@ $days = [
 
         <?php wp_reset_postdata();
 
-      else: /* No artist added yet — TBA placeholder */ ?>
+        else: /* No artist added yet — TBA placeholder */ ?>
 
         <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
@@ -138,7 +135,11 @@ $days = [
           </div>
         </div>
 
-      <?php endif; endforeach; ?>
+        <?php endif; ?>
+
+      </div>
+
+      <?php endforeach; ?>
 
     </div>
 

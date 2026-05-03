@@ -156,24 +156,21 @@ $sponsors = new WP_Query([
   ];
   ?>
 
-  <!-- Day headers -->
-  <div class="fday-col-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);margin-bottom:2px;">
-    <?php foreach ($fp_days as $fp_day): ?>
-    <div style="background:#0d0d0d;padding:20px 32px;display:flex;align-items:center;gap:14px;">
-      <div style="width:7px;height:7px;border-radius:50%;background:<?php echo esc_attr($fp_day['color']); ?>;flex-shrink:0;"></div>
-      <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:<?php echo esc_attr($fp_day['color']); ?>;"><?php echo esc_html($fp_day['label']); ?></span>
-      <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);"><?php echo esc_html($fp_day['date']); ?></span>
-      <span class="fday-col-name" style="margin-left:auto;font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.5px;color:rgba(255,255,255,0.15);text-transform:uppercase;"><?php echo esc_html($fp_day['name']); ?></span>
-    </div>
-    <?php endforeach; ?>
-  </div>
-
-  <!-- Artist columns -->
+  <!-- Day headers + Artist columns -->
   <div class="fday-col-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
     <?php foreach ($fp_days as $fp_day_key => $fp_day):
       $day_artists = $fp_artists[$fp_day_key];
       $a = !empty($day_artists) ? $day_artists[0] : null;
-      if ($a):
+    ?>
+    <div>
+      <div style="background:#0d0d0d;padding:20px 32px;display:flex;align-items:center;gap:14px;">
+        <div style="width:7px;height:7px;border-radius:50%;background:<?php echo esc_attr($fp_day['color']); ?>;flex-shrink:0;"></div>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:<?php echo esc_attr($fp_day['color']); ?>;"><?php echo esc_html($fp_day['label']); ?></span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);"><?php echo esc_html($fp_day['date']); ?></span>
+        <span class="fday-col-name" style="margin-left:auto;font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.5px;color:rgba(255,255,255,0.15);text-transform:uppercase;"><?php echo esc_html($fp_day['name']); ?></span>
+      </div>
+
+      <?php if ($a):
         setup_postdata($GLOBALS['post'] = $a['post']);
         $role   = $a['role'];
         $origin = $a['origin'];
@@ -210,7 +207,10 @@ $sponsors = new WP_Query([
           <div style="font-family:'Unbounded',sans-serif;font-size:clamp(24px,3vw,48px);font-weight:900;color:rgba(255,255,255,0.08);text-transform:uppercase;letter-spacing:-1px;">TBA</div>
         </div>
       </div>
-      <?php endif; endforeach; ?>
+      <?php endif; ?>
+
+    </div>
+    <?php endforeach; ?>
   </div>
 
   <div style="margin-top:36px;text-align:center;" class="fest-reveal">
