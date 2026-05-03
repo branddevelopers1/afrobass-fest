@@ -156,18 +156,6 @@ $sponsors = new WP_Query([
   ];
   ?>
 
-  <!-- Day headers -->
-  <div class="fday-col-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);margin-bottom:2px;">
-    <?php foreach ($fp_days as $fp_day): ?>
-    <div style="background:#0d0d0d;padding:20px 32px;display:flex;align-items:center;gap:14px;">
-      <div style="width:7px;height:7px;border-radius:50%;background:<?php echo esc_attr($fp_day['color']); ?>;flex-shrink:0;"></div>
-      <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:<?php echo esc_attr($fp_day['color']); ?>;"><?php echo esc_html($fp_day['label']); ?></span>
-      <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);"><?php echo esc_html($fp_day['date']); ?></span>
-      <span class="fday-col-name" style="margin-left:auto;font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.5px;color:rgba(255,255,255,0.15);text-transform:uppercase;"><?php echo esc_html($fp_day['name']); ?></span>
-    </div>
-    <?php endforeach; ?>
-  </div>
-
   <!-- Artist columns -->
   <div class="fday-col-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
     <?php foreach ($fp_days as $fp_day_key => $fp_day):
@@ -187,9 +175,10 @@ $sponsors = new WP_Query([
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.99) 0%,transparent 60%);"></div>
         <?php endif; ?>
         <div style="position:absolute;top:20px;left:20px;background:<?php echo esc_attr($fp_day['color']); ?>;padding:5px 14px;border-radius:1px;">
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($role); ?></span>
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($fp_day['label']); ?> &middot; <?php echo esc_html($fp_day['name']); ?></span>
         </div>
         <div style="position:relative;z-index:2;padding:32px 36px;">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px;"><?php echo esc_html($role); ?></div>
           <div style="font-family:'Unbounded',sans-serif;font-size:clamp(24px,3vw,48px);font-weight:900;color:<?php echo $tba?'rgba(255,255,255,0.12)':'#fff'; ?>;text-transform:uppercase;letter-spacing:-1px;line-height:1;"><?php echo $tba ? 'TBA' : get_the_title(); ?></div>
           <?php if ($origin && !$tba): ?><div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:8px;letter-spacing:1px;"><?php echo esc_html($origin); ?></div><?php endif; ?>
         </div>
@@ -203,10 +192,11 @@ $sponsors = new WP_Query([
           </div>
         </div>
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.99) 0%,transparent 60%);"></div>
-        <div style="position:absolute;top:20px;left:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);padding:5px 14px;border-radius:1px;">
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);">Headliner</span>
+        <div style="position:absolute;top:20px;left:20px;background:<?php echo esc_attr($fp_day['color']); ?>;padding:5px 14px;border-radius:1px;">
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($fp_day['label']); ?> &middot; <?php echo esc_html($fp_day['name']); ?></span>
         </div>
         <div style="position:relative;z-index:2;padding:32px 36px;">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:10px;">Headliner</div>
           <div style="font-family:'Unbounded',sans-serif;font-size:clamp(24px,3vw,48px);font-weight:900;color:rgba(255,255,255,0.08);text-transform:uppercase;letter-spacing:-1px;">TBA</div>
         </div>
       </div>

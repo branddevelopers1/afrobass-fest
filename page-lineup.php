@@ -41,20 +41,6 @@ $days = [
 
   <section style="padding:0 0 120px;">
 
-    <!-- Day headers -->
-    <div class="fday-col-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
-      <?php foreach ($days as $day): ?>
-      <div style="background:#0d0d0d;padding:24px 40px;display:flex;align-items:center;gap:16px;">
-        <div style="width:8px;height:8px;border-radius:50%;background:<?php echo esc_attr($day['color']); ?>;flex-shrink:0;"></div>
-        <div>
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:<?php echo esc_attr($day['color']); ?>;"><?php echo esc_html($day['label']); ?></span>
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-left:12px;"><?php echo esc_html($day['date']); ?></span>
-        </div>
-        <div class="fday-col-name" style="margin-left:auto;font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.15);text-transform:uppercase;"><?php echo esc_html($day['name']); ?></div>
-      </div>
-      <?php endforeach; ?>
-    </div>
-
     <!-- Artist columns -->
     <div class="fday-col-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
 
@@ -81,13 +67,14 @@ $days = [
             <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.99) 0%,transparent 60%);"></div>
           <?php endif; ?>
 
-          <!-- Role badge -->
+          <!-- Day + event badge -->
           <div style="position:absolute;top:24px;left:24px;background:<?php echo esc_attr($day['color']); ?>;padding:5px 14px;border-radius:1px;">
-            <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($role); ?></span>
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($day['label']); ?> &middot; <?php echo esc_html($day['name']); ?></span>
           </div>
 
           <!-- Info -->
           <div style="position:relative;z-index:2;padding:40px;">
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px;"><?php echo esc_html($role); ?></div>
             <div style="font-family:'Unbounded',sans-serif;font-size:clamp(28px,3.5vw,56px);font-weight:900;color:<?php echo $tba ? 'rgba(255,255,255,0.1)' : '#fff'; ?>;text-transform:uppercase;letter-spacing:-1.5px;line-height:0.95;">
               <?php echo $tba ? 'TBA' : get_the_title(); ?>
             </div>
@@ -128,11 +115,12 @@ $days = [
           </div>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.99) 0%,transparent 60%);"></div>
 
-          <div style="position:absolute;top:24px;left:24px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);padding:5px 14px;border-radius:1px;">
-            <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);">Headliner</span>
+          <div style="position:absolute;top:24px;left:24px;background:<?php echo esc_attr($day['color']); ?>;padding:5px 14px;border-radius:1px;">
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($day['label']); ?> &middot; <?php echo esc_html($day['name']); ?></span>
           </div>
 
           <div style="position:relative;z-index:2;padding:40px;">
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:10px;">Headliner</div>
             <div style="font-family:'Unbounded',sans-serif;font-size:clamp(28px,3.5vw,56px);font-weight:900;color:rgba(255,255,255,0.07);text-transform:uppercase;letter-spacing:-1.5px;line-height:0.95;">TBA</div>
             <div style="font-size:12px;color:rgba(255,255,255,0.18);margin-top:12px;letter-spacing:1px;">Announcement coming soon</div>
           </div>
