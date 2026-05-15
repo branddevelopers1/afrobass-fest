@@ -4,7 +4,7 @@
  * Template Post Type: page
  */
 get_header();
-$email      = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
+$email      = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
 $ticket_url = fest_setting('fest_ticket_url') ?: home_url('/tickets');
 
 $faqs = [
@@ -15,11 +15,11 @@ $faqs = [
     ],
     [
       'q' => 'What ticket types are available?',
-      'a' => 'We offer General Admission, VIP Experience, and Table Packages. General Admission gives you full access to the festival floor and all performances. VIP includes priority entry, a dedicated VIP area and bar, and exclusive lounge access. Table Packages include a reserved table for 6–10 guests with bottle service.'
+      'a' => 'We offer General Admission, VIP Experience, and Table Packages. General Admission gives you full access to the fest floor and all performances. VIP includes priority entry, a dedicated VIP area and bar, and exclusive lounge access. Table Packages include a reserved table for 6–10 guests with bottle service.'
     ],
     [
       'q' => 'Is there an age requirement?',
-      'a' => 'Yes — Afrobass Music Festival is a 19+ event. Valid government-issued photo ID is required for entry. No exceptions.'
+      'a' => 'Yes — Afrobass Music Fest is a 19+ event. Valid government-issued photo ID is required for entry. No exceptions.'
     ],
     [
       'q' => 'Can I get a refund on my ticket?',
@@ -32,8 +32,8 @@ $faqs = [
   ],
   'The Event' => [
     [
-      'q' => 'When and where is Afrobass Music Festival?',
-      'a' => 'Afrobass Music Festival is a 2-day event taking place August 15–16, 2026 in Toronto. Day 1 (Aug 15) is Obi\'s House at Rebel Entertainment Complex, 11 Polson St — doors 10pm to 2am. Day 2 (Aug 16) is Amapiano Day Party at Noir, 11 Polson St — 5pm to 11pm.'
+      'q' => 'When and where is Afrobass Music Fest?',
+      'a' => 'Afrobass Music Fest is a 2-day event taking place August 15–16, 2026 in Toronto. Day 1 (Aug 15) is Obi\'s House at Rebel Entertainment Complex, 11 Polson St — doors 10pm to 2am. Day 2 (Aug 16) is Amapiano Day Party at Noir, 11 Polson St — 5pm to 11pm.'
     ],
     [
       'q' => 'What time do doors open?',
@@ -45,7 +45,7 @@ $faqs = [
     ],
     [
       'q' => 'What genres of music will be played?',
-      'a' => 'Afrobass Music Festival celebrates Afrobeats, Amapiano, and Afro-Caribbean music — the sounds shaping global culture right now. Expect an electrifying mix of live performances and DJ sets across all three genres.'
+      'a' => 'Afrobass Music Fest celebrates Afrobeats, Amapiano, and Afro-Caribbean music — the sounds shaping global culture right now. Expect an electrifying mix of live performances and DJ sets across all three genres.'
     ],
     [
       'q' => 'How many stages are there?',
@@ -68,7 +68,7 @@ $faqs = [
   ],
   'Vendors & Sponsors' => [
     [
-      'q' => 'How do I become a vendor at the festival?',
+      'q' => 'How do I become a vendor at the fest?',
       'a' => 'We welcome food, beverage, merchandise, and lifestyle vendors. Submit your application through our Submissions page and our team will review it and be in touch.'
     ],
     [
@@ -78,7 +78,7 @@ $faqs = [
   ],
   'Artists & Performers' => [
     [
-      'q' => 'How can I apply to perform at Afrobass Music Festival?',
+      'q' => 'How can I apply to perform at Afrobass Music Fest?',
       'a' => 'Artists can submit a performance application through our Submissions page. Include links to your music, social media, and a brief bio. We review all submissions and will reach out if there\'s a fit.'
     ],
     [

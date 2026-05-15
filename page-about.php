@@ -23,14 +23,14 @@ $hero_video_url = fest_setting('fest_hero_video');
     </div>
 
     <div class="fest-about-content">
-      <div class="fest-kicker fest-reveal">The Festival</div>
-      <h1 class="fest-title fest-reveal">About<br>Afrobass<br>Music Festival</h1>
+      <div class="fest-kicker fest-reveal">The Fest</div>
+      <h1 class="fest-title fest-reveal">About<br>Afrobass<br>Music Fest</h1>
       <div class="fest-about-body fest-reveal">
-        Afrobass Music Festival is a <strong>live music and cultural event</strong> based in Toronto, Canada celebrating Afrobeats, Amapiano, and Afro-Caribbean music.
+        Afrobass Music Fest is a <strong>live music and cultural event</strong> based in Toronto, Canada celebrating Afrobeats, Amapiano, and Afro-Caribbean music.
         <br><br>
-        The festival brings together international artists, DJs, and performers to connect with one of the <strong>fastest growing Afrobeats audiences in North America</strong>. Toronto has become a major hub for African music culture with a large African and Caribbean diaspora and a vibrant nightlife scene.
+        The fest brings together international artists, DJs, and performers to connect with one of the <strong>fastest growing Afrobeats audiences in North America</strong>. Toronto has become a major hub for African music culture with a large African and Caribbean diaspora and a vibrant nightlife scene.
         <br><br>
-        The festival will feature international African artists, DJs, and Canadian performers, creating a <strong>large-scale cultural music experience</strong>. Now, we are proud to invite you to be part of the first edition of the Afrobass Music Festival.
+        The fest will feature international African artists, DJs, and Canadian performers, creating a <strong>large-scale cultural music experience</strong>. Now, we are proud to invite you to be part of the first edition of the Afrobass Music Fest.
       </div>
 
       <div class="fest-about-stats fest-reveal">
@@ -61,7 +61,7 @@ $hero_video_url = fest_setting('fest_hero_video');
         <div class="fest-kicker">The Venue</div>
         <h2 class="fest-title" style="margin-bottom:24px;">Rebel<br>Entertainment<br>Complex</h2>
         <p style="font-size:15px;font-weight:300;color:rgba(255,255,255,0.4);line-height:1.8;margin-bottom:24px;">
-          One of Toronto's most iconic live music and event venues, right on the waterfront. Rebel Entertainment Complex is the perfect home for Afrobass Music Festival's inaugural edition — massive sound, incredible production capacity, and an atmosphere built for unforgettable nights.
+          One of Toronto's most iconic live music and event venues, right on the waterfront. Rebel Entertainment Complex is the perfect home for Afrobass Music Fest's inaugural edition — massive sound, incredible production capacity, and an atmosphere built for unforgettable nights.
         </p>
         <p style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25);">
           11 Polson St, Toronto, Ontario
@@ -97,7 +97,7 @@ $hero_video_url = fest_setting('fest_hero_video');
       <div class="fest-powered-logo">AFRO<span>BASS</span></div>
     </div>
     <p class="fest-powered-desc fest-reveal fest-d1">
-      Since 2018, Afrobass has produced world-class Afrobeats concerts and tours across Canada — from sold-out shows at El Mocambo and The Opera House to national artist tours. The Afrobass Music Festival is the natural next step in that journey.
+      Since 2018, Afrobass has produced world-class Afrobeats concerts and tours across Canada — from sold-out shows at El Mocambo and The Opera House to national artist tours. The Afrobass Music Fest is the natural next step in that journey.
     </p>
     <a href="https://afrobass.com" target="_blank" rel="noopener" class="fest-powered-link fest-reveal fest-d2">
       Visit Afrobass.com →

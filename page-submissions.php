@@ -4,7 +4,7 @@
  * Template Post Type: page
  */
 get_header();
-$email = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
+$email = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
 ?>
 
 <style>
@@ -305,7 +305,7 @@ $email = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
         <div class="join-card-number">02</div>
         <div class="join-card-title">Vendors</div>
         <div class="join-card-desc">
-          Food, beverage, merchandise, lifestyle, and cultural vendors. Bring your brand to 3,000+ passionate festival-goers. Space is limited — apply early.
+          Food, beverage, merchandise, lifestyle, and cultural vendors. Bring your brand to 3,000+ passionate fest-goers. Space is limited — apply early.
         </div>
         <div class="join-card-cta" style="color:#FF6B1A;">
           Vendor Application
@@ -332,7 +332,7 @@ $email = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
         <div class="join-card-number">03</div>
         <div class="join-card-title">Volunteers</div>
         <div class="join-card-desc">
-          Be part of the team that makes it all happen. Join the Afrobass crew, earn free festival access, and be part of history from the inside.
+          Be part of the team that makes it all happen. Join the Afrobass crew, earn free fest access, and be part of history from the inside.
         </div>
         <div class="join-card-cta" style="color:#a855f7;">
           Volunteer Application
@@ -455,7 +455,7 @@ $email = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
         <div class="fform-field"><input type="url" name="instagram" placeholder=" "><label>Instagram URL</label></div>
         <div class="fform-field">
           <textarea name="message" placeholder=" " rows="3" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.08);color:#fff;font-size:15px;padding:20px 0 14px;outline:none;resize:none;font-family:'Space Grotesk',sans-serif;"></textarea>
-          <label>What will you be offering at the festival? *</label>
+          <label>What will you be offering at the fest? *</label>
         </div>
         <input type="hidden" name="submission_type" value="vendor">
         <input type="text" name="website" style="display:none;position:absolute;left:-9999px;" tabindex="-1" autocomplete="off">
@@ -477,7 +477,7 @@ $email = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
     <div class="join-form-grid">
       <div class="join-form-info">
         <h2>Volunteer<br><em style="color:#a855f7;font-style:italic;">Application</em></h2>
-        <p>Volunteers are the backbone of every great event. Join the Afrobass crew and be part of history from the inside. Perks include free festival entry and more.</p>
+        <p>Volunteers are the backbone of every great event. Join the Afrobass crew and be part of history from the inside. Perks include free fest entry and more.</p>
         <div class="join-form-steps">
           <?php foreach([
             ['Submit your application', 'Tell us when you\'re available and what you can bring.'],

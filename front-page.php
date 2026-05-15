@@ -1,6 +1,6 @@
 <?php get_header();
 $ticket_url    = fest_setting('fest_ticket_url') ?: home_url('/tickets');
-$contact_email = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
+$contact_email = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
 
 $day1_slug = fest_setting('fest_day1_slug') ?: 'afrobass-festival-day1';
 $day2_slug = fest_setting('fest_day2_slug') ?: '';
@@ -76,7 +76,7 @@ $sponsors = new WP_Query([
     </defs>
     <text fill="rgba(255,255,255,0.5)" font-family="'Space Grotesk',sans-serif" font-size="13" font-weight="500" letter-spacing="8">
       <textPath href="#fcp">
-        AFROBASS MUSIC FESTIVAL · TORONTO 2026 · AUG 15–16 · REBEL ENTERTAINMENT COMPLEX · AFROBEATS · AMAPIANO · AFRO-CARIBBEAN ·
+        AFROBASS MUSIC FEST · TORONTO 2026 · AUG 15–16 · REBEL ENTERTAINMENT COMPLEX · AFROBEATS · AMAPIANO · AFRO-CARIBBEAN ·
       </textPath>
     </text>
   </svg>
@@ -105,9 +105,11 @@ $sponsors = new WP_Query([
       <button class="fbtn-main" onclick="showpass.tickets.eventPurchaseWidget('afrobass-festival', {'theme-primary': '#FF2D8A', 'keep-shopping': false})" style="border:none;cursor:pointer;">
         Buy Tickets Now &rarr;
       </button>
-      <a href="<?php echo esc_url(home_url('/lineup')); ?>" class="fbtn-ghost">
+      <?php /* commented out
+      <a href="<?= esc_url(home_url('/lineup')) ?>" class="fbtn-ghost">
         See the Lineup
       </a>
+      */ ?>
     </div>
   </div>
 
@@ -124,7 +126,7 @@ $sponsors = new WP_Query([
     <div class="fti hot">Afrobeats <div class="ftdot"></div></div>
     <div class="fti">Amapiano <div class="ftdot"></div></div>
     <div class="fti">Aug 15–16, 2026 <div class="ftdot"></div></div>
-    <div class="fti hot">2-Day Festival <div class="ftdot"></div></div>
+    <div class="fti hot">2-Day Fest <div class="ftdot"></div></div>
     <div class="fti">Toronto <div class="ftdot"></div></div>
     <div class="fti hot">Rebel Entertainment Complex <div class="ftdot"></div></div>
     <div class="fti hot">First Edition <div class="ftdot"></div></div>
@@ -141,7 +143,7 @@ $sponsors = new WP_Query([
 
   <div class="fest-section-hdr fest-reveal" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;">
     <div>
-      <div class="fest-kicker">Afrobass Music Festival 2026</div>
+      <div class="fest-kicker">Afrobass Music Fest 2026</div>
       <h2 style="font-family:'Unbounded',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:900;letter-spacing:-1px;color:#fff;text-transform:uppercase;line-height:0.95;margin-top:12px;">The<br><em style="color:#FF2D8A;font-style:italic;">Lineup</em></h2>
     </div>
     <a href="<?php echo esc_url(home_url('/lineup')); ?>"

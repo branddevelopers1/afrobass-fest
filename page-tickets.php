@@ -4,7 +4,7 @@
  * Template Post Type: page
  */
 get_header();
-$contact_email = fest_setting('fest_email')       ?: 'contact@afrobassfestival.com';
+$contact_email = fest_setting('fest_email')       ?: 'contact@afrobassfest.com';
 $day1_slug     = fest_setting('fest_day1_slug')   ?: 'afrobass-festival-day1';
 $day2_slug     = fest_setting('fest_day2_slug')   ?: '';
 
@@ -66,7 +66,7 @@ $ticket_days = [
           <span class="fest-tier-badge">General</span>
           <div class="fest-tier-name">General Admission</div>
           <div class="fest-tier-price"><?php echo esc_html($prices[$day_key]['ga']); ?></div>
-          <div class="fest-tier-desc"><?php echo $is_day_party ? 'Full access to the day party, all performances, and vendor areas.' : 'Full access to the festival grounds, all performances, and vendor areas.'; ?></div>
+          <div class="fest-tier-desc"><?php echo $is_day_party ? 'Full access to the day party, all performances, and vendor areas.' : 'Full access to the fest grounds, all performances, and vendor areas.'; ?></div>
           <div class="fest-tier-perks">
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>All performances &mdash; <?php echo $is_day_party ? '5pm to 11pm' : 'full night'; ?></div>
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>General standing floor</div>

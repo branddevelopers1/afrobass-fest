@@ -1,7 +1,7 @@
 <!-- BOTTOM BAR -->
 <div class="fest-bottom-bar" style="position:relative;z-index:2;padding:32px 56px;border-top:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
   <div style="font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.15);">
-    © <?php echo date('Y'); ?> Afrobass Inc. · Afrobass Music Festival
+    © <?php echo date('Y'); ?> Afrobass Inc. · Afrobass Music Fest
   </div>
   <div style="display:flex;gap:8px;flex-wrap:wrap;">
     <?php

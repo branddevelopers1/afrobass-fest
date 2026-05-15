@@ -4,9 +4,9 @@
  * Template Post Type: page
  */
 get_header();
-$email = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
+$email = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
 $phone = fest_setting('fest_phone') ?: '416.846.6483';
-$ig    = fest_setting('fest_instagram') ?: 'https://instagram.com/afrobass.ca';
+$ig    = fest_setting('fest_instagram') ?: 'https://instagram.com/afrobassfest';
 ?>
 
 <div style="padding-top:96px;">
@@ -86,7 +86,7 @@ $ig    = fest_setting('fest_instagram') ?: 'https://instagram.com/afrobass.ca';
           $links = [
             ['Sponsorship', "mailto:{$email}?subject=Sponsorship Enquiry — Afrobass Fest 2026"],
             ['Press & Media', "mailto:{$email}?subject=Press Enquiry — Afrobass Fest 2026"],
-            ['Talent Booking', "mailto:{$email}?subject=Talent Booking — Afrobass Fest 2026"],
+            ['Tickets & Booth Packages', "mailto:{$email}?subject=Tickets & Booth Packages — Afrobass Fest 2026"],
             ['Artists & Vendors', esc_url(home_url('/submissions'))],
           ];
           foreach ($links as $l): ?>

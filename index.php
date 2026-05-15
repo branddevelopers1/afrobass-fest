@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 <div style="padding:160px 56px 120px;">
-  <div class="fest-kicker">Afrobass Music Festival</div>
+  <div class="fest-kicker">Afrobass Music Fest</div>
   <h1 class="fest-title" style="margin-bottom:48px;"><?php wp_title(''); ?></h1>
   <?php if (have_posts()): while(have_posts()): the_post(); ?>
     <div style="padding:24px 0;border-bottom:1px solid #1a1a1a;">

@@ -1,5 +1,5 @@
 /* ============================================================
-   AFROBASS MUSIC FESTIVAL — MAIN JS
+   AFROBASS MUSIC FEST — MAIN JS
    ============================================================ */
 (function(){
   'use strict';

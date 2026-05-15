@@ -1,6 +1,6 @@
 <?php
 /**
- * Afrobass Festival Theme — functions.php
+ * Afrobass Fest Theme — functions.php
  */
 defined('ABSPATH') || exit;
 
@@ -85,8 +85,8 @@ function fest_register_acf() {
             ['key'=>'field_fest_artist_apple_music', 'label'=>'Apple Music URL',        'name'=>'fest_artist_apple_music', 'type'=>'url'],
             ['key'=>'field_fest_artist_order',       'label'=>'Display Order',          'name'=>'fest_artist_order',       'type'=>'number',   'default_value'=>10],
             ['key'=>'field_fest_artist_tba',         'label'=>'TBA (hide name/photo)',  'name'=>'fest_artist_tba',         'type'=>'true_false','default_value'=>0],
-            ['key'=>'field_fest_artist_day',         'label'=>'Festival Day',           'name'=>'fest_artist_day',         'type'=>'select',
-             'choices'=>['day1'=>"Day 1 — Obi's House (Aug 15)",'day2'=>'Day 2 — Afrobass Music Festival (Aug 16)','both'=>'Both Days'],
+            ['key'=>'field_fest_artist_day',         'label'=>'Fest Day',           'name'=>'fest_artist_day',         'type'=>'select',
+             'choices'=>['day1'=>"Day 1 — Obi's House (Aug 15)",'day2'=>'Day 2 — Afrobass Music Fest (Aug 16)','both'=>'Both Days'],
              'default_value'=>'day1'],
         ],
         'location' => [[ ['param'=>'post_type','operator'=>'==','value'=>'fest_artist'] ]],
@@ -111,11 +111,11 @@ function fest_register_acf() {
 }
 add_action('acf/init', 'fest_register_acf');
 
-/* ─── FESTIVAL SETTINGS ADMIN PAGE ─── */
+/* ─── FEST SETTINGS ADMIN PAGE ─── */
 function fest_settings_menu() {
     add_menu_page(
-        'Festival Settings',
-        'Festival Settings',
+        'Fest Settings',
+        'Fest Settings',
         'manage_options',
         'fest-settings',
         'fest_settings_page',
@@ -152,7 +152,7 @@ function fest_settings_page() {
     function fv($s, $k) { return esc_attr($s[$k] ?? ''); }
     ?>
     <div class="wrap">
-    <h1 style="display:flex;align-items:center;gap:10px;">🎟️ Festival Settings</h1>
+    <h1 style="display:flex;align-items:center;gap:10px;">🎟️ Fest Settings</h1>
     <form method="post">
         <?php wp_nonce_field('fest_save_settings', 'fest_settings_nonce'); ?>
 
@@ -187,7 +187,7 @@ function fest_settings_page() {
                     </div>
                     <div class="fest-row">
                         <label>Email</label>
-                        <input type="email" name="fest_email" value="<?php echo fv($s,'fest_email'); ?>" placeholder="signup@afrobassfestival.com">
+                        <input type="email" name="fest_email" value="<?php echo fv($s,'fest_email'); ?>" placeholder="signup@afrobassfest.com">
                     </div>
                 </div>
             </div>
@@ -227,7 +227,7 @@ function fest_settings_page() {
 
             <!-- Day 2 Tickets -->
             <div class="fest-card">
-                <h2>Day 2 — Afrobass Music Festival (Aug 16)</h2>
+                <h2>Day 2 — Afrobass Music Fest (Aug 16)</h2>
                 <div class="fest-row">
                     <label>Ticket URL</label>
                     <input type="url" name="fest_day2_ticket_url" value="<?php echo fv($s,'fest_day2_ticket_url'); ?>" placeholder="https://...">
@@ -307,8 +307,8 @@ function fest_email_capture() {
 
     if (!$email || !is_email($email)) { wp_send_json_error('Please enter a valid email address.'); }
 
-    $to      = get_field('fest_email', 'option') ?: 'signup@afrobassfestival.com';
-    $subject = 'New Festival Interest — ' . $first . ' ' . $last;
+    $to      = get_field('fest_email', 'option') ?: 'signup@afrobassfest.com';
+    $subject = 'New Fest Interest — ' . $first . ' ' . $last;
     $body    = "New signup from afrobassfestival.com\n\n";
     $body   .= "Name:  {$first} {$last}\n";
     $body   .= "Email: {$email}\n";
@@ -424,7 +424,7 @@ function fest_contact_form() {
         wp_send_json_error('Please fill in all required fields.');
     }
 
-    $to      = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
+    $to      = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
     $subj    = "[{$subject}] {$first} {$last} — Afrobass Fest 2026";
     $body    = "New contact form submission\n\nName:    {$first} {$last}\nEmail:   {$email}\nPhone:   {$phone}\nTopic:   {$subject}\n\nMessage:\n{$message}\n";
     $headers = ['Content-Type: text/plain; charset=UTF-8', 'Reply-To: ' . $first . ' ' . $last . ' <' . $email . '>'];
@@ -474,7 +474,7 @@ function fest_handle_submission() {
         wp_send_json_error('Please fill in all required fields with a valid email.');
     }
 
-    $to      = fest_setting('fest_email') ?: 'contact@afrobassfestival.com';
+    $to      = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
     $subject = '[' . ucfirst($type) . ' Submission] ' . $name . ' — Afrobass Fest 2026';
     $body    = "New {$type} submission from afrobassfestival.com\n\n";
     $body   .= "Name:    {$name}\n";
@@ -561,49 +561,49 @@ add_action('wp_head', 'fest_favicon', 1);
 
 /* ── SEO — META, OG, TWITTER, SCHEMA ── */
 function fest_seo_meta() {
-    $site_name   = 'Afrobass Music Festival';
-    $title       = 'Afrobass Music Festival — Toronto 2026 | August 15–16';
-    $description = 'The first edition of Afrobass Music Festival. A 2-day event in Toronto, Canada. August 15–16, 2026. Celebrating Afrobeats, Amapiano, and Afro-Caribbean music. Be the first to know.';
+    $site_name   = 'Afrobass Music Fest';
+    $title       = 'Afrobass Music Fest — Toronto 2026 | August 15–16';
+    $description = 'The first edition of Afrobass Music Fest. A 2-day event in Toronto, Canada. August 15–16, 2026. Celebrating Afrobeats, Amapiano, and Afro-Caribbean music. Be the first to know.';
     $url         = home_url('/');
     $og_img      = get_template_directory_uri() . '/assets/images/og-image.jpg';
     $ticket_url  = fest_setting('fest_ticket_url') ?: home_url('/tickets');
 
     // Per-page overrides
     if (is_page('lineup')) {
-        $title       = 'Lineup — Afrobass Music Festival Toronto 2026';
-        $description = 'Meet the artists performing at Afrobass Music Festival. International Afrobeats, Amapiano, and Afro-Caribbean artists live in Toronto. August 15–16, 2026.';
+        $title       = 'Lineup — Afrobass Music Fest Toronto 2026';
+        $description = 'Meet the artists performing at Afrobass Music Fest. International Afrobeats, Amapiano, and Afro-Caribbean artists live in Toronto. August 15–16, 2026.';
         $url         = get_permalink();
     } elseif (is_page('schedule') || is_page('timetable')) {
-        $title       = 'Schedule — Afrobass Music Festival Toronto 2026';
-        $description = "Full 2-day performance schedule for Afrobass Music Festival. Day 1: Obi's House (Aug 15). Day 2: Afrobass Music Festival (Aug 16). Toronto, Ontario.";
+        $title       = 'Schedule — Afrobass Music Fest Toronto 2026';
+        $description = "Full 2-day performance schedule for Afrobass Music Fest. Day 1: Obi's House (Aug 15). Day 2: Afrobass Music Fest (Aug 16). Toronto, Ontario.";
         $url         = get_permalink();
     } elseif (is_page('tickets')) {
-        $title       = 'Tickets — Afrobass Music Festival Toronto 2026';
-        $description = 'Get your tickets for Afrobass Music Festival. General Admission, VIP, and Table packages available for both days. Toronto, August 15–16, 2026.';
+        $title       = 'Tickets — Afrobass Music Fest Toronto 2026';
+        $description = 'Get your tickets for Afrobass Music Fest. General Admission, VIP, and Table packages available for both days. Toronto, August 15–16, 2026.';
         $url         = get_permalink();
     } elseif (is_page('sponsors')) {
-        $title       = 'Sponsorship — Afrobass Music Festival Toronto 2026';
-        $description = 'Partner with Afrobass Music Festival 2026. Sponsorship packages available — Platinum, Gold, Silver, Bronze, and In-Kind. Reach thousands of Afrobeats fans in Toronto.';
+        $title       = 'Sponsorship — Afrobass Music Fest Toronto 2026';
+        $description = 'Partner with Afrobass Music Fest 2026. Sponsorship packages available — Platinum, Gold, Silver, Bronze, and In-Kind. Reach thousands of Afrobeats fans in Toronto.';
         $url         = get_permalink();
     } elseif (is_page('about') || is_page('the-festival')) {
-        $title       = 'About — Afrobass Music Festival Toronto 2026';
-        $description = 'Afrobass Music Festival is a 2-day live music and cultural event in Toronto celebrating Afrobeats, Amapiano, and Afro-Caribbean music. First edition: August 15–16, 2026.';
+        $title       = 'About — Afrobass Music Fest Toronto 2026';
+        $description = 'Afrobass Music Fest is a 2-day live music and cultural event in Toronto celebrating Afrobeats, Amapiano, and Afro-Caribbean music. First edition: August 15–16, 2026.';
         $url         = get_permalink();
     } elseif (is_page('contact')) {
-        $title       = 'Contact — Afrobass Music Festival Toronto 2026';
-        $description = 'Get in touch with the Afrobass Music Festival team. General enquiries, press, sponsorship, and more.';
+        $title       = 'Contact — Afrobass Music Fest Toronto 2026';
+        $description = 'Get in touch with the Afrobass Music Fest team. General enquiries, press, sponsorship, and more.';
         $url         = get_permalink();
     } elseif (is_page('faq')) {
-        $title       = 'FAQ — Afrobass Music Festival Toronto 2026';
-        $description = 'Frequently asked questions about Afrobass Music Festival Toronto 2026. Tickets, venue, artists, and everything you need to know.';
+        $title       = 'FAQ — Afrobass Music Fest Toronto 2026';
+        $description = 'Frequently asked questions about Afrobass Music Fest Toronto 2026. Tickets, venue, artists, and everything you need to know.';
         $url         = get_permalink();
     } elseif (is_page('submissions') || is_page('apply')) {
-        $title       = 'Apply — Artists, Vendors & Volunteers | Afrobass Music Festival 2026';
-        $description = 'Apply to perform, vend, or volunteer at Afrobass Music Festival Toronto 2026. Submit your application today.';
+        $title       = 'Apply — Artists, Vendors & Volunteers | Afrobass Music Fest 2026';
+        $description = 'Apply to perform, vend, or volunteer at Afrobass Music Fest Toronto 2026. Submit your application today.';
         $url         = get_permalink();
     } elseif (is_page('signup') || is_page('notify')) {
-        $title       = 'Join the List — Afrobass Music Festival Toronto 2026';
-        $description = 'Sign up for early access to Afrobass Music Festival tickets. Be the first to know about lineup announcements, presales, and exclusive updates.';
+        $title       = 'Join the List — Afrobass Music Fest Toronto 2026';
+        $description = 'Sign up for early access to Afrobass Music Fest tickets. Be the first to know about lineup announcements, presales, and exclusive updates.';
         $url         = get_permalink();
     }
 
@@ -615,7 +615,7 @@ function fest_seo_meta() {
 
     <!-- SEO Core -->
     <meta name="description" content="<?php echo $description; ?>">
-    <meta name="keywords" content="Afrobass Music Festival, Afrobeats Toronto, Amapiano Toronto, African music festival Toronto, Afro-Caribbean festival, Toronto music festival 2026, Toronto music event">
+    <meta name="keywords" content="Afrobass Music Fest, Afrobeats Toronto, Amapiano Toronto, African music fest Toronto, Afro-Caribbean fest, Toronto music fest 2026, Toronto music event">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Afrobass Inc.">
     <link rel="canonical" href="<?php echo $url_esc; ?>">
@@ -629,7 +629,7 @@ function fest_seo_meta() {
     <meta property="og:image"        content="<?php echo $og_img_esc; ?>">
     <meta property="og:image:width"  content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt"    content="Afrobass Music Festival — Toronto 2026">
+    <meta property="og:image:alt"    content="Afrobass Music Fest — Toronto 2026">
     <meta property="og:locale"       content="en_CA">
 
     <!-- Twitter Card -->
@@ -650,7 +650,7 @@ function fest_seo_meta() {
     {
       "@context": "https://schema.org",
       "@type": "MusicEvent",
-      "name": "Afrobass Music Festival 2026",
+      "name": "Afrobass Music Fest 2026",
       "description": "<?php echo esc_js($description); ?>",
       "startDate": "2026-08-15T20:00:00-04:00",
       "endDate": "2026-08-17T03:00:00-04:00",
@@ -738,6 +738,6 @@ add_action('wp_head', 'fest_seo_meta', 5);
 /* ACF missing notice */
 function fest_acf_notice() {
     if (function_exists('acf_add_local_field_group')) return;
-    echo '<div class="notice notice-warning is-dismissible"><p><strong>Afrobass Festival Theme:</strong> Please install <a href="https://wordpress.org/plugins/advanced-custom-fields/" target="_blank">Advanced Custom Fields</a> to enable all features.</p></div>';
+    echo '<div class="notice notice-warning is-dismissible"><p><strong>Afrobass Fest Theme:</strong> Please install <a href="https://wordpress.org/plugins/advanced-custom-fields/" target="_blank">Advanced Custom Fields</a> to enable all features.</p></div>';
 }
 add_action('admin_notices', 'fest_acf_notice');

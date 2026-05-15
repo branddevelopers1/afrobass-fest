@@ -31,7 +31,7 @@ $ticket_url = fest_setting('fest_ticket_url') ?: home_url('/tickets');
     </defs>
     <text fill="rgba(255,255,255,0.5)" font-family="'Space Grotesk',sans-serif" font-size="13" font-weight="500" letter-spacing="8">
       <textPath href="#fcp">
-        AFROBASS MUSIC FESTIVAL · TORONTO 2026 · AUGUST 15 · AFROBEATS · AMAPIANO · AFRO-CARIBBEAN · TORONTO CANADA ·
+        AFROBASS MUSIC FEST · TORONTO 2026 · AUGUST 15 · AFROBEATS · AMAPIANO · AFRO-CARIBBEAN · TORONTO CANADA ·
       </textPath>
     </text>
   </svg>
@@ -42,7 +42,7 @@ $ticket_url = fest_setting('fest_ticket_url') ?: home_url('/tickets');
     <h1 class="fh1">
       <span class="fh1-1">AFROBASS</span>
       <span class="fh1-2">MUSIC</span>
-      <span class="fh1-3">FESTIVAL</span>
+      <span class="fh1-3">FEST</span>
     </h1>
 
     <div class="fmeta">

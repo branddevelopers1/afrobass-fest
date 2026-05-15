@@ -13,7 +13,7 @@ $contact_phone = fest_setting('fest_phone') ?: '416.846.6483';
       <div class="fest-kicker">Partner With Us</div>
       <h1 class="fest-title">Sponsorship<br>Packages</h1>
       <p style="font-size:16px;font-weight:300;color:rgba(255,255,255,0.4);margin-top:20px;max-width:560px;line-height:1.7;">
-        Place your brand in front of 3,000+ passionate Afrobeats fans in Toronto. Afrobass Music Festival is the largest Afrobeats cultural event of its kind in Canada.
+        Place your brand in front of 3,000+ passionate Afrobeats fans in Toronto. Afrobass Music Fest is the largest Afrobeats cultural event of its kind in Canada.
       </p>
     </div>
 
@@ -28,7 +28,7 @@ $contact_phone = fest_setting('fest_phone') ?: '416.846.6483';
         <div class="fest-sponsor-benefits">
           Exclusive naming rights ("Presented by [Brand]") · Largest logo on stage banners, LED screens, and all marketing · Dedicated social media posts · VIP tickets + backstage passes · Custom brand activation space · Co-branded recap video · On-stage acknowledgment by MC
         </div>
-        <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Platinum Sponsorship — Afrobass Festival 2026" class="fest-sponsor-cta-btn">
+        <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Platinum Sponsorship — Afrobass Fest 2026" class="fest-sponsor-cta-btn">
           Get in Touch →
         </a>
       </div>
@@ -42,7 +42,7 @@ $contact_phone = fest_setting('fest_phone') ?: '416.846.6483';
         <div class="fest-sponsor-benefits">
           Logo on event banners, stage backdrop, and select marketing materials · Social media mentions and branded posts · Logo on LED screens · Product sampling or activation space · VIP tickets for company representatives · Recognition during opening/closing ceremonies
         </div>
-        <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Gold Sponsorship — Afrobass Festival 2026" class="fest-sponsor-cta-btn">
+        <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Gold Sponsorship — Afrobass Fest 2026" class="fest-sponsor-cta-btn">
           Get in Touch →
         </a>
       </div>
@@ -54,9 +54,9 @@ $contact_phone = fest_setting('fest_phone') ?: '416.846.6483';
           <div class="fest-sponsor-tier-badge">Supporting Partner · 3 Slots Available</div>
         </div>
         <div class="fest-sponsor-benefits">
-          Logo on event posters, flyers, and select banners · Recognition in promotional materials and social media · Company logo on festival website · Verbal acknowledgment during event · VIP hospitality access for limited guests
+          Logo on event posters, flyers, and select banners · Recognition in promotional materials and social media · Company logo on fest website · Verbal acknowledgment during event · VIP hospitality access for limited guests
         </div>
-        <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Silver Sponsorship — Afrobass Festival 2026" class="fest-sponsor-cta-btn">
+        <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Silver Sponsorship — Afrobass Fest 2026" class="fest-sponsor-cta-btn">
           Get in Touch →
         </a>
       </div>
@@ -68,9 +68,9 @@ $contact_phone = fest_setting('fest_phone') ?: '416.846.6483';
           <div class="fest-sponsor-tier-badge">Community Partner · 5 Slots Available</div>
         </div>
         <div class="fest-sponsor-benefits">
-          Recognition during the event · Logo on promotional material · Company logo and brief description on festival website · Complimentary General Admission passes for company representatives
+          Recognition during the event · Logo on promotional material · Company logo and brief description on fest website · Complimentary General Admission passes for company representatives
         </div>
-        <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Bronze Sponsorship — Afrobass Festival 2026" class="fest-sponsor-cta-btn">
+        <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Bronze Sponsorship — Afrobass Fest 2026" class="fest-sponsor-cta-btn">
           Get in Touch →
         </a>
       </div>
@@ -84,7 +84,7 @@ $contact_phone = fest_setting('fest_phone') ?: '416.846.6483';
         <div class="fest-sponsor-benefits">
           Airline tickets · Hotel accommodation · Catering services · Audio/visual equipment · Photography · Videography · Any relevant products or services. Custom package tailored to your offering.
         </div>
-        <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=In-Kind Sponsorship — Afrobass Festival 2026" class="fest-sponsor-cta-btn">
+        <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=In-Kind Sponsorship — Afrobass Fest 2026" class="fest-sponsor-cta-btn">
           Get in Touch →
         </a>
       </div>
@@ -99,7 +99,7 @@ $contact_phone = fest_setting('fest_phone') ?: '416.846.6483';
         <p style="font-size:14px;font-weight:300;color:rgba(255,255,255,0.4);line-height:1.7;">Custom packages available. We'll work with you to create a sponsorship that meets your specific marketing goals and budget.</p>
       </div>
       <div style="display:flex;flex-direction:column;gap:16px;">
-        <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Sponsorship Enquiry — Afrobass Festival 2026"
+        <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Sponsorship Enquiry — Afrobass Fest 2026"
            style="display:block;background:#FF4500;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:18px 40px;border-radius:2px;text-align:center;text-decoration:none;">
           Email Us →
         </a>
