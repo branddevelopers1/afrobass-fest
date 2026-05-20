@@ -24,7 +24,7 @@
     <?php endforeach; ?>
   </div>
   <div style="font-size:11px;color:rgba(255,255,255,0.12);letter-spacing:1px;font-family:'Space Grotesk',sans-serif;">
-    afrobassfestival.com · Presented by <a href="https://afrobass.com" style="color:rgba(255,45,138,0.5);text-decoration:none;">Afrobass</a>
+    afrobassfest.com · Presented by <a href="https://afrobass.com" style="color:rgba(255,45,138,0.5);text-decoration:none;">Afrobass</a>
   </div>
 </div>
 
