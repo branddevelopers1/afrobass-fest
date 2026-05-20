@@ -305,7 +305,7 @@ $email = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
         <div class="join-card-number">02</div>
         <div class="join-card-title">Vendors</div>
         <div class="join-card-desc">
-          Food, beverage, merchandise, lifestyle, and cultural vendors. Bring your brand to 3,000+ passionate fest-goers. Space is limited — apply early.
+          Food, merchandise, lifestyle, and cultural vendors. Bring your brand to 3,000+ passionate fest-goers. Space is limited — apply early.
         </div>
         <div class="join-card-cta" style="color:#FF6B1A;">
           Vendor Application
