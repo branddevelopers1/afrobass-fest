@@ -75,7 +75,7 @@ $sponsors = new WP_Query([
       <path id="fcp" d="M 250 250 m -200 0 a 200 200 0 1 1 400 0 a 200 200 0 1 1 -400 0"/>
     </defs>
     <text fill="rgba(255,255,255,0.5)" font-family="'Space Grotesk',sans-serif" font-size="13" font-weight="500" letter-spacing="8">
-      <textPath href="#fcp">
+      <textPath href="#fcp" startOffset="25%">
         AFROBASS MUSIC FEST · TORONTO · AUGUST 15–16 2026 · REBEL ENTERTAINMENT COMPLEX · AFROBEATS · AMAPIANO · 
       </textPath>
     </text>
