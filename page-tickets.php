@@ -48,8 +48,9 @@ $ticket_days = [
     </div>
 
     <?php foreach ($ticket_days as [$day_key, $slug, $is_active]):
-      $dm = $days_meta[$day_key];
+      $dm      = $days_meta[$day_key];
       $is_day_party = ($day_key === 'day2');
+      $day_url = $day_key === 'day1' ? $day1_ticket_url : $day2_ticket_url;
     ?>
     <div class="fday-panel<?php echo $is_active ? ' fday-panel--active' : ''; ?>" data-day="<?php echo esc_attr($day_key); ?>">
 
@@ -76,8 +77,8 @@ $ticket_days = [
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Food &amp; vendor access</div>
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>19+ valid ID required</div>
           </div>
-          <?php if ($slug): ?>
-          <a href="<?php echo esc_url($day_key === 'day1' ? $day1_ticket_url : $day2_ticket_url); ?>"
+          <?php if ($day_url): ?>
+          <a href="<?php echo esc_url($day_url); ?>"
              class="fest-tier-btn fest-tier-btn-outline" style="display:block;width:100%;text-align:center;border:1px solid rgba(255,255,255,0.15);background:transparent;">
             Buy Tickets &rarr;
           </a>
@@ -98,8 +99,8 @@ $ticket_days = [
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Priority entry &mdash; skip the line</div>
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Exclusive VIP lounge access</div>
           </div>
-          <?php if ($slug): ?>
-          <a href="<?php echo esc_url($day_key === 'day1' ? $day1_ticket_url : $day2_ticket_url); ?>"
+          <?php if ($day_url): ?>
+          <a href="<?php echo esc_url($day_url); ?>"
              class="fest-tier-btn fest-tier-btn-fill" style="display:block;width:100%;text-align:center;">
             Buy Tickets &rarr;
           </a>
