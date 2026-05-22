@@ -133,6 +133,7 @@ function fest_settings_page() {
             'fest_hero_video',
             'fest_day1_slug', 'fest_ticket_url', 'fest_day1_ga_price', 'fest_day1_vip_price', 'fest_day1_table_price', 'fest_day1_flyer_url',
             'fest_day2_slug', 'fest_day2_ticket_url', 'fest_day2_ga_price', 'fest_day2_vip_price', 'fest_day2_table_price', 'fest_day2_flyer_url',
+            'fest_table_ticket_url',
             'fest_phone', 'fest_email',
             'fest_instagram', 'fest_youtube', 'fest_tiktok', 'fest_facebook', 'fest_twitter',
         ];
@@ -254,6 +255,16 @@ function fest_settings_page() {
                 <div class="fest-row">
                     <label>Table Price</label>
                     <input type="text" name="fest_day2_table_price" value="<?php echo fv($s,'fest_day2_table_price'); ?>" placeholder="e.g. $499">
+                </div>
+            </div>
+
+            <!-- Table / Booth -->
+            <div class="fest-card full">
+                <h2>Table & Booth Reservations</h2>
+                <div class="fest-row">
+                    <label>Reservation URL</label>
+                    <input type="url" name="fest_table_ticket_url" value="<?php echo fv($s,'fest_table_ticket_url'); ?>" placeholder="https://buy.tablelist.com/...">
+                    <div class="desc">Link used on the Table Package "Enquire" button on the tickets page.</div>
                 </div>
             </div>
 

@@ -4,9 +4,12 @@
  * Template Post Type: page
  */
 get_header();
-$contact_email = fest_setting('fest_email')       ?: 'contact@afrobassfest.com';
-$day1_slug     = fest_setting('fest_day1_slug')   ?: 'afrobass-festival-day1';
-$day2_slug     = fest_setting('fest_day2_slug')   ?: '';
+$contact_email    = fest_setting('fest_email')            ?: 'contact@afrobassfest.com';
+$day1_slug        = fest_setting('fest_day1_slug')        ?: 'afrobass-festival-day1';
+$day2_slug        = fest_setting('fest_day2_slug')        ?: '';
+$day1_ticket_url  = fest_setting('fest_ticket_url')       ?: 'https://show.ps/l/581f9fa7/';
+$day2_ticket_url  = fest_setting('fest_day2_ticket_url')  ?: 'https://show.ps/l/0c3f4a74/';
+$table_ticket_url = fest_setting('fest_table_ticket_url') ?: 'https://buy.tablelist.com/i/ae49e4abdeaa1f8c';
 
 $prices = [
     'day1' => [
@@ -74,10 +77,10 @@ $ticket_days = [
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>19+ valid ID required</div>
           </div>
           <?php if ($slug): ?>
-          <button onclick="showpass.tickets.eventPurchaseWidget('<?php echo esc_js($slug); ?>', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
-             class="fest-tier-btn fest-tier-btn-outline" style="display:block;width:100%;text-align:center;border:1px solid rgba(255,255,255,0.15);background:transparent;cursor:pointer;">
+          <a href="<?php echo esc_url($day_key === 'day1' ? $day1_ticket_url : $day2_ticket_url); ?>"
+             class="fest-tier-btn fest-tier-btn-outline" style="display:block;width:100%;text-align:center;border:1px solid rgba(255,255,255,0.15);background:transparent;">
             Buy Tickets &rarr;
-          </button>
+          </a>
           <?php else: ?>
           <div class="fest-tier-btn fest-tier-btn-outline" style="display:block;width:100%;text-align:center;opacity:0.4;cursor:default;">Tickets Coming Soon</div>
           <?php endif; ?>
@@ -96,10 +99,10 @@ $ticket_days = [
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Exclusive VIP lounge access</div>
           </div>
           <?php if ($slug): ?>
-          <button onclick="showpass.tickets.eventPurchaseWidget('<?php echo esc_js($slug); ?>', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
-             class="fest-tier-btn fest-tier-btn-fill" style="display:block;width:100%;text-align:center;border:none;cursor:pointer;">
+          <a href="<?php echo esc_url($day_key === 'day1' ? $day1_ticket_url : $day2_ticket_url); ?>"
+             class="fest-tier-btn fest-tier-btn-fill" style="display:block;width:100%;text-align:center;">
             Buy Tickets &rarr;
-          </button>
+          </a>
           <?php else: ?>
           <div class="fest-tier-btn fest-tier-btn-fill" style="display:block;width:100%;text-align:center;opacity:0.5;cursor:default;">Tickets Coming Soon</div>
           <?php endif; ?>
@@ -117,9 +120,9 @@ $ticket_days = [
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Dedicated event host</div>
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Best views of the stage</div>
           </div>
-          <a href="mailto:<?php echo esc_attr($contact_email); ?>?subject=Table Package Enquiry — <?php echo esc_attr($dm['name']); ?> <?php echo esc_attr($dm['date']); ?>"
+          <a href="<?php echo esc_url($table_ticket_url); ?>"
              class="fest-tier-btn fest-tier-btn-outline" style="display:block;text-align:center;">
-            Enquire &rarr;
+            Reserve &rarr;
           </a>
         </div>
 

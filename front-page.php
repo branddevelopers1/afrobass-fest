@@ -100,9 +100,9 @@ $sponsors = new WP_Query([
     </div>
 
     <div class="factions">
-      <button class="fbtn-main" onclick="showpass.tickets.eventPurchaseWidget('afrobass-festival', {'theme-primary': '#FF2D8A', 'keep-shopping': false})" style="border:none;cursor:pointer;">
+      <a href="<?php echo esc_url($ticket_url ?: 'https://show.ps/l/581f9fa7/'); ?>" class="fbtn-main">
         Buy Tickets Now &rarr;
-      </button>
+      </a>
       <?php /* commented out
       <a href="<?= esc_url(home_url('/lineup')) ?>" class="fbtn-ghost">
         See the Lineup

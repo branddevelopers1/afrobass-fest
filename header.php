@@ -8,24 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
 <?php wp_head(); ?>
 
-<!-- Showpass SDK -->
-<script type="text/javascript">
-(function(window, document, src) {
-  var config = window.__shwps;
-  if (typeof config === 'undefined') {
-    config = function() { config.c(arguments); };
-    config.q = [];
-    config.c = function(args) { config.q.push(args); };
-    window.__shwps = config;
-    var s = document.createElement('script');
-    s.type = 'text/javascript';
-    s.async = true;
-    s.src = src;
-    var x = document.getElementsByTagName('script')[0];
-    x.parentNode.insertBefore(s, x);
-  }
-})(window, document, 'https://www.showpass.com/static/dist/sdk.js');
-</script>
 </head>
 <body <?php body_class('fest-site'); ?> style="background:#0a0608;cursor:none;overflow-x:hidden;">
 <?php wp_body_open(); ?>
@@ -79,12 +61,9 @@ $full_nav = [
 
   <!-- Right side: CTA + Menu button -->
   <div class="fest-nav-right">
-    <button
-      onclick="showpass.tickets.eventPurchaseWidget('afrobass-festival', {'theme-primary': '#FF2D8A', 'keep-shopping': false})"
-      class="fest-nav-cta"
-      style="border:none; cursor:pointer;">
+    <a href="<?php echo esc_url(fest_setting('fest_ticket_url') ?: 'https://show.ps/l/581f9fa7/'); ?>" class="fest-nav-cta">
       Get Tickets
-    </button>
+    </a>
     <button id="fest-menu-btn" class="fest-menu-btn" aria-label="Open menu" aria-expanded="false">
       <span class="fest-menu-btn-inner">
         <span></span>
@@ -117,9 +96,9 @@ $full_nav = [
         <div class="fest-menu-footer-date">August 15–16, 2026</div>
         <div class="fest-menu-footer-venue">Rebel Entertainment Complex · Toronto</div>
       </div>
-      <button onclick="showpass.tickets.eventPurchaseWidget('afrobass-festival', {'theme-primary': '#FF2D8A', 'keep-shopping': false})" class="fest-menu-cta" style="border:none;cursor:pointer;">
+      <a href="<?php echo esc_url(fest_setting('fest_ticket_url') ?: 'https://show.ps/l/581f9fa7/'); ?>" class="fest-menu-cta">
         Get Tickets &rarr;
-      </button>
+      </a>
     </div>
 
   </div>
