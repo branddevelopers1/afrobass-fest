@@ -1,6 +1,8 @@
 <?php get_header();
-$ticket_url    = fest_setting('fest_ticket_url') ?: home_url('/tickets');
-$contact_email = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
+$ticket_url       = fest_setting('fest_ticket_url')       ?: home_url('/tickets');
+$day2_ticket_url  = fest_setting('fest_day2_ticket_url')  ?: 'https://show.ps/l/0c3f4a74/';
+$table_ticket_url = fest_setting('fest_table_ticket_url') ?: 'https://buy.tablelist.com/i/ae49e4abdeaa1f8c';
+$contact_email    = fest_setting('fest_email')            ?: 'contact@afrobassfest.com';
 
 $day1_slug = fest_setting('fest_day1_slug') ?: 'afrobass-festival-day1';
 $day2_slug = fest_setting('fest_day2_slug') ?: '';
@@ -224,7 +226,78 @@ $sponsors = new WP_Query([
 
 </section>
 
-<?php /* TICKET TIERS SECTION — hidden */ ?>
+<!-- ═══════════════════════════════════════════
+     TICKET TIERS
+════════════════════════════════════════════ -->
+<section style="position:relative;z-index:2;padding:100px 56px;border-top:1px solid rgba(255,255,255,0.04);" id="tickets">
+
+  <div class="fest-section-hdr fest-reveal" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;">
+    <div>
+      <div class="fest-kicker">Get Your Tickets</div>
+      <h2 style="font-family:'Unbounded',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:900;letter-spacing:-1px;color:#fff;text-transform:uppercase;line-height:0.95;margin-top:12px;">Aug 15–16<br><em style="color:#FF2D8A;font-style:italic;">Toronto</em></h2>
+    </div>
+    <a href="<?php echo esc_url(home_url('/tickets')); ?>"
+       style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color 0.2s;white-space:nowrap;"
+       onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">All Ticket Options &rarr;</a>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
+
+    <?php
+    $fp_ticket_days = [
+      'day1' => ['label' => 'Day 1', 'name' => "Obi's House",        'date' => 'Aug 15', 'hours' => '10pm – 2am', 'color' => '#FF4500', 'url' => $ticket_url],
+      'day2' => ['label' => 'Day 2', 'name' => 'Amapiano Day Party',  'date' => 'Aug 16', 'hours' => '5pm – 11pm', 'color' => '#FF2D8A', 'url' => $day2_ticket_url],
+    ];
+    foreach ($fp_ticket_days as $fp_tk_key => $fp_tk):
+      $show = $fp_tk_key === 'day1' || $day2_slug;
+      if (!$show) continue;
+    ?>
+    <div class="fest-reveal" style="background:#0d0d0d;padding:48px 40px;display:flex;flex-direction:column;gap:32px;">
+
+      <!-- Day label -->
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:7px;height:7px;border-radius:50%;background:<?php echo esc_attr($fp_tk['color']); ?>;flex-shrink:0;"></div>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:<?php echo esc_attr($fp_tk['color']); ?>;"><?php echo esc_html($fp_tk['label']); ?> — <?php echo esc_html($fp_tk['name']); ?></span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;color:rgba(255,255,255,0.2);letter-spacing:1.5px;"><?php echo esc_html($fp_tk['date']); ?> · <?php echo esc_html($fp_tk['hours']); ?></span>
+      </div>
+
+      <!-- Tiers -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.04);">
+
+        <!-- GA -->
+        <div style="background:#080808;padding:28px 24px;">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:12px;">General Admission</div>
+          <div style="font-family:'Unbounded',sans-serif;font-size:clamp(22px,2.5vw,36px);font-weight:900;color:#fff;margin-bottom:20px;"><?php echo esc_html($prices[$fp_tk_key]['ga']); ?></div>
+          <a href="<?php echo esc_url($fp_tk['url']); ?>"
+             style="display:block;text-align:center;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,0.15);padding:14px 20px;transition:border-color 0.2s,color 0.2s;"
+             onmouseover="this.style.borderColor='rgba(255,255,255,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)'">Buy Now &rarr;</a>
+        </div>
+
+        <!-- VIP -->
+        <div style="background:#0a0a0a;padding:28px 24px;position:relative;">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:<?php echo esc_attr($fp_tk['color']); ?>;margin-bottom:12px;">VIP Experience</div>
+          <div style="font-family:'Unbounded',sans-serif;font-size:clamp(22px,2.5vw,36px);font-weight:900;color:#fff;margin-bottom:20px;"><?php echo esc_html($prices[$fp_tk_key]['vip']); ?></div>
+          <a href="<?php echo esc_url($fp_tk['url']); ?>"
+             style="display:block;text-align:center;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;text-decoration:none;background:<?php echo esc_attr($fp_tk['color']); ?>;padding:14px 20px;transition:opacity 0.2s;"
+             onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Buy Now &rarr;</a>
+        </div>
+
+      </div>
+
+      <!-- Table CTA -->
+      <a href="<?php echo esc_url($table_ticket_url); ?>"
+         style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border:1px solid rgba(255,255,255,0.06);text-decoration:none;transition:border-color 0.2s;"
+         onmouseover="this.style.borderColor='rgba(255,255,255,0.15)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.06)'">
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);">Table & Booth Packages</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;color:rgba(255,255,255,0.25);">Reserve &rarr;</span>
+      </a>
+
+    </div>
+    <?php endforeach; ?>
+
+  </div>
+
+</section>
 
 <!-- ═══════════════════════════════════════════
      COUNTDOWN
