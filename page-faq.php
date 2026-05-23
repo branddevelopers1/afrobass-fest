@@ -33,11 +33,11 @@ $faqs = [
   'The Event' => [
     [
       'q' => 'When and where is Afrobass Music Fest?',
-      'a' => 'Afrobass Music Fest is a 2-day event taking place August 15–16, 2026 in Toronto. Day 1 (Aug 15) is Obi\'s House at Rebel Entertainment Complex, 11 Polson St — doors 10pm to 2am. Day 2 (Aug 16) is Amapiano Day Party at Noir, 11 Polson St — 5pm to 11pm.'
+      'a' => 'Afrobass Music Fest is a 2-day event taking place August 15–16, 2026 in Toronto. Day 1 (Aug 15) is Obi\'s House at Rebel Entertainment Complex, 11 Polson St — doors 10pm to 3am. Day 2 (Aug 16) is Amapiano Day Party at Noir, 11 Polson St — 5pm to 11pm.'
     ],
     [
       'q' => 'What time do doors open?',
-      'a' => 'Day 1 — Obi\'s House doors open at 10pm (until 2am). Day 2 — Amapiano Day Party runs 5pm to 11pm.'
+      'a' => 'Day 1 — Obi\'s House doors open at 10pm (until 3am). Day 2 — Amapiano Day Party runs 5pm to 11pm.'
     ],
     [
       'q' => 'Who is performing?',

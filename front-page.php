@@ -245,7 +245,7 @@ $sponsors = new WP_Query([
 
     <?php
     $fp_ticket_days = [
-      'day1' => ['label' => 'Day 1', 'name' => "Obi's House",        'date' => 'Aug 15', 'hours' => '10pm – 2am', 'color' => '#FF4500', 'url' => $ticket_url],
+      'day1' => ['label' => 'Day 1', 'name' => "Obi's House",        'date' => 'Aug 15', 'hours' => '10pm – 3am', 'color' => '#FF4500', 'url' => $ticket_url],
       'day2' => ['label' => 'Day 2', 'name' => 'Amapiano Day Party',  'date' => 'Aug 16', 'hours' => '5pm – 11pm', 'color' => '#FF2D8A', 'url' => $day2_ticket_url],
     ];
     foreach ($fp_ticket_days as $fp_tk_key => $fp_tk):
