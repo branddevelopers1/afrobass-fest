@@ -249,7 +249,7 @@ $sponsors = new WP_Query([
       'day2' => ['label' => 'Day 2', 'name' => 'Amapiano Day Party',  'date' => 'Aug 16', 'hours' => '5pm – 11pm', 'color' => '#FF2D8A', 'url' => $day2_ticket_url],
     ];
     foreach ($fp_ticket_days as $fp_tk_key => $fp_tk):
-      $show = $fp_tk_key === 'day1' || $day2_slug;
+      $show = $fp_tk_key === 'day1' || $fp_tk['url'];
       if (!$show) continue;
     ?>
     <div class="fest-reveal" style="background:#0d0d0d;padding:48px 40px;display:flex;flex-direction:column;gap:32px;">
