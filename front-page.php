@@ -9,8 +9,8 @@ $day2_slug = fest_setting('fest_day2_slug') ?: '';
 
 $prices = [
     'day1' => [
-        'ga'    => 'Starts at ' . (fest_setting('fest_day1_ga_price')  ?: '$40'),
-        'vip'   => 'Starts at ' . (fest_setting('fest_day1_vip_price') ?: '$80'),
+        'ga'    => fest_setting('fest_day1_ga_price')  ?: '$40',
+        'vip'   => fest_setting('fest_day1_vip_price') ?: '$80',
         'table' => fest_setting('fest_day1_table_price') ?: 'TBA',
     ],
     'day2' => [
@@ -193,7 +193,10 @@ $sponsors = new WP_Query([
         <!-- GA -->
         <div style="background:#080808;padding:28px 24px;">
           <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:12px;">General Admission</div>
-          <div style="font-family:'Unbounded',sans-serif;font-size:clamp(22px,2.5vw,36px);font-weight:900;color:#fff;margin-bottom:20px;"><?php echo esc_html($prices[$fp_tk_key]['ga']); ?></div>
+          <div style="margin-bottom:20px;">
+            <span style="display:block;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:500;letter-spacing:1px;color:rgba(255,255,255,0.35);margin-bottom:4px;">Starts at</span>
+            <span style="font-family:'Unbounded',sans-serif;font-size:clamp(22px,2.5vw,36px);font-weight:900;color:#FF4500;"><?php echo esc_html($prices[$fp_tk_key]['ga']); ?></span>
+          </div>
           <a href="<?php echo esc_url($fp_tk['url']); ?>"
              style="display:block;text-align:center;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,0.15);padding:14px 20px;transition:border-color 0.2s,color 0.2s;"
              onmouseover="this.style.borderColor='rgba(255,255,255,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)'">Buy Now &rarr;</a>
@@ -202,7 +205,10 @@ $sponsors = new WP_Query([
         <!-- VIP -->
         <div style="background:#0a0a0a;padding:28px 24px;position:relative;">
           <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:<?php echo esc_attr($fp_tk['color']); ?>;margin-bottom:12px;">VIP Experience</div>
-          <div style="font-family:'Unbounded',sans-serif;font-size:clamp(22px,2.5vw,36px);font-weight:900;color:#fff;margin-bottom:20px;"><?php echo esc_html($prices[$fp_tk_key]['vip']); ?></div>
+          <div style="margin-bottom:20px;">
+            <span style="display:block;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:500;letter-spacing:1px;color:rgba(255,255,255,0.35);margin-bottom:4px;">Starts at</span>
+            <span style="font-family:'Unbounded',sans-serif;font-size:clamp(22px,2.5vw,36px);font-weight:900;color:<?php echo esc_attr($fp_tk['color']); ?>;"><?php echo esc_html($prices[$fp_tk_key]['vip']); ?></span>
+          </div>
           <a href="<?php echo esc_url($fp_tk['url']); ?>"
              style="display:block;text-align:center;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;text-decoration:none;background:<?php echo esc_attr($fp_tk['color']); ?>;padding:14px 20px;transition:opacity 0.2s;"
              onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Buy Now &rarr;</a>

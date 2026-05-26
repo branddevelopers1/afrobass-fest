@@ -13,8 +13,8 @@ $table_ticket_url = fest_setting('fest_table_ticket_url') ?: 'https://buy.tablel
 
 $prices = [
     'day1' => [
-        'ga'    => 'Starts at ' . (fest_setting('fest_day1_ga_price')  ?: '$40'),
-        'vip'   => 'Starts at ' . (fest_setting('fest_day1_vip_price') ?: '$80'),
+        'ga'    => fest_setting('fest_day1_ga_price')  ?: '$40',
+        'vip'   => fest_setting('fest_day1_vip_price') ?: '$80',
         'table' => fest_setting('fest_day1_table_price') ?: 'TBA',
     ],
     'day2' => [
@@ -69,7 +69,12 @@ $ticket_days = [
         <div class="fest-ticket-tier fest-reveal">
           <span class="fest-tier-badge">General</span>
           <div class="fest-tier-name">General Admission</div>
-          <div class="fest-tier-price"><?php echo esc_html($prices[$day_key]['ga']); ?></div>
+          <div class="fest-tier-price">
+            <?php if ($day_key === 'day1'): ?>
+            <span style="display:block;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:500;letter-spacing:1px;color:rgba(255,255,255,0.35);margin-bottom:4px;">Starts at</span>
+            <span style="color:#FF4500;"><?php echo esc_html($prices[$day_key]['ga']); ?></span>
+            <?php else: echo esc_html($prices[$day_key]['ga']); endif; ?>
+          </div>
           <div class="fest-tier-desc"><?php echo $is_day_party ? 'Full access to the day party, all performances, and vendor areas.' : 'Full access to the fest grounds, all performances, and vendor areas.'; ?></div>
           <div class="fest-tier-perks">
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>All performances &mdash; <?php echo $is_day_party ? '5pm to 11pm' : 'full night'; ?></div>
@@ -91,7 +96,12 @@ $ticket_days = [
         <div class="fest-ticket-tier featured fest-reveal">
           <span class="fest-tier-badge">Most Popular</span>
           <div class="fest-tier-name">VIP Experience</div>
-          <div class="fest-tier-price"><?php echo esc_html($prices[$day_key]['vip']); ?></div>
+          <div class="fest-tier-price">
+            <?php if ($day_key === 'day1'): ?>
+            <span style="display:block;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:500;letter-spacing:1px;color:rgba(255,255,255,0.35);margin-bottom:4px;">Starts at</span>
+            <span style="color:#FF2D8A;"><?php echo esc_html($prices[$day_key]['vip']); ?></span>
+            <?php else: echo esc_html($prices[$day_key]['vip']); endif; ?>
+          </div>
           <div class="fest-tier-desc">Premium access with exclusive areas, dedicated bar, and priority entry.</div>
           <div class="fest-tier-perks">
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Everything in General Admission</div>
