@@ -70,8 +70,7 @@ $days = [
         $tba    = $a ? $a['tba']    : false;
       ?>
 
-      <a href="<?php echo esc_url($day['ticket_url']); ?>" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;">
-      <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;min-height:520px;">
+      <div class="fest-reveal fday-col-card" onclick="window.open('<?php echo esc_js($day['ticket_url']); ?>','_blank')" style="background:#080808;position:relative;overflow:hidden;min-height:520px;cursor:pointer;">
         <?php if ($a && !$tba && has_post_thumbnail()): ?>
           <?php the_post_thumbnail('fest-artist', ['style'=>'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(10%);', 'alt'=>get_the_title()]); ?>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.97) 0%,rgba(8,8,8,0.3) 55%,transparent 100%);"></div>
@@ -111,7 +110,6 @@ $days = [
           <?php endif; ?>
         </div>
       </div>
-      </a>
 
       <?php
         if ($a) wp_reset_postdata();
