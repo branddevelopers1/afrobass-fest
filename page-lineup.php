@@ -37,6 +37,14 @@ $days = [
 ];
 ?>
 
+<style>
+@media (max-width: 768px) {
+  .fday-col-grid { grid-template-columns: 1fr !important; }
+  .fday-col-card { min-height: 420px !important; }
+  .fday-header   { padding: 16px 20px !important; }
+}
+</style>
+
 <div style="padding-top:96px;">
 
   <section style="padding:0 0 120px;">
@@ -47,7 +55,7 @@ $days = [
     ?>
 
     <!-- Day header -->
-    <div style="background:#0d0d0d;padding:24px 40px;display:flex;align-items:center;gap:16px;border-bottom:2px solid <?php echo esc_attr($day['color']); ?>;">
+    <div class="fday-header" style="background:#0d0d0d;padding:24px 40px;display:flex;align-items:center;gap:16px;border-bottom:2px solid <?php echo esc_attr($day['color']); ?>;">
       <div style="width:8px;height:8px;border-radius:50%;background:<?php echo esc_attr($day['color']); ?>;flex-shrink:0;"></div>
       <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:<?php echo esc_attr($day['color']); ?>;"><?php echo esc_html($day['label']); ?></span>
       <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);"><?php echo esc_html($day['date']); ?></span>
@@ -55,7 +63,7 @@ $days = [
     </div>
 
     <!-- Artist grid -->
-    <div style="display:grid;grid-template-columns:repeat(<?php echo $col_count; ?>,1fr);gap:2px;background:rgba(255,255,255,0.06);">
+    <div class="fday-col-grid" style="display:grid;grid-template-columns:repeat(<?php echo $col_count; ?>,1fr);gap:2px;background:rgba(255,255,255,0.06);">
 
       <?php
       $slot_map = [];
