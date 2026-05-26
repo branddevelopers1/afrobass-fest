@@ -9,8 +9,8 @@ $day2_slug = fest_setting('fest_day2_slug') ?: '';
 
 $prices = [
     'day1' => [
-        'ga'    => fest_setting('fest_day1_ga_price')    ?: 'TBA',
-        'vip'   => fest_setting('fest_day1_vip_price')   ?: 'TBA',
+        'ga'    => fest_setting('fest_day1_ga_price') ?: 'Starts at $40',
+        'vip'   => fest_setting('fest_day1_vip_price') ?: 'Starts at $80',
         'table' => fest_setting('fest_day1_table_price') ?: 'TBA',
     ],
     'day2' => [
@@ -141,11 +141,15 @@ $sponsors = new WP_Query([
 ════════════════════════════════════════════ -->
 <?php $lineup_image = fest_setting('fest_lineup_image'); ?>
 <?php if ($lineup_image): ?>
-<section style="position:relative;z-index:2;padding:0 56px;border-top:1px solid rgba(255,255,255,0.04);">
+<section class="fest-lineup-img-section" style="position:relative;z-index:2;border-top:1px solid rgba(255,255,255,0.04);">
   <a href="<?php echo esc_url(home_url('/lineup')); ?>">
     <img src="<?php echo esc_url($lineup_image); ?>" alt="Afrobass Music Fest 2026 Lineup" style="display:block;width:100%;height:auto;">
   </a>
 </section>
+<style>
+.fest-lineup-img-section { padding: 0 56px; }
+@media (max-width: 768px) { .fest-lineup-img-section { padding: 0; } }
+</style>
 <?php endif; ?>
 
 <!-- ═══════════════════════════════════════════
