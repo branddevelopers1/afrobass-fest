@@ -62,7 +62,7 @@ $ig    = fest_setting('fest_instagram') ?: 'https://instagram.com/afrobassfest';
           </div>
           <div>
             <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:8px;">Instagram</div>
-            <div style="font-size:16px;color:#fff;font-weight:400;">@afrobass.ca</div>
+            <div style="font-size:16px;color:#fff;font-weight:400;">@afrobassfest</div>
             <div style="font-size:12px;color:rgba(255,255,255,0.25);margin-top:4px;">DMs open for quick questions</div>
           </div>
         </a>
