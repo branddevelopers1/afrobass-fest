@@ -323,7 +323,7 @@ function fest_email_capture() {
 
     if (!$email || !is_email($email)) { wp_send_json_error('Please enter a valid email address.'); }
 
-    $to      = get_field('fest_email', 'option') ?: 'signup@afrobassfest.com';
+    $to      = 'signup@afrobassfest.com';
     $subject = 'New Fest Interest — ' . $first . ' ' . $last;
     $body    = "New signup from afrobassfestival.com\n\n";
     $body   .= "Name:  {$first} {$last}\n";
@@ -440,7 +440,13 @@ function fest_contact_form() {
         wp_send_json_error('Please fill in all required fields.');
     }
 
-    $to      = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
+    if ($subject === 'Press') {
+        $to = 'media@afrobass.com';
+    } elseif ($subject === 'Sponsorship') {
+        $to = 'sponsor@afrobass.com';
+    } else {
+        $to = 'contact@afrobass.com';
+    }
     $subj    = "[{$subject}] {$first} {$last} — Afrobass Fest 2026";
     $body    = "New contact form submission\n\nName:    {$first} {$last}\nEmail:   {$email}\nPhone:   {$phone}\nTopic:   {$subject}\n\nMessage:\n{$message}\n";
     $headers = ['Content-Type: text/plain; charset=UTF-8', 'Reply-To: ' . $first . ' ' . $last . ' <' . $email . '>'];
@@ -490,7 +496,7 @@ function fest_handle_submission() {
         wp_send_json_error('Please fill in all required fields with a valid email.');
     }
 
-    $to      = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
+    $to      = 'contact@afrobass.com';
     $subject = '[' . ucfirst($type) . ' Submission] ' . $name . ' — Afrobass Fest 2026';
     $body    = "New {$type} submission from afrobassfestival.com\n\n";
     $body   .= "Name:    {$name}\n";

@@ -155,14 +155,14 @@
             msg.textContent='Something went wrong. DM us @afrobass on Instagram.';
           })
           .finally(function(){
-            btn.textContent='Notify Me When Tickets Drop \u2192';
+            btn.textContent='Keep Me Up to Date \u2192';
             btn.disabled=false;
           });
       } else {
         msg.className='fest-form-msg success';
         msg.textContent="You're on the list! We'll notify you when tickets drop.";
         form.reset();
-        btn.textContent='Notify Me When Tickets Drop \u2192';
+        btn.textContent='Keep Me Up to Date \u2192';
         btn.disabled=false;
       }
     });

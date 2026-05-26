@@ -302,7 +302,7 @@ $sponsors = new WP_Query([
           <label for="fph">Phone <span style="color:rgba(255,255,255,0.2);font-size:9px;">(optional)</span></label>
         </div>
         <input type="text" name="website" style="display:none;position:absolute;left:-9999px;" tabindex="-1" autocomplete="off">
-        <button type="submit" class="fest-capture-submit" style="margin-top:32px;">Notify Me When Tickets Drop &rarr;</button>
+        <button type="submit" class="fest-capture-submit" style="margin-top:32px;">Keep Me Up to Date &rarr;</button>
         <div class="fest-form-msg" role="alert"></div>
       </form>
     </div>

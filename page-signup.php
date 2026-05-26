@@ -126,7 +126,7 @@ $ticket_url = fest_setting('fest_ticket_url') ?: home_url('/tickets');
       </div>
       <!-- Honeypot -->
       <input type="text" name="website" style="display:none;position:absolute;left:-9999px;" tabindex="-1" autocomplete="off">
-      <button type="submit" class="fest-capture-submit">Notify Me When Tickets Drop →</button>
+      <button type="submit" class="fest-capture-submit">Keep Me Up to Date →</button>
       <div class="fest-form-msg" role="alert"></div>
     </form>
   </div>
