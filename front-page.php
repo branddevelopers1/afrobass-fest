@@ -137,94 +137,16 @@ $sponsors = new WP_Query([
 </div>
 
 <!-- ═══════════════════════════════════════════
-     3. LINEUP TEASER
+     3. LINEUP IMAGE
 ════════════════════════════════════════════ -->
-<section class="fest-content-section" style="position:relative;z-index:2;padding:100px 56px;border-top:1px solid rgba(255,255,255,0.04);">
-
-  <div class="fest-section-hdr fest-reveal" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;">
-    <div>
-      <div class="fest-kicker">Afrobass Music Fest 2026</div>
-      <h2 style="font-family:'Unbounded',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:900;letter-spacing:-1px;color:#fff;text-transform:uppercase;line-height:0.95;margin-top:12px;">The<br><em style="color:#FF2D8A;font-style:italic;">Lineup</em></h2>
-    </div>
-    <a href="<?php echo esc_url(home_url('/lineup')); ?>"
-       style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color 0.2s;white-space:nowrap;"
-       onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Full Lineup &rarr;</a>
-  </div>
-
-  <?php
-  $fp_days = [
-    'day1' => ['label' => 'Day 1', 'name' => "Obi's House",         'date' => 'Aug 15', 'color' => '#FF4500'],
-    'day2' => ['label' => 'Day 2', 'name' => 'Amapiano Day Party',   'date' => 'Aug 16', 'color' => '#FF2D8A'],
-  ];
-  ?>
-
-  <!-- Day headers + Artist columns -->
-  <div class="fday-col-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
-    <?php foreach ($fp_days as $fp_day_key => $fp_day):
-      $day_artists = $fp_artists[$fp_day_key];
-      $a = !empty($day_artists) ? $day_artists[0] : null;
-    ?>
-    <div>
-      <div style="background:#0d0d0d;padding:20px 32px;display:flex;align-items:center;gap:14px;">
-        <div style="width:7px;height:7px;border-radius:50%;background:<?php echo esc_attr($fp_day['color']); ?>;flex-shrink:0;"></div>
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:<?php echo esc_attr($fp_day['color']); ?>;"><?php echo esc_html($fp_day['label']); ?></span>
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);"><?php echo esc_html($fp_day['date']); ?></span>
-        <span class="fday-col-name" style="margin-left:auto;font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.5px;color:rgba(255,255,255,0.15);text-transform:uppercase;"><?php echo esc_html($fp_day['name']); ?></span>
-      </div>
-
-      <?php if ($a):
-        setup_postdata($GLOBALS['post'] = $a['post']);
-        $role   = $a['role'];
-        $origin = $a['origin'];
-        $tba    = $a['tba']; ?>
-      <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;">
-        <?php if (!$tba && has_post_thumbnail()): ?>
-          <?php the_post_thumbnail('fest-artist',['style'=>'display:block;width:100%;height:auto;filter:grayscale(15%);']); ?>
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.96) 0%,rgba(8,8,8,0.2) 60%,transparent 100%);"></div>
-        <?php else: ?>
-          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,45,138,0.06) 0%,transparent 70%);"></div>
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.99) 0%,transparent 60%);"></div>
-        <?php endif; ?>
-        <div style="position:absolute;top:20px;left:20px;background:<?php echo esc_attr($fp_day['color']); ?>;padding:5px 14px;border-radius:1px;">
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;"><?php echo esc_html($role); ?></span>
-        </div>
-        <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;padding:32px 36px;">
-          <div style="font-family:'Unbounded',sans-serif;font-size:clamp(24px,3vw,48px);font-weight:900;color:<?php echo $tba?'rgba(255,255,255,0.12)':'#fff'; ?>;text-transform:uppercase;letter-spacing:-1px;line-height:1;"><?php echo $tba ? 'TBA' : get_the_title(); ?></div>
-          <?php if ($origin && !$tba): ?><div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:8px;letter-spacing:1px;"><?php echo esc_html($origin); ?></div><?php endif; ?>
-        </div>
-      </div>
-      <?php wp_reset_postdata();
-      else: ?>
-      <div class="fest-reveal fday-col-card" style="background:#080808;position:relative;overflow:hidden;height:480px;display:flex;flex-direction:column;justify-content:flex-end;">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-          <div style="width:80px;height:80px;border-radius:50%;border:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
-          </div>
-        </div>
-        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.99) 0%,transparent 60%);"></div>
-        <div style="position:absolute;top:20px;left:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);padding:5px 14px;border-radius:1px;">
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);">Headliner</span>
-        </div>
-        <div style="position:relative;z-index:2;padding:32px 36px;">
-          <div style="font-family:'Unbounded',sans-serif;font-size:clamp(24px,3vw,48px);font-weight:900;color:rgba(255,255,255,0.08);text-transform:uppercase;letter-spacing:-1px;">TBA</div>
-        </div>
-      </div>
-      <?php endif; ?>
-
-    </div>
-    <?php endforeach; ?>
-  </div>
-
-  <div style="margin-top:36px;text-align:center;" class="fest-reveal">
-    <a href="<?php echo esc_url(home_url('/lineup')); ?>"
-       style="display:inline-flex;align-items:center;gap:12px;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;border:1px solid rgba(255,255,255,0.08);padding:16px 32px;border-radius:100px;transition:color 0.2s,border-color 0.2s;"
-       onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.2)'"
-       onmouseout="this.style.color='rgba(255,255,255,0.3)';this.style.borderColor='rgba(255,255,255,0.08)'">
-      Full Artist Lineup &rarr;
-    </a>
-  </div>
-
+<?php $lineup_image = fest_setting('fest_lineup_image'); ?>
+<?php if ($lineup_image): ?>
+<section style="position:relative;z-index:2;padding:0 56px;border-top:1px solid rgba(255,255,255,0.04);">
+  <a href="<?php echo esc_url(home_url('/lineup')); ?>">
+    <img src="<?php echo esc_url($lineup_image); ?>" alt="Afrobass Music Fest 2026 Lineup" style="display:block;width:100%;height:auto;">
+  </a>
 </section>
+<?php endif; ?>
 
 <!-- ═══════════════════════════════════════════
      TICKET TIERS
