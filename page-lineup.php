@@ -58,9 +58,14 @@ $days = [
     <div style="display:grid;grid-template-columns:repeat(<?php echo $col_count; ?>,1fr);gap:2px;background:rgba(255,255,255,0.06);">
 
       <?php
-      $slots = max(count($artists), $col_count);
-      for ($i = 0; $i < $slots; $i++):
-        $a = $artists[$i] ?? null;
+      $slot_map = [];
+      foreach ($artists as $artist_item) {
+          $order = (int) get_post_meta($artist_item['post']->ID, 'fest_artist_order', true);
+          $slot  = ($order >= $col_count) ? $col_count : max(1, $order);
+          if (!isset($slot_map[$slot])) $slot_map[$slot] = $artist_item;
+      }
+      for ($i = 1; $i <= $col_count; $i++):
+        $a = $slot_map[$i] ?? null;
         if ($a) setup_postdata($GLOBALS['post'] = $a['post']);
         $role   = $a ? $a['role']   : 'Headliner';
         $origin = $a ? $a['origin'] : '';
@@ -113,7 +118,8 @@ $days = [
 
       <?php
         if ($a) wp_reset_postdata();
-      endfor; ?>
+      endfor; // slot loop
+      ?>
 
     </div>
 
