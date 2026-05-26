@@ -171,7 +171,7 @@ $sponsors = new WP_Query([
 
     <?php
     $fp_ticket_days = [
-      'day1' => ['label' => 'Day 1', 'name' => "Obi's House + The Cavemen + More!", 'date' => 'Aug 15', 'hours' => '8pm – 3am', 'color' => '#FF4500', 'url' => $ticket_url],
+      'day1' => ['label' => 'Day 1', 'name' => "Obi's House + The Cavemen. + More!", 'date' => 'Aug 15', 'hours' => '8pm – 3am', 'color' => '#FF4500', 'url' => $ticket_url],
       'day2' => ['label' => 'Day 2', 'name' => 'Day Party w/ DBN Gogo', 'date' => 'Aug 16', 'hours' => '5pm – 11pm', 'color' => '#FF2D8A', 'url' => $day2_ticket_url],
     ];
     foreach ($fp_ticket_days as $fp_tk_key => $fp_tk):
@@ -241,7 +241,7 @@ $sponsors = new WP_Query([
      COUNTDOWN
 ════════════════════════════════════════════ -->
 <div class="fcount-section" style="position:relative;z-index:2;">
-  <div class="fcount-label">Counting Down to August 15, 2026 — Day 1: Obi's House</div>
+  <div class="fcount-label">Counting Down to August 15, 2026 — Day 1: Obi's House + The Cavemen. + More!</div>
   <div class="fcount-grid">
     <div class="fcd-block"><span class="fcd-num" id="cd-days">--</span><span class="fcd-lbl">Days</span></div>
     <div class="fcd-block"><span class="fcd-num" id="cd-hours">--</span><span class="fcd-lbl">Hours</span></div>

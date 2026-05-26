@@ -25,7 +25,7 @@ $prices = [
 ];
 
 $days_meta = [
-  'day1' => ['name' => "Obi's House",       'date' => 'Aug 15', 'hours' => '8pm – 3am', 'venue' => 'Rebel Entertainment Complex', 'color' => '#FF4500'],
+  'day1' => ['name' => "Obi's House + The Cavemen. + More!",       'date' => 'Aug 15', 'hours' => '8pm – 3am', 'venue' => 'Rebel Entertainment Complex', 'color' => '#FF4500'],
   'day2' => ['name' => 'Day Party w/ DBN Gogo', 'date' => 'Aug 16', 'hours' => '5pm – 11pm',  'venue' => 'Noir',                        'color' => '#FF2D8A'],
 ];
 $ticket_days = [
