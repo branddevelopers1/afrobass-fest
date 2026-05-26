@@ -167,7 +167,7 @@ $sponsors = new WP_Query([
        onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">All Ticket Options &rarr;</a>
   </div>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
+  <div class="fp-ticket-days" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);">
 
     <?php
     $fp_ticket_days = [
@@ -188,7 +188,7 @@ $sponsors = new WP_Query([
       </div>
 
       <!-- Tiers -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.04);">
+      <div class="fp-ticket-tiers" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.04);">
 
         <!-- GA -->
         <div style="background:#080808;padding:28px 24px;">
@@ -230,6 +230,12 @@ $sponsors = new WP_Query([
   </div>
 
 </section>
+<style>
+@media (max-width: 768px) {
+  .fp-ticket-days  { grid-template-columns: 1fr !important; }
+  .fp-ticket-tiers { grid-template-columns: 1fr !important; }
+}
+</style>
 
 <!-- ═══════════════════════════════════════════
      COUNTDOWN
