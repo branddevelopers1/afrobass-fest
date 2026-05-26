@@ -13,8 +13,8 @@ $table_ticket_url = fest_setting('fest_table_ticket_url') ?: 'https://buy.tablel
 
 $prices = [
     'day1' => [
-        'ga'    => (fest_setting('fest_day1_ga_price')  ?: 'TBA') !== 'TBA' ? fest_setting('fest_day1_ga_price')  : 'Starts at $40',
-        'vip'   => (fest_setting('fest_day1_vip_price') ?: 'TBA') !== 'TBA' ? fest_setting('fest_day1_vip_price') : 'Starts at $80',
+        'ga'    => 'Starts at ' . (fest_setting('fest_day1_ga_price')  ?: '$40'),
+        'vip'   => 'Starts at ' . (fest_setting('fest_day1_vip_price') ?: '$80'),
         'table' => fest_setting('fest_day1_table_price') ?: 'TBA',
     ],
     'day2' => [
