@@ -11,85 +11,85 @@ $faqs = [
   'Tickets & Entry' => [
     [
       'q' => 'When do tickets go on sale?',
-      'a' => 'Ticket on-sale dates will be announced via our email list and social media channels first. Sign up on our homepage to get early access before the public sale.'
+      'a' => 'Tickets go on sale August 27th this Wednesday at 12pm. Announced via email list and social media first; sign up on the homepage for early access.'
     ],
     [
       'q' => 'What ticket types are available?',
-      'a' => 'We offer General Admission, VIP Experience, and Table Packages. General Admission gives you full access to the fest floor and all performances. VIP includes priority entry, a dedicated VIP area and bar, and exclusive lounge access. Table Packages include a reserved table for 6–10 guests with bottle service.'
+      'a' => 'General Admission, VIP Experience, and Table Packages (for 10 guests with bottle service).'
     ],
     [
       'q' => 'Is there an age requirement?',
-      'a' => 'Yes — Afrobass Music Fest is a 19+ event. Valid government-issued photo ID is required for entry. No exceptions.'
+      'a' => 'Yes, 19+. Valid government-issued photo ID required. No exceptions.'
     ],
     [
       'q' => 'Can I get a refund on my ticket?',
-      'a' => 'All ticket sales are final. Tickets are non-refundable but may be transferable. Please check the specific terms and conditions at the time of purchase from our ticketing provider.'
+      'a' => 'All sales final. Non-refundable but may be transferable.'
     ],
     [
       'q' => 'Will tickets be available at the door?',
-      'a' => 'We strongly recommend purchasing tickets in advance as the event may sell out. Limited tickets may be available at the door, but this is not guaranteed.'
+      'a' => 'Not guaranteed; strongly recommended to buy in advance.'
     ],
   ],
   'The Event' => [
     [
       'q' => 'When and where is Afrobass Music Fest?',
-      'a' => 'Afrobass Music Fest is a 2-day event taking place August 15–16, 2026 in Toronto. Day 1 (Saturday, Aug 15) is Obi\'s House ft. The Cavemen at Rebel Entertainment Complex, 11 Polson St — 8pm to 3am. Day 2 (Sunday, Aug 16) is Amapiano Day Party ft. DBN Gogo at Noir, 11 Polson St — 5pm to 11pm.'
+      'a' => 'August 15–16, 2026, Toronto. Day 1: Obi\'s House at Rebel, 11 Polson St (8pm–3am). Day 2: Amapiano Day Party at Noir, 11 Polson St (5pm–11pm).'
     ],
     [
       'q' => 'What time do doors open?',
-      'a' => 'Saturday (Day 1) — Obi\'s House doors open at 8pm, last call 3am. Sunday (Day 2) — Amapiano Day Party doors open at 5pm, ends 11pm.'
+      'a' => 'Day 1: 8pm. Day 2: 5pm.'
     ],
     [
       'q' => 'Who is performing?',
-      'a' => 'Day 1 (Saturday, Aug 15) features Obi\'s House + The Cavemen + more artists to be announced. Day 2 (Sunday, Aug 16) is the Amapiano Day Party featuring DBN Gogo all the way from South Africa, plus more.'
+      'a' => 'Lineup announced in stages. Day 1 headliner: Obi\'s House, The Cavemen., and more. Day 2 headliner: DBN Gogo.'
     ],
     [
       'q' => 'What genres of music will be played?',
-      'a' => 'Afrobass Music Fest celebrates Afrobeats, Amapiano, and Afro-Caribbean music — the sounds shaping global culture right now. Expect an electrifying mix of live performances and DJ sets across all three genres.'
+      'a' => 'Afrobeats, Amapiano, Afro-house, Afro-Caribbean music and more.'
     ],
     [
       'q' => 'How many stages are there?',
-      'a' => '1 main stage, both days. No split decisions, no FOMO — every artist performs for the full crowd.'
+      'a' => '1 main stage, both days.'
     ],
   ],
   'Venue & Getting There' => [
     [
       'q' => 'Where is Rebel Entertainment Complex?',
-      'a' => 'Rebel Entertainment Complex is located at 11 Polson St, Toronto, ON M5A 1A4 — on the waterfront in the Port Lands area. It\'s one of Toronto\'s most iconic live event venues.'
+      'a' => '11 Polson St, Toronto, ON M5A 1A4.'
     ],
     [
       'q' => 'Is there parking at the venue?',
-      'a' => 'Parking details will be confirmed closer to the event. We recommend taking public transit or rideshare. The venue is accessible via TTC and within rideshare range of downtown Toronto.'
+      'a' => 'Yes there is plenty of parking owned by the venue; public transit or rideshare also recommended.'
     ],
     [
       'q' => 'Is the venue accessible?',
-      'a' => 'Rebel Entertainment Complex is an accessible venue. If you have specific accessibility requirements, please contact us at ' . $email . ' ahead of the event and we\'ll do our best to accommodate you.'
+      'a' => 'Yes. Contact ' . $email . ' for specific needs.'
     ],
   ],
   'Vendors & Sponsors' => [
     [
-      'q' => 'How do I become a vendor at the fest?',
-      'a' => 'We welcome food, beverage, merchandise, and lifestyle vendors. Submit your application through our Submissions page and our team will review it and be in touch.'
+      'q' => 'How do I become a vendor?',
+      'a' => 'Submit via the Submissions page.'
     ],
     [
       'q' => 'How do I become a sponsor?',
-      'a' => 'We offer Platinum, Gold, Silver, Bronze, and In-Kind sponsorship packages. Visit our Sponsorship page for full details, or email us directly at ' . $email . ' to discuss a custom partnership.'
+      'a' => 'Platinum, Gold, Silver, Bronze, and In-Kind packages available. Email sponsor@afrobassfest.com.'
     ],
   ],
   'Artists & Performers' => [
     [
-      'q' => 'How can I apply to perform at Afrobass Music Fest?',
-      'a' => 'Artists can submit a performance application through our Submissions page. Include links to your music, social media, and a brief bio. We review all submissions and will reach out if there\'s a fit.'
+      'q' => 'How can I apply to perform?',
+      'a' => 'Submit via the Submissions page with music links, socials, and a bio.'
     ],
     [
       'q' => 'I\'m a DJ — can I apply to play?',
-      'a' => 'Absolutely. We welcome DJ set applications. Use the Artist submission form on our Submissions page and select "DJ Set" as your role. Include links to mixes or sets you\'ve performed.'
+      'a' => 'Yes, use the Artist form and select "DJ Set."'
     ],
   ],
   'Press & Media' => [
     [
       'q' => 'How do I apply for press credentials?',
-      'a' => 'Media enquiries and press accreditation requests can be sent to ' . $email . ' with the subject line "Press Enquiry — Afrobass Fest 2026". Please include your publication, outlet, or platform details.'
+      'a' => 'Send media enquiries to ' . $email . ' with the subject line "Press Enquiry — Afrobass Fest 2026". Include your publication or platform details.'
     ],
   ],
 ];
