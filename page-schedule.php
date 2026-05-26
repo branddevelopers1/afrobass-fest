@@ -45,7 +45,7 @@ $days = [
     'color'  => '#FF4500',
     'active' => true,
     'venue'  => 'Rebel Entertainment Complex',
-    'hours'  => '10pm – 3am',
+    'hours'  => '8pm – 3am',
   ],
   'day2' => [
     'query'  => $day2_q,
