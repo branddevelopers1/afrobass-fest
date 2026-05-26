@@ -33,7 +33,7 @@ $faqs = [
   'The Event' => [
     [
       'q' => 'When and where is Afrobass Music Fest?',
-      'a' => 'August 15–16, 2026, Toronto. Day 1: Obi\'s House at Rebel, 11 Polson St (8pm–3am). Day 2: Amapiano Day Party at Noir, 11 Polson St (5pm–11pm).'
+      'a' => 'August 15–16, 2026, Toronto. Day 1: Obi\'s House at Rebel, 11 Polson St (8pm–3am). Day 2: Day Party w/ DBN Gogo at Noir, 11 Polson St (5pm–11pm).'
     ],
     [
       'q' => 'What time do doors open?',

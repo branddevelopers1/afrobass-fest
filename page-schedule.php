@@ -49,7 +49,7 @@ $days = [
   ],
   'day2' => [
     'query'  => $day2_q,
-    'name'   => 'Amapiano Day Party',
+    'name'   => 'Day Party w/ DBN Gogo',
     'label'  => 'Day 2',
     'date'   => 'Sunday, August 16, 2026',
     'span'   => 'Aug 16',
