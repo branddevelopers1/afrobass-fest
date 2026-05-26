@@ -130,7 +130,7 @@ function fest_settings_page() {
 
     if (isset($_POST['fest_settings_nonce']) && wp_verify_nonce($_POST['fest_settings_nonce'], 'fest_save_settings')) {
         $fields = [
-            'fest_hero_video',
+            'fest_hero_video', 'fest_lineup_image',
             'fest_day1_slug', 'fest_ticket_url', 'fest_day1_ga_price', 'fest_day1_vip_price', 'fest_day1_table_price', 'fest_day1_flyer_url',
             'fest_day2_slug', 'fest_day2_ticket_url', 'fest_day2_ga_price', 'fest_day2_vip_price', 'fest_day2_table_price', 'fest_day2_flyer_url',
             'fest_table_ticket_url',
@@ -181,6 +181,11 @@ function fest_settings_page() {
                         <label>Hero Video URL (MP4)</label>
                         <input type="url" name="fest_hero_video" value="<?php echo fv($s,'fest_hero_video'); ?>" placeholder="https://...video.mp4">
                         <div class="desc">Direct URL to the background video file.</div>
+                    </div>
+                    <div class="fest-row">
+                        <label>Lineup Image URL</label>
+                        <input type="url" name="fest_lineup_image" value="<?php echo fv($s,'fest_lineup_image'); ?>" placeholder="https://...lineup.jpg">
+                        <div class="desc">Image shown in the Lineup section on the home page. Upload to Media Library and paste the URL here.</div>
                     </div>
                     <div class="fest-row">
                         <label>Phone</label>
