@@ -38,10 +38,12 @@ $days = [
 ?>
 
 <style>
+.fday-landscape { min-height: unset !important; aspect-ratio: 16/7; }
 @media (max-width: 768px) {
-  .fday-col-grid { grid-template-columns: 1fr !important; }
-  .fday-col-card { min-height: 420px !important; }
-  .fday-header   { padding: 16px 20px !important; }
+  .fday-col-grid  { grid-template-columns: 1fr !important; }
+  .fday-col-card  { min-height: 420px !important; }
+  .fday-landscape { min-height: unset !important; aspect-ratio: 16/9; }
+  .fday-header    { padding: 16px 20px !important; }
 }
 </style>
 
@@ -83,7 +85,7 @@ $days = [
         $tba    = $a ? $a['tba']    : false;
       ?>
 
-      <div class="fest-reveal fday-col-card" onclick="window.open('<?php echo esc_js($day['ticket_url']); ?>','_blank')" style="background:#080808;position:relative;overflow:hidden;min-height:520px;cursor:pointer;">
+      <div class="fest-reveal fday-col-card<?php echo $day_key === 'day2' ? ' fday-landscape' : ''; ?>" onclick="window.open('<?php echo esc_js($day['ticket_url']); ?>','_blank')" style="background:#080808;position:relative;overflow:hidden;min-height:520px;cursor:pointer;">
         <?php if ($a && !$tba && has_post_thumbnail()): ?>
           <?php the_post_thumbnail('fest-artist', ['style'=>'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(10%);', 'alt'=>get_the_title()]); ?>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.97) 0%,rgba(8,8,8,0.3) 55%,transparent 100%);"></div>
