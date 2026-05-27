@@ -87,7 +87,12 @@ $days = [
 
       <div class="fest-reveal fday-col-card<?php echo $day_key === 'day2' ? ' fday-landscape' : ''; ?>" onclick="window.open('<?php echo esc_js($day['ticket_url']); ?>','_blank')" style="background:#080808;position:relative;overflow:hidden;min-height:520px;cursor:pointer;">
         <?php if ($a && !$tba && has_post_thumbnail()): ?>
-          <?php the_post_thumbnail('fest-artist', ['style'=>'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(10%);', 'alt'=>get_the_title()]); ?>
+          <?php
+            $img_style = $day_key === 'day2'
+              ? 'position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:calc(100% / 3);height:100%;object-fit:cover;object-position:center top;filter:grayscale(10%);'
+              : 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(10%);';
+          ?>
+          <?php the_post_thumbnail('fest-artist', ['style' => $img_style, 'alt' => get_the_title()]); ?>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.97) 0%,rgba(8,8,8,0.3) 55%,transparent 100%);"></div>
         <?php else: ?>
           <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center top,rgba(255,255,255,0.02) 0%,transparent 70%);"></div>
