@@ -229,12 +229,14 @@ $sponsors = new WP_Query([
       </div>
 
       <!-- Table CTA -->
+      <?php if ($fp_tk_key !== 'day2'): // remove this condition when Day 2 table link is ready ?>
       <a href="<?php echo esc_url($table_ticket_url); ?>"
          style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border:1px solid rgba(255,255,255,0.06);text-decoration:none;transition:border-color 0.2s;"
          onmouseover="this.style.borderColor='rgba(255,255,255,0.15)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.06)'">
         <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);">Table & Booth Packages</span>
         <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;color:rgba(255,255,255,0.25);">Reserve &rarr;</span>
       </a>
+      <?php endif; ?>
 
     </div>
     <?php endforeach; ?>

@@ -131,10 +131,12 @@ $ticket_days = [
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Dedicated event host</div>
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Best views of the stage</div>
           </div>
+          <?php if ($day_key !== 'day2'): // remove this condition when Day 2 table link is ready ?>
           <a href="<?php echo esc_url($table_ticket_url); ?>"
              class="fest-tier-btn fest-tier-btn-outline" style="display:block;text-align:center;">
             Reserve &rarr;
           </a>
+          <?php endif; ?>
         </div>
 
       </div>
