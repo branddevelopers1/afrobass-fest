@@ -420,6 +420,9 @@ $full_nav = [
 #fest-loader.fest-hide { animation: fLoaderOut 0.7s 0.2s cubic-bezier(0.76,0,0.24,1) forwards; }
 @keyframes fLoaderOut { 0% { clip-path: inset(0 0 0 0); } 100% { clip-path: inset(0 0 100% 0); } }
 
+/* ── NAV HIDDEN ── */
+#fest-nav, #fest-menu { display: none !important; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .fest-primary-nav { display: none; }
