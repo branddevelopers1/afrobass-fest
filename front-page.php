@@ -1,7 +1,3 @@
-<?php
-wp_redirect(home_url('/signup'), 302);
-exit;
-?>
 <?php get_header();
 $ticket_url       = fest_setting('fest_ticket_url')       ?: home_url('/tickets');
 $day2_ticket_url  = fest_setting('fest_day2_ticket_url')  ?: 'https://show.ps/l/0c3f4a74/';
