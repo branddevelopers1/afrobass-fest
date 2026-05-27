@@ -89,14 +89,14 @@ $days = [
         <?php if ($a && !$tba && has_post_thumbnail()): ?>
           <?php
             $img_style = $day_key === 'day2'
-              ? 'position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:calc(100% / 3);height:100%;object-fit:cover;object-position:center top;filter:grayscale(10%);'
+              ? 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;filter:grayscale(10%);'
               : 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(10%);';
           ?>
-          <?php the_post_thumbnail('fest-artist', ['style' => $img_style, 'alt' => get_the_title()]); ?>
+          <?php
+            $thumb_size = $day_key === 'day2' ? 'full' : 'fest-artist';
+          ?>
+          <?php the_post_thumbnail($thumb_size, ['style' => $img_style, 'alt' => get_the_title()]); ?>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.97) 0%,rgba(8,8,8,0.3) 55%,transparent 100%);"></div>
-          <?php if ($day_key === 'day2'): ?>
-          <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(8,8,8,1) 0%,rgba(8,8,8,0.5) 16%,transparent 33%,transparent 67%,rgba(8,8,8,0.5) 84%,rgba(8,8,8,1) 100%);"></div>
-          <?php endif; ?>
         <?php else: ?>
           <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center top,rgba(255,255,255,0.02) 0%,transparent 70%);"></div>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.99) 0%,transparent 60%);"></div>
