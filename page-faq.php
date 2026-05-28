@@ -95,16 +95,25 @@ $faqs = [
 ];
 ?>
 
+<style>
+@media (max-width: 768px) {
+  .faq-layout   { grid-template-columns: 1fr !important; gap: 40px !important; padding: 0 20px 80px !important; }
+  .faq-sidebar  { display: none !important; }
+  .faq-main     { padding-top: 0 !important; }
+  .faq-cta-grid { grid-template-columns: 1fr !important; gap: 24px !important; padding: 32px 20px !important; }
+}
+</style>
+
 <div style="padding-top:96px;">
 
   <!-- Hero -->
   
 
   <!-- FAQ Content -->
-  <section style="padding:0 56px 120px;display:grid;grid-template-columns:280px 1fr;gap:80px;align-items:start;">
+  <section class="faq-layout" style="padding:0 56px 120px;display:grid;grid-template-columns:280px 1fr;gap:80px;align-items:start;">
 
     <!-- Sticky sidebar nav -->
-    <div style="position:sticky;top:100px;" class="fest-reveal">
+    <div class="faq-sidebar" style="position:sticky;top:100px;" class="fest-reveal">
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:20px;">Categories</div>
       <nav style="display:flex;flex-direction:column;gap:2px;" id="faq-nav">
         <?php foreach (array_keys($faqs) as $i => $cat): ?>
