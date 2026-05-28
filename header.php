@@ -29,7 +29,6 @@ $ticket_url  = home_url('/tickets');
 /* Primary nav — desktop */
 $primary_nav = [
   ['Lineup',  '/lineup'],
-  ['Tickets', '/tickets'],
   ['FAQ',     '/faq'],
   ['Join',    '/submissions'],
   ['Contact', '/contact'],
@@ -38,7 +37,6 @@ $primary_nav = [
 /* Full menu */
 $full_nav = [
   ['Lineup',  '/lineup'],
-  ['Tickets', '/tickets'],
   ['FAQ',     '/faq'],
   ['Join',    '/submissions'],
   ['Contact', '/contact'],
