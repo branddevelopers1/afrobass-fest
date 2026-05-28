@@ -138,7 +138,7 @@ $faqs = [
     </div>
 
     <!-- FAQ sections -->
-    <div style="padding-top:0;">
+    <div class="faq-main" style="padding-top:0;">
       <?php foreach ($faqs as $category => $questions): ?>
         <div id="faq-<?php echo esc_attr(sanitize_title($category)); ?>" style="margin-bottom:72px;" class="fest-reveal">
 
@@ -171,7 +171,7 @@ $faqs = [
       <?php endforeach; ?>
 
       <!-- Still have questions -->
-      <div style="background:#0d0d0d;border:1px solid #1a1a1a;padding:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;" class="fest-reveal">
+      <div class="faq-cta-grid" style="background:#0d0d0d;border:1px solid #1a1a1a;padding:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;" class="fest-reveal">
         <div>
           <h3 style="font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;color:#fff;text-transform:uppercase;margin-bottom:8px;">Still Have Questions?</h3>
           <p style="font-size:14px;font-weight:300;color:rgba(255,255,255,0.4);">Our team is available to help. Drop us a message and we'll get back to you.</p>
