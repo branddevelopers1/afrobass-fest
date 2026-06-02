@@ -145,6 +145,7 @@ $sponsors = new WP_Query([
 <!-- ═══════════════════════════════════════════
      3. LINEUP IMAGE
 ════════════════════════════════════════════ -->
+<?php if (false): ?>
 <?php $lineup_image = fest_setting('fest_lineup_image'); ?>
 <?php if ($lineup_image): ?>
 <section class="fest-lineup-img-section" style="position:relative;z-index:2;border-top:1px solid rgba(255,255,255,0.04);">
@@ -168,6 +169,7 @@ $sponsors = new WP_Query([
 .fest-lineup-img-section { padding: 0 56px; }
 @media (max-width: 768px) { .fest-lineup-img-section { padding: 0; } }
 </style>
+<?php endif; ?>
 <?php endif; ?>
 
 <!-- ═══════════════════════════════════════════
