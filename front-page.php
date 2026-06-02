@@ -152,18 +152,6 @@ $sponsors = new WP_Query([
   <a href="<?php echo esc_url(home_url('/lineup')); ?>">
     <img src="<?php echo esc_url($lineup_image); ?>" alt="Afrobass Music Fest 2026 Lineup" style="display:block;width:100%;height:auto;">
   </a>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2px;">
-    <a href="<?php echo esc_url($ticket_url ?: 'https://show.ps/l/581f9fa7/'); ?>"
-       style="display:flex;align-items:center;justify-content:center;gap:12px;padding:22px;background:#FF4500;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff;text-decoration:none;transition:opacity 0.2s;"
-       onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-      Day 1 — Aug 15 &nbsp; Get Tickets &rarr;
-    </a>
-    <a href="<?php echo esc_url($day2_ticket_url ?: 'https://show.ps/l/0c3f4a74/'); ?>"
-       style="display:flex;align-items:center;justify-content:center;gap:12px;padding:22px;background:#fff;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0a0608;text-decoration:none;transition:opacity 0.2s;"
-       onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-      Day 2 — Aug 16 &nbsp; Get Tickets &rarr;
-    </a>
-  </div>
 </section>
 <style>
 .fest-lineup-img-section { padding: 0 56px; }
@@ -171,6 +159,19 @@ $sponsors = new WP_Query([
 </style>
 <?php endif; ?>
 <?php endif; ?>
+
+<div style="position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:2px;">
+  <a href="<?php echo esc_url($ticket_url ?: 'https://show.ps/l/581f9fa7/'); ?>"
+     style="display:flex;align-items:center;justify-content:center;gap:12px;padding:22px;background:#FF4500;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff;text-decoration:none;transition:opacity 0.2s;"
+     onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+    Day 1 — Aug 15 &nbsp; Get Tickets &rarr;
+  </a>
+  <a href="<?php echo esc_url($day2_ticket_url ?: 'https://show.ps/l/0c3f4a74/'); ?>"
+     style="display:flex;align-items:center;justify-content:center;gap:12px;padding:22px;background:#fff;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0a0608;text-decoration:none;transition:opacity 0.2s;"
+     onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+    Day 2 — Aug 16 &nbsp; Get Tickets &rarr;
+  </a>
+</div>
 
 <!-- ═══════════════════════════════════════════
      LINEUP
