@@ -9,7 +9,7 @@ $day1_slug        = fest_setting('fest_day1_slug')        ?: 'afrobass-festival-
 $day2_slug        = fest_setting('fest_day2_slug')        ?: '';
 $day1_ticket_url  = fest_setting('fest_ticket_url')       ?: 'https://show.ps/l/581f9fa7/';
 $day2_ticket_url  = fest_setting('fest_day2_ticket_url')  ?: 'https://show.ps/l/0c3f4a74/';
-$table_ticket_url = fest_setting('fest_table_ticket_url') ?: 'https://buy.tablelist.com/i/ae49e4abdeaa1f8c';
+$table_ticket_url = fest_setting('fest_table_ticket_url') ?: 'https://buy.tablelist.com/e/dc29c65de8a48aa2?at=61c5de745e73f315';
 
 $prices = [
     'day1' => [

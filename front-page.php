@@ -1,7 +1,7 @@
 <?php get_header();
 $ticket_url       = fest_setting('fest_ticket_url')       ?: home_url('/tickets');
 $day2_ticket_url  = fest_setting('fest_day2_ticket_url')  ?: 'https://show.ps/l/0c3f4a74/';
-$table_ticket_url = fest_setting('fest_table_ticket_url') ?: 'https://buy.tablelist.com/i/ae49e4abdeaa1f8c';
+$table_ticket_url = fest_setting('fest_table_ticket_url') ?: 'https://buy.tablelist.com/e/dc29c65de8a48aa2?at=61c5de745e73f315';
 $contact_email    = fest_setting('fest_email')            ?: 'contact@afrobassfest.com';
 
 $day1_slug = fest_setting('fest_day1_slug') ?: 'afrobass-festival-day1';
