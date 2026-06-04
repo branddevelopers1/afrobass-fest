@@ -11,11 +11,11 @@ $faqs = [
   'Tickets & Entry' => [
     [
       'q' => 'When do tickets go on sale?',
-      'a' => 'Tickets go on sale August 27th this Wednesday at 12pm. Announced via email list and social media first; sign up on the homepage for early access.'
+      'a' => 'Tickets are available now. For updates, join the email list and follow Afrobass Fest on social media.'
     ],
     [
       'q' => 'What ticket types are available?',
-      'a' => 'General Admission, VIP Experience, and Table Packages (for 10 guests with bottle service).'
+      'a' => 'General Admission, VIP Experience, and Table Packages for 10 guests with bottle service.'
     ],
     [
       'q' => 'Is there an age requirement?',
