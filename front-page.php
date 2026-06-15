@@ -47,7 +47,7 @@ if ($_aq->have_posts()):
 endif;
 
 $fp_lineup_days = [
-  'day1' => ['label' => 'Day 1', 'name' => "The Cavemen., Victony, Obi's House Toronto+ More!", 'date' => 'Aug 15, 2026', 'color' => '#FF4500', 'ticket_url' => $ticket_url ?: 'https://show.ps/l/581f9fa7/'],
+  'day1' => ['label' => 'Day 1', 'name' => "The Cavemen., Victony, Obi's House Toronto + More!", 'date' => 'Aug 15, 2026', 'color' => '#FF4500', 'ticket_url' => $ticket_url ?: 'https://show.ps/l/581f9fa7/'],
   'day2' => ['label' => 'Day 2', 'name' => 'Day Party w/ DBN Gogo', 'date' => 'Aug 16, 2026', 'color' => '#FF2D8A', 'ticket_url' => $day2_ticket_url ?: 'https://show.ps/l/0c3f4a74/'],
 ];
 

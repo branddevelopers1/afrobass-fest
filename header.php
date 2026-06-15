@@ -30,6 +30,7 @@ $ticket_url  = home_url('/tickets');
 $primary_nav = [
   ['Lineup',  '/lineup'],
   ['FAQ',     '/faq'],
+  ['Sponsors','/sponsors'],
   ['Join',    '/submissions'],
   ['Contact', '/contact'],
 ];
@@ -38,6 +39,7 @@ $primary_nav = [
 $full_nav = [
   ['Lineup',  '/lineup'],
   ['FAQ',     '/faq'],
+  ['Sponsors','/sponsors'],
   ['Join',    '/submissions'],
   ['Contact', '/contact'],
 ];
