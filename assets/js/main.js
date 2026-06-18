@@ -183,10 +183,16 @@
     tabs.forEach(function(tab) {
       tab.addEventListener('click', function() {
         var day = this.getAttribute('data-day');
-        tabs.forEach(function(t) { t.classList.remove('fday-tab--active'); });
+        tabs.forEach(function(t) {
+          t.classList.remove('fday-tab--active');
+          t.setAttribute('aria-selected', 'false');
+        });
         this.classList.add('fday-tab--active');
+        this.setAttribute('aria-selected', 'true');
         section.querySelectorAll('.fday-panel').forEach(function(panel) {
-          panel.classList.toggle('fday-panel--active', panel.getAttribute('data-day') === day);
+          var isActive = panel.getAttribute('data-day') === day;
+          panel.classList.toggle('fday-panel--active', isActive);
+          panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
         });
       });
     });

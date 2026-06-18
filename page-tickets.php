@@ -25,8 +25,8 @@ $prices = [
 ];
 
 $days_meta = [
-  'day1' => ['name' => "Obi's House + The Cavemen. + More!",       'date' => 'Aug 15', 'hours' => '8pm – 3am', 'venue' => 'Rebel Entertainment Complex', 'color' => '#FF4500'],
-  'day2' => ['name' => 'Day Party w/ DBN Gogo', 'date' => 'Aug 16', 'hours' => '5pm – 11pm',  'venue' => 'Noir',                        'color' => '#FF2D8A'],
+  'day1' => ['label' => 'Day 1', 'name' => "Obi's House + The Cavemen. + More!", 'date' => 'Aug 15', 'full_date' => 'Saturday, August 15', 'hours' => '8pm - 3am', 'venue' => 'Rebel Entertainment Complex', 'color' => '#FF4500'],
+  'day2' => ['label' => 'Day 2', 'name' => 'Day Party w/ DBN Gogo',              'date' => 'Aug 16', 'full_date' => 'Sunday, August 16',   'hours' => '5pm - 11pm', 'venue' => 'Noir',                        'color' => '#FF2D8A'],
 ];
 $ticket_days = [
   ['day1', $day1_slug, true],
@@ -34,15 +34,27 @@ $ticket_days = [
 ];
 ?>
 
-<div style="padding-top:96px;">
+<main class="fest-tickets-page">
 
-  <!-- ── TICKET TIERS ── -->
-  <section class="fest-tickets-section">
+  <section class="fest-ticket-hero">
+    <div>
+      <div class="fest-kicker">Tickets</div>
+      <h1>Choose Your Night</h1>
+      <p>Two Afrobass experiences across one weekend in Toronto. Lock in the day, vibe, and access level that fits your crew.</p>
+    </div>
+    <div class="fest-ticket-hero-card fest-reveal">
+      <span>Weekend Dates</span>
+      <strong>Aug 15-16, 2026</strong>
+      <em>Toronto, Canada</em>
+    </div>
+  </section>
 
-    <div class="fday-tabs" style="margin-bottom:40px;">
+  <section class="fest-tickets-section" aria-label="Ticket tiers">
+
+    <div class="fday-tabs fest-ticket-tabs" role="tablist" aria-label="Ticket days">
       <?php foreach ($days_meta as $dk => $dm): ?>
-      <button class="fday-tab<?php echo $dk === 'day1' ? ' fday-tab--active' : ''; ?>" data-day="<?php echo esc_attr($dk); ?>">
-        <?php echo esc_html($dm['name']); ?> <span><?php echo esc_html($dm['date']); ?></span>
+      <button class="fday-tab<?php echo $dk === 'day1' ? ' fday-tab--active' : ''; ?>" data-day="<?php echo esc_attr($dk); ?>" type="button" role="tab" aria-selected="<?php echo $dk === 'day1' ? 'true' : 'false'; ?>">
+        <?php echo esc_html($dm['label']); ?> <span><?php echo esc_html($dm['date']); ?></span>
       </button>
       <?php endforeach; ?>
     </div>
@@ -52,15 +64,18 @@ $ticket_days = [
       $is_day_party = ($day_key === 'day2');
       $day_url = $day_key === 'day1' ? $day1_ticket_url : $day2_ticket_url;
     ?>
-    <div class="fday-panel<?php echo $is_active ? ' fday-panel--active' : ''; ?>" data-day="<?php echo esc_attr($day_key); ?>">
+    <div class="fday-panel<?php echo $is_active ? ' fday-panel--active' : ''; ?>" data-day="<?php echo esc_attr($day_key); ?>" role="tabpanel" aria-hidden="<?php echo $is_active ? 'false' : 'true'; ?>">
 
-      <!-- Day context bar -->
-      <div style="display:flex;align-items:center;gap:24px;padding:16px 0 32px;flex-wrap:wrap;">
-        <div style="display:flex;align-items:center;gap:8px;">
-          <div style="width:7px;height:7px;border-radius:50%;background:<?php echo esc_attr($dm['color']); ?>;flex-shrink:0;"></div>
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:<?php echo esc_attr($dm['color']); ?>;"><?php echo esc_html($dm['name']); ?></span>
+      <div class="fest-ticket-day-card fest-reveal" style="--day-color: <?php echo esc_attr($dm['color']); ?>;">
+        <div>
+          <span class="fest-ticket-day-label"><?php echo esc_html($dm['label']); ?></span>
+          <h2><?php echo esc_html($dm['name']); ?></h2>
         </div>
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25);"><?php echo esc_html($dm['date']); ?> &middot; <?php echo esc_html($dm['hours']); ?> &middot; <?php echo esc_html($dm['venue']); ?>, Toronto</span>
+        <div class="fest-ticket-day-meta">
+          <span><?php echo esc_html($dm['full_date']); ?></span>
+          <span><?php echo esc_html($dm['hours']); ?></span>
+          <span><?php echo esc_html($dm['venue']); ?>, Toronto</span>
+        </div>
       </div>
 
       <div class="fest-tickets-grid">
@@ -71,8 +86,8 @@ $ticket_days = [
           <div class="fest-tier-name">General Admission</div>
           <div class="fest-tier-price">
             <?php if ($day_key === 'day1'): ?>
-            <span style="display:block;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:500;letter-spacing:1px;color:rgba(255,255,255,0.35);margin-bottom:4px;">Starts at</span>
-            <span style="color:#FF4500;"><?php echo esc_html($prices[$day_key]['ga']); ?></span>
+            <span class="fest-tier-price-note">Starts at</span>
+            <strong><?php echo esc_html($prices[$day_key]['ga']); ?></strong>
             <?php else: echo esc_html($prices[$day_key]['ga']); endif; ?>
           </div>
           <div class="fest-tier-desc"><?php echo $is_day_party ? 'Full access to the day party, all performances, and vendor areas.' : 'Full access to the fest grounds, all performances, and vendor areas.'; ?></div>
@@ -84,11 +99,11 @@ $ticket_days = [
           </div>
           <?php if ($day_url): ?>
           <a href="<?php echo esc_url($day_url); ?>"
-             class="fest-tier-btn fest-tier-btn-outline" style="display:block;width:100%;text-align:center;border:1px solid rgba(255,255,255,0.15);background:transparent;">
+             class="fest-tier-btn fest-tier-btn-outline">
             Buy Tickets &rarr;
           </a>
           <?php else: ?>
-          <div class="fest-tier-btn fest-tier-btn-outline" style="display:block;width:100%;text-align:center;opacity:0.4;cursor:default;">Tickets Coming Soon</div>
+          <div class="fest-tier-btn fest-tier-btn-outline fest-tier-btn-disabled">Tickets Coming Soon</div>
           <?php endif; ?>
         </div>
 
@@ -98,8 +113,8 @@ $ticket_days = [
           <div class="fest-tier-name">VIP Experience</div>
           <div class="fest-tier-price">
             <?php if ($day_key === 'day1'): ?>
-            <span style="display:block;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:500;letter-spacing:1px;color:rgba(255,255,255,0.35);margin-bottom:4px;">Starts at</span>
-            <span style="color:#FF2D8A;"><?php echo esc_html($prices[$day_key]['vip']); ?></span>
+            <span class="fest-tier-price-note">Starts at</span>
+            <strong><?php echo esc_html($prices[$day_key]['vip']); ?></strong>
             <?php else: echo esc_html($prices[$day_key]['vip']); endif; ?>
           </div>
           <div class="fest-tier-desc">Premium access with exclusive areas, dedicated bar, and priority entry.</div>
@@ -111,11 +126,11 @@ $ticket_days = [
           </div>
           <?php if ($day_url): ?>
           <a href="<?php echo esc_url($day_url); ?>"
-             class="fest-tier-btn fest-tier-btn-fill" style="display:block;width:100%;text-align:center;">
+             class="fest-tier-btn fest-tier-btn-fill">
             Buy Tickets &rarr;
           </a>
           <?php else: ?>
-          <div class="fest-tier-btn fest-tier-btn-fill" style="display:block;width:100%;text-align:center;opacity:0.5;cursor:default;">Tickets Coming Soon</div>
+          <div class="fest-tier-btn fest-tier-btn-fill fest-tier-btn-disabled">Tickets Coming Soon</div>
           <?php endif; ?>
         </div>
 
@@ -133,9 +148,11 @@ $ticket_days = [
           </div>
           <?php if ($day_key !== 'day2'): // remove this condition when Day 2 table link is ready ?>
           <a href="<?php echo esc_url($table_ticket_url); ?>"
-             class="fest-tier-btn fest-tier-btn-outline" style="display:block;text-align:center;">
+             class="fest-tier-btn fest-tier-btn-outline">
             Reserve &rarr;
           </a>
+          <?php else: ?>
+          <div class="fest-tier-btn fest-tier-btn-outline fest-tier-btn-disabled">Tables Coming Soon</div>
           <?php endif; ?>
         </div>
 
@@ -145,39 +162,35 @@ $ticket_days = [
 
   </section>
 
-  <!-- ── EVENT INFO STRIP ── -->
-  <div style="border-top:1px solid rgba(255,255,255,0.04);display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,0.04);margin-top:80px;" class="fest-reveal">
+  <section class="fest-ticket-info-strip fest-reveal" aria-label="Event information">
     <?php foreach([
-      ['Dates',      'Aug 15–16, 2026'],
+      ['Dates',      'Aug 15-16, 2026'],
       ['Day 1 Venue', 'Rebel Entertainment Complex'],
-      ['Day 2 Venue', 'Noir — 11 Polson St, Toronto'],
+      ['Day 2 Venue', 'Noir - 11 Polson St, Toronto'],
       ['Age',         '19+ Valid ID Required'],
     ] as $d): ?>
-      <div style="background:#080808;padding:28px 32px;">
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:8px;"><?php echo esc_html($d[0]); ?></div>
-        <div style="font-size:13px;color:rgba(255,255,255,0.65);"><?php echo esc_html($d[1]); ?></div>
+      <div>
+        <span><?php echo esc_html($d[0]); ?></span>
+        <strong><?php echo esc_html($d[1]); ?></strong>
       </div>
     <?php endforeach; ?>
-  </div>
+  </section>
 
-  <!-- ── FAQ CTA ── -->
-  <div style="padding:80px 56px;border-top:1px solid rgba(255,255,255,0.04);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;" class="fest-reveal">
+  <section class="fest-ticket-help fest-reveal">
     <div>
       <div class="fest-kicker">Need Help?</div>
-      <h2 style="font-family:'Unbounded',sans-serif;font-size:clamp(28px,3vw,44px);font-weight:900;letter-spacing:-1px;color:#fff;text-transform:uppercase;margin-top:12px;margin-bottom:16px;">Ticket FAQs</h2>
-      <p style="font-size:14px;font-weight:300;color:rgba(255,255,255,0.4);line-height:1.8;">Questions about refunds, transfers, age requirements, or what's included? We have answers.</p>
+      <h2>Ticket FAQs</h2>
+      <p>Questions about refunds, transfers, age requirements, or what's included? We have answers.</p>
     </div>
-    <div style="display:flex;gap:16px;flex-wrap:wrap;">
-      <a href="<?php echo esc_url(home_url('/faq')); ?>" class="fest-btn-primary" style="display:inline-block;">Read the FAQ &rarr;</a>
+    <div class="fest-ticket-help-actions">
+      <a href="<?php echo esc_url(home_url('/faq')); ?>" class="fest-btn-primary">Read the FAQ &rarr;</a>
       <a href="mailto:<?php echo esc_attr($contact_email); ?>"
-         style="display:inline-flex;align-items:center;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);text-decoration:none;padding:17px 32px;border:1px solid rgba(255,255,255,0.08);border-radius:2px;transition:color 0.2s,border-color 0.2s;"
-         onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,0.2)'"
-         onmouseout="this.style.color='rgba(255,255,255,0.35)';this.style.borderColor='rgba(255,255,255,0.08)'">
+         class="fest-ticket-contact">
         Contact Us
       </a>
     </div>
-  </div>
+  </section>
 
-</div>
+</main>
 
 <?php get_footer(); ?>
