@@ -518,7 +518,7 @@ input, textarea, select { font-family: var(--font-body); }
   color: var(--white);
 }
 .fest-tickets-section { padding: 72px 56px 96px; }
-.fest-ticket-tabs { margin-bottom: 40px; }
+.fest-ticket-day-section + .fest-ticket-day-section { margin-top: 72px; }
 .fest-tickets-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 2px; background: var(--dark3); margin-top: 28px;
@@ -922,15 +922,7 @@ input, textarea, select { font-family: var(--font-body); }
   .fest-ticket-hero-card { width: 100%; padding: 22px; }
   .fest-ticket-hero-card strong { font-size: 36px; }
   .fest-tickets-section { padding: 120px 24px 80px; }
-  .fest-ticket-tabs {
-    overflow-x: auto;
-    padding-bottom: 1px;
-  }
-  .fday-tab {
-    flex: 0 0 auto;
-    padding: 14px 20px;
-    white-space: nowrap;
-  }
+  .fest-ticket-day-section + .fest-ticket-day-section { margin-top: 56px; }
   .fest-ticket-day-card { padding: 24px; }
   .fest-ticket-day-card h2 { font-size: clamp(36px, 13vw, 56px); }
   .fest-ticket-day-meta span { width: 100%; }

@@ -38,6 +38,7 @@ $primary_nav = [
 
 /* Full menu */
 $full_nav = [
+  ['Tickets', '/tickets'],
   ['Lineup',  '/lineup'],
   ['FAQ',     '/faq'],
   ['Sponsors','/sponsors'],

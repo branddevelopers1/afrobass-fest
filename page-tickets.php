@@ -5,8 +5,6 @@
  */
 get_header();
 $contact_email    = fest_setting('fest_email')            ?: 'contact@afrobassfest.com';
-$day1_slug        = fest_setting('fest_day1_slug')        ?: 'afrobass-festival-day1';
-$day2_slug        = fest_setting('fest_day2_slug')        ?: '';
 $day1_ticket_url  = fest_setting('fest_ticket_url')       ?: 'https://show.ps/l/581f9fa7/';
 $day2_ticket_url  = fest_setting('fest_day2_ticket_url')  ?: 'https://show.ps/l/0c3f4a74/';
 $table_ticket_url = fest_setting('fest_table_ticket_url') ?: 'https://buy.tablelist.com/e/dc29c65de8a48aa2?at=61c5de745e73f315';
@@ -29,8 +27,8 @@ $days_meta = [
   'day2' => ['label' => 'Day 2', 'name' => 'Day Party w/ DBN Gogo',              'date' => 'Aug 16', 'full_date' => 'Sunday, August 16',   'hours' => '5pm - 11pm', 'venue' => 'Noir',                        'color' => '#FF2D8A'],
 ];
 $ticket_days = [
-  ['day1', $day1_slug, true],
-  ['day2', $day2_slug, false],
+  'day1',
+  'day2',
 ];
 ?>
 
@@ -51,20 +49,12 @@ $ticket_days = [
 
   <section class="fest-tickets-section" aria-label="Ticket tiers">
 
-    <div class="fday-tabs fest-ticket-tabs" role="tablist" aria-label="Ticket days">
-      <?php foreach ($days_meta as $dk => $dm): ?>
-      <button class="fday-tab<?php echo $dk === 'day1' ? ' fday-tab--active' : ''; ?>" data-day="<?php echo esc_attr($dk); ?>" type="button" role="tab" aria-selected="<?php echo $dk === 'day1' ? 'true' : 'false'; ?>">
-        <?php echo esc_html($dm['label']); ?> <span><?php echo esc_html($dm['date']); ?></span>
-      </button>
-      <?php endforeach; ?>
-    </div>
-
-    <?php foreach ($ticket_days as [$day_key, $slug, $is_active]):
+    <?php foreach ($ticket_days as $day_key):
       $dm      = $days_meta[$day_key];
       $is_day_party = ($day_key === 'day2');
       $day_url = $day_key === 'day1' ? $day1_ticket_url : $day2_ticket_url;
     ?>
-    <div class="fday-panel<?php echo $is_active ? ' fday-panel--active' : ''; ?>" data-day="<?php echo esc_attr($day_key); ?>" role="tabpanel" aria-hidden="<?php echo $is_active ? 'false' : 'true'; ?>">
+    <div class="fest-ticket-day-section" data-day="<?php echo esc_attr($day_key); ?>">
 
       <div class="fest-ticket-day-card fest-reveal" style="--day-color: <?php echo esc_attr($dm['color']); ?>;">
         <div>
