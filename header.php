@@ -29,6 +29,7 @@ $ticket_url  = home_url('/tickets');
 
 /* Primary nav — desktop */
 $primary_nav = [
+  ['Tickets', '/tickets'],
   ['Lineup',  '/lineup'],
   ['FAQ',     '/faq'],
   ['Sponsors','/sponsors'],
@@ -293,13 +294,13 @@ $full_nav = [
 }
 .fest-menu-link {
   font-family: 'Unbounded', sans-serif;
-  font-size: clamp(32px, 6vw, 72px);
+  font-size: clamp(28px, 4.6vw, 54px);
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: -1px;
+  letter-spacing: 0;
   color: rgba(255,255,255,0.2);
   text-decoration: none;
-  padding: 12px 0;
+  padding: 9px 0;
   border-bottom: 1px solid rgba(255,255,255,0.05);
   display: flex;
   align-items: baseline;
