@@ -16,9 +16,9 @@ add_action('after_setup_theme', 'fest_setup');
 
 /* ─── ENQUEUE ─── */
 function fest_enqueue() {
-    wp_enqueue_style('fest-main', get_template_directory_uri() . '/assets/css/main.css', [], '3.2.1');
-    wp_enqueue_style('fest-style', get_stylesheet_uri(), ['fest-main'], '3.2.1');
-    wp_enqueue_script('fest-main', get_template_directory_uri() . '/assets/js/main.js', [], '3.2.1', true);
+    wp_enqueue_style('fest-main', get_template_directory_uri() . '/assets/css/main.css', [], '3.2.2');
+    wp_enqueue_style('fest-style', get_stylesheet_uri(), ['fest-main'], '3.2.2');
+    wp_enqueue_script('fest-main', get_template_directory_uri() . '/assets/js/main.js', [], '3.2.2', true);
     wp_localize_script('fest-main', 'festAjax', [
         'ajaxurl' => admin_url('admin-ajax.php'),
         'nonce'   => wp_create_nonce('fest_nonce'),
@@ -131,7 +131,7 @@ function fest_settings_page() {
     if (isset($_POST['fest_settings_nonce']) && wp_verify_nonce($_POST['fest_settings_nonce'], 'fest_save_settings')) {
         $fields = [
             'fest_hero_video', 'fest_lineup_image',
-            'fest_music_url', 'fest_music_title', 'fest_music_artist',
+            'fest_music_url', 'fest_music_title', 'fest_music_artist', 'fest_music_playlist',
             'fest_day1_slug', 'fest_ticket_url', 'fest_day1_ga_price', 'fest_day1_vip_price', 'fest_day1_table_price', 'fest_day1_flyer_url',
             'fest_day2_slug', 'fest_day2_ticket_url', 'fest_day2_ga_price', 'fest_day2_vip_price', 'fest_day2_table_price', 'fest_day2_flyer_url',
             'fest_table_ticket_url',
@@ -141,6 +141,9 @@ function fest_settings_page() {
         $saved = [];
         foreach ($fields as $f) {
             $saved[$f] = isset($_POST[$f]) ? sanitize_text_field(wp_unslash($_POST[$f])) : '';
+        }
+        if (isset($_POST['fest_music_playlist'])) {
+            $saved['fest_music_playlist'] = sanitize_textarea_field(wp_unslash($_POST['fest_music_playlist']));
         }
         // email field gets email sanitization
         if (!empty($saved['fest_email'])) {
@@ -167,7 +170,9 @@ function fest_settings_page() {
             .fest-row label { display:block; font-size:12px; font-weight:600; color:#50575e; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.5px; }
             .fest-row input[type=text],
             .fest-row input[type=url],
-            .fest-row input[type=email] { width:100%; padding:8px 10px; border:1px solid #ddd; border-radius:4px; font-size:13px; }
+            .fest-row input[type=email],
+            .fest-row textarea { width:100%; padding:8px 10px; border:1px solid #ddd; border-radius:4px; font-size:13px; }
+            .fest-row textarea { min-height:110px; font-family:monospace; resize:vertical; }
             .fest-row .desc { font-size:11px; color:#999; margin-top:3px; }
             .fest-divider { border:none; border-top:1px solid #eee; margin:14px 0; }
         </style>
@@ -200,6 +205,11 @@ function fest_settings_page() {
                     <div class="fest-row">
                         <label>Music Player Artist / Label</label>
                         <input type="text" name="fest_music_artist" value="<?php echo fv($s,'fest_music_artist'); ?>" placeholder="Afrobeats · Amapiano · Toronto">
+                    </div>
+                    <div class="fest-row full">
+                        <label>Music Player Playlist</label>
+                        <textarea name="fest_music_playlist" placeholder="Song Title | Artist Name | https://...track.mp3"><?php echo esc_textarea($s['fest_music_playlist'] ?? ''); ?></textarea>
+                        <div class="desc">Optional. One track per line: Song Title | Artist Name | Direct MP3/audio URL. If this has tracks, it overrides the single audio URL above.</div>
                     </div>
                     <div class="fest-row">
                         <label>Phone</label>

@@ -181,8 +181,20 @@
     var audio = player.querySelector('[data-music-audio]');
     var toggle = player.querySelector('[data-music-toggle]');
     var mute = player.querySelector('[data-music-mute]');
+    var prev = player.querySelector('[data-music-prev]');
+    var next = player.querySelector('[data-music-next]');
     var progress = player.querySelector('[data-music-progress]');
+    var title = player.querySelector('[data-music-title]');
+    var artist = player.querySelector('[data-music-artist]');
+    var tracks = [];
+    var trackIndex = 0;
     if (!audio || !toggle) return;
+
+    try {
+      tracks = JSON.parse(player.getAttribute('data-music-tracks') || '[]');
+    } catch (err) {
+      tracks = [];
+    }
 
     function setPlaying(isPlaying) {
       player.classList.toggle('is-playing', isPlaying);
@@ -190,18 +202,55 @@
       toggle.setAttribute('aria-label', isPlaying ? 'Pause music' : 'Play music');
     }
 
-    toggle.addEventListener('click', function(){
-      if (audio.paused) {
-        audio.play().then(function(){
+    function playAudio() {
+      var playResult = audio.play();
+      if (playResult && typeof playResult.then === 'function') {
+        playResult.then(function(){
           setPlaying(true);
         }).catch(function(){
           setPlaying(false);
         });
       } else {
+        setPlaying(true);
+      }
+    }
+
+    function loadTrack(index, shouldPlay) {
+      if (!tracks.length) return;
+      trackIndex = (index + tracks.length) % tracks.length;
+      var track = tracks[trackIndex];
+
+      player.classList.remove('has-error');
+      audio.src = track.url;
+      audio.load();
+      if (title) title.textContent = track.title || 'Afrobass Radio';
+      if (artist) artist.textContent = track.artist || 'Afrobeats · Amapiano · Toronto';
+      if (progress) progress.style.width = '0%';
+
+      if (shouldPlay) playAudio();
+      else setPlaying(false);
+    }
+
+    toggle.addEventListener('click', function(){
+      if (audio.paused) {
+        playAudio();
+      } else {
         audio.pause();
         setPlaying(false);
       }
     });
+
+    if (prev) {
+      prev.addEventListener('click', function(){
+        loadTrack(trackIndex - 1, !audio.paused);
+      });
+    }
+
+    if (next) {
+      next.addEventListener('click', function(){
+        loadTrack(trackIndex + 1, !audio.paused);
+      });
+    }
 
     if (mute) {
       mute.addEventListener('click', function(){
@@ -218,8 +267,12 @@
       progress.style.width = Math.min((audio.currentTime / audio.duration) * 100, 100) + '%';
     });
     audio.addEventListener('ended', function(){
-      setPlaying(false);
-      if (progress) progress.style.width = '0%';
+      if (tracks.length > 1) {
+        loadTrack(trackIndex + 1, true);
+      } else {
+        setPlaying(false);
+        if (progress) progress.style.width = '0%';
+      }
     });
     audio.addEventListener('error', function(){
       player.classList.add('has-error');

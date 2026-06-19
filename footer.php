@@ -29,25 +29,59 @@
 </div>
 
 <?php
-$fest_music_url    = fest_setting('fest_music_url');
-$fest_music_title  = fest_setting('fest_music_title') ?: 'Afrobass Radio';
-$fest_music_artist = fest_setting('fest_music_artist') ?: 'Afrobeats · Amapiano · Toronto';
+$fest_music_playlist_raw = fest_setting('fest_music_playlist');
+$fest_music_tracks       = [];
+
+if ($fest_music_playlist_raw) {
+  foreach (preg_split('/\r\n|\r|\n/', $fest_music_playlist_raw) as $line) {
+    $line = trim($line);
+    if (!$line) continue;
+
+    $parts = array_map('trim', explode('|', $line, 3));
+    if (count($parts) < 3 || !$parts[2]) continue;
+
+    $track_url = esc_url_raw($parts[2]);
+    if (!$track_url) continue;
+
+    $fest_music_tracks[] = [
+      'title'  => $parts[0] ?: 'Afrobass Radio',
+      'artist' => $parts[1] ?: 'Afrobeats · Amapiano · Toronto',
+      'url'    => $track_url,
+    ];
+  }
+}
+
+if (!$fest_music_tracks && fest_setting('fest_music_url')) {
+  $fest_music_tracks[] = [
+    'title'  => fest_setting('fest_music_title') ?: 'Afrobass Radio',
+    'artist' => fest_setting('fest_music_artist') ?: 'Afrobeats · Amapiano · Toronto',
+    'url'    => esc_url_raw(fest_setting('fest_music_url')),
+  ];
+}
+
+$fest_music_first = $fest_music_tracks[0] ?? null;
 ?>
-<?php if ($fest_music_url): ?>
-<div class="fest-music-player" data-music-player>
-  <audio data-music-audio preload="metadata" src="<?php echo esc_url($fest_music_url); ?>"></audio>
+<?php if ($fest_music_first): ?>
+<div class="fest-music-player" data-music-player data-music-tracks="<?php echo esc_attr(wp_json_encode($fest_music_tracks)); ?>">
+  <audio data-music-audio preload="metadata" src="<?php echo esc_url($fest_music_first['url']); ?>"></audio>
   <button class="fest-music-toggle" type="button" data-music-toggle aria-label="Play music" aria-pressed="false">
     <span class="fest-music-play-icon" aria-hidden="true"></span>
   </button>
   <div class="fest-music-meta">
     <div class="fest-music-kicker">Now Playing</div>
-    <div class="fest-music-title"><?php echo esc_html($fest_music_title); ?></div>
-    <div class="fest-music-artist"><?php echo esc_html($fest_music_artist); ?></div>
+    <div class="fest-music-title" data-music-title><?php echo esc_html($fest_music_first['title']); ?></div>
+    <div class="fest-music-artist" data-music-artist><?php echo esc_html($fest_music_first['artist']); ?></div>
+  </div>
+  <div class="fest-music-controls">
+    <?php if (count($fest_music_tracks) > 1): ?>
+    <button class="fest-music-skip-btn" type="button" data-music-prev aria-label="Previous track">Prev</button>
+    <button class="fest-music-skip-btn" type="button" data-music-next aria-label="Next track">Next</button>
+    <?php endif; ?>
+    <button class="fest-music-mute" type="button" data-music-mute aria-label="Mute music" aria-pressed="false">Vol</button>
   </div>
   <div class="fest-music-progress" aria-hidden="true">
     <span data-music-progress></span>
   </div>
-  <button class="fest-music-mute" type="button" data-music-mute aria-label="Mute music" aria-pressed="false">Vol</button>
 </div>
 <?php endif; ?>
 
