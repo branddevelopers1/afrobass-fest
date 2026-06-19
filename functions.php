@@ -373,6 +373,7 @@ function fest_route_templates($template) {
         $map  = [
             'lineup'      => 'page-lineup.php',
             'tickets'     => 'page-tickets.php',
+            'vendors'     => 'page-vendors.php',
             'sponsors'    => 'page-sponsors.php',
             'about'       => 'page-about.php',
             'the-festival'=> 'page-about.php',
@@ -398,6 +399,7 @@ function fest_route_templates($template) {
     $url_map = [
         'lineup'      => 'page-lineup.php',
         'tickets'     => 'page-tickets.php',
+        'vendors'     => 'page-vendors.php',
         'sponsors'    => 'page-sponsors.php',
         'about'       => 'page-about.php',
         'schedule'    => 'page-schedule.php',
@@ -602,6 +604,10 @@ function fest_seo_meta() {
     } elseif (is_page('tickets')) {
         $title       = 'Tickets — Afrobass Music Fest Toronto 2026';
         $description = 'Get your tickets for Afrobass Music Fest. General Admission, VIP, and Table packages available for both days. Toronto, August 15–16, 2026.';
+        $url         = get_permalink();
+    } elseif (is_page('vendors')) {
+        $title       = 'Vendor Applications — Afrobass Music Fest Toronto 2026';
+        $description = 'Apply to vend at Afrobass Music Fest Toronto 2026. Food, beverage, merchandise, lifestyle, cultural, and community vendors are welcome.';
         $url         = get_permalink();
     } elseif (is_page('sponsors')) {
         $title       = 'Sponsorship — Afrobass Music Fest Toronto 2026';

@@ -367,6 +367,136 @@ $sponsors = new WP_Query([
 </style>
 
 <!-- ═══════════════════════════════════════════
+     APPLY CTA
+════════════════════════════════════════════ -->
+<section class="fp-apply-section" id="apply">
+  <div class="fp-apply-head fest-reveal">
+    <div>
+      <div class="fest-kicker">Be Part of Afrobass</div>
+      <h2>Apply to Join<br><em>the Festival</em></h2>
+    </div>
+    <p>Perform on stage, volunteer with the crew, work with the team, or bring your food, merch, lifestyle, or cultural brand to the fest.</p>
+  </div>
+
+  <div class="fp-apply-grid">
+    <?php foreach ([
+      ['Perform',   'Artists and DJs ready for the Afrobass stage.',                    home_url('/apply'),    '#FF2D8A', 'Artist Application'],
+      ['Volunteer', 'Help build the experience from the inside and earn fest access.',  home_url('/apply'),    '#a855f7', 'Volunteer Application'],
+      ['Vendors',   'Food, merch, lifestyle, beauty, cultural, and community vendors.', home_url('/vendors'),  '#FF6B1A', 'Vendor Application'],
+      ['Work',      'Want to be part of the team behind the festival?',                 'mailto:' . $contact_email . '?subject=Afrobass%20Team%20Application', '#00c2ff', 'Contact the Team'],
+    ] as $i => $item): ?>
+      <a href="<?php echo esc_url($item[2]); ?>" class="fp-apply-card fest-reveal" style="--apply-color: <?php echo esc_attr($item[3]); ?>;">
+        <span><?php echo str_pad($i + 1, 2, '0', STR_PAD_LEFT); ?></span>
+        <h3><?php echo esc_html($item[0]); ?></h3>
+        <p><?php echo esc_html($item[1]); ?></p>
+        <strong><?php echo esc_html($item[4]); ?> &rarr;</strong>
+      </a>
+    <?php endforeach; ?>
+  </div>
+</section>
+
+<style>
+.fp-apply-section {
+  position: relative;
+  z-index: 2;
+  padding: 100px 56px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.fp-apply-head {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 420px);
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 48px;
+}
+.fp-apply-head h2 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(36px,5vw,64px);
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 0.95;
+  margin-top: 12px;
+}
+.fp-apply-head h2 em {
+  color: #FF2D8A;
+  font-style: italic;
+}
+.fp-apply-head p {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.8;
+}
+.fp-apply-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: rgba(255,255,255,0.05);
+}
+.fp-apply-card {
+  --apply-color: #FF2D8A;
+  min-height: 300px;
+  background: #080808;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  text-decoration: none;
+  border-top: 2px solid var(--apply-color);
+  transition: background 0.2s, transform 0.2s;
+}
+.fp-apply-card:hover {
+  background: #0d0d0d;
+  transform: translateY(-2px);
+}
+.fp-apply-card span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--apply-color);
+  margin-bottom: 28px;
+}
+.fp-apply-card h3 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(24px,2.8vw,36px);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.95;
+  margin-bottom: 16px;
+}
+.fp-apply-card p {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.42);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+.fp-apply-card strong {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--apply-color);
+}
+@media (max-width: 1024px) {
+  .fp-apply-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .fp-apply-section { padding: 72px 24px; }
+  .fp-apply-head { grid-template-columns: 1fr; gap: 20px; }
+  .fp-apply-grid { grid-template-columns: 1fr; }
+  .fp-apply-card { min-height: 240px; }
+}
+</style>
+
+<!-- ═══════════════════════════════════════════
      COUNTDOWN
 ════════════════════════════════════════════ -->
 <div class="fcount-section" style="position:relative;z-index:2;">

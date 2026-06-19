@@ -33,7 +33,7 @@ $primary_nav = [
   ['Lineup',  '/lineup'],
   ['FAQ',     '/faq'],
   ['Sponsors','/sponsors'],
-  ['Join',    '/submissions'],
+  ['Apply',   '/submissions'],
   ['Contact', '/contact'],
 ];
 
@@ -43,7 +43,7 @@ $full_nav = [
   ['Lineup',  '/lineup'],
   ['FAQ',     '/faq'],
   ['Sponsors','/sponsors'],
-  ['Join',    '/submissions'],
+  ['Apply',   '/submissions'],
   ['Contact', '/contact'],
 ];
 ?>
