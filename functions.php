@@ -16,9 +16,9 @@ add_action('after_setup_theme', 'fest_setup');
 
 /* ─── ENQUEUE ─── */
 function fest_enqueue() {
-    wp_enqueue_style('fest-main', get_template_directory_uri() . '/assets/css/main.css', [], '3.2.0');
-    wp_enqueue_style('fest-style', get_stylesheet_uri(), ['fest-main'], '3.2.0');
-    wp_enqueue_script('fest-main', get_template_directory_uri() . '/assets/js/main.js', [], '3.2.0', true);
+    wp_enqueue_style('fest-main', get_template_directory_uri() . '/assets/css/main.css', [], '3.2.1');
+    wp_enqueue_style('fest-style', get_stylesheet_uri(), ['fest-main'], '3.2.1');
+    wp_enqueue_script('fest-main', get_template_directory_uri() . '/assets/js/main.js', [], '3.2.1', true);
     wp_localize_script('fest-main', 'festAjax', [
         'ajaxurl' => admin_url('admin-ajax.php'),
         'nonce'   => wp_create_nonce('fest_nonce'),
@@ -131,6 +131,7 @@ function fest_settings_page() {
     if (isset($_POST['fest_settings_nonce']) && wp_verify_nonce($_POST['fest_settings_nonce'], 'fest_save_settings')) {
         $fields = [
             'fest_hero_video', 'fest_lineup_image',
+            'fest_music_url', 'fest_music_title', 'fest_music_artist',
             'fest_day1_slug', 'fest_ticket_url', 'fest_day1_ga_price', 'fest_day1_vip_price', 'fest_day1_table_price', 'fest_day1_flyer_url',
             'fest_day2_slug', 'fest_day2_ticket_url', 'fest_day2_ga_price', 'fest_day2_vip_price', 'fest_day2_table_price', 'fest_day2_flyer_url',
             'fest_table_ticket_url',
@@ -186,6 +187,19 @@ function fest_settings_page() {
                         <label>Lineup Image URL</label>
                         <input type="url" name="fest_lineup_image" value="<?php echo fv($s,'fest_lineup_image'); ?>" placeholder="https://...lineup.jpg">
                         <div class="desc">Image shown in the Lineup section on the home page. Upload to Media Library and paste the URL here.</div>
+                    </div>
+                    <div class="fest-row">
+                        <label>Music Player Audio URL</label>
+                        <input type="url" name="fest_music_url" value="<?php echo fv($s,'fest_music_url'); ?>" placeholder="https://...track.mp3">
+                        <div class="desc">Direct MP3/audio URL. Leave blank to hide the sitewide music player.</div>
+                    </div>
+                    <div class="fest-row">
+                        <label>Music Player Track Title</label>
+                        <input type="text" name="fest_music_title" value="<?php echo fv($s,'fest_music_title'); ?>" placeholder="Afrobass Radio">
+                    </div>
+                    <div class="fest-row">
+                        <label>Music Player Artist / Label</label>
+                        <input type="text" name="fest_music_artist" value="<?php echo fv($s,'fest_music_artist'); ?>" placeholder="Afrobeats · Amapiano · Toronto">
                     </div>
                     <div class="fest-row">
                         <label>Phone</label>

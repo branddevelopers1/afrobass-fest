@@ -28,6 +28,29 @@
   </div>
 </div>
 
+<?php
+$fest_music_url    = fest_setting('fest_music_url');
+$fest_music_title  = fest_setting('fest_music_title') ?: 'Afrobass Radio';
+$fest_music_artist = fest_setting('fest_music_artist') ?: 'Afrobeats · Amapiano · Toronto';
+?>
+<?php if ($fest_music_url): ?>
+<div class="fest-music-player" data-music-player>
+  <audio data-music-audio preload="metadata" src="<?php echo esc_url($fest_music_url); ?>"></audio>
+  <button class="fest-music-toggle" type="button" data-music-toggle aria-label="Play music" aria-pressed="false">
+    <span class="fest-music-play-icon" aria-hidden="true"></span>
+  </button>
+  <div class="fest-music-meta">
+    <div class="fest-music-kicker">Now Playing</div>
+    <div class="fest-music-title"><?php echo esc_html($fest_music_title); ?></div>
+    <div class="fest-music-artist"><?php echo esc_html($fest_music_artist); ?></div>
+  </div>
+  <div class="fest-music-progress" aria-hidden="true">
+    <span data-music-progress></span>
+  </div>
+  <button class="fest-music-mute" type="button" data-music-mute aria-label="Mute music" aria-pressed="false">Vol</button>
+</div>
+<?php endif; ?>
+
 <?php wp_footer(); ?>
 </body>
 </html>
