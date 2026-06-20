@@ -188,6 +188,8 @@
     var artist = player.querySelector('[data-music-artist]');
     var tracks = [];
     var trackIndex = 0;
+    var wantsAutoplay = player.getAttribute('data-music-autoplay') === 'true';
+    var autoplayArmed = false;
     if (!audio || !toggle) return;
 
     try {
@@ -213,6 +215,22 @@
       } else {
         setPlaying(true);
       }
+    }
+
+    function armInteractionAutoplay() {
+      if (autoplayArmed) return;
+      autoplayArmed = true;
+
+      function startAfterInteraction() {
+        document.removeEventListener('click', startAfterInteraction);
+        document.removeEventListener('touchstart', startAfterInteraction);
+        document.removeEventListener('keydown', startAfterInteraction);
+        playAudio();
+      }
+
+      document.addEventListener('click', startAfterInteraction, { once: true });
+      document.addEventListener('touchstart', startAfterInteraction, { once: true, passive: true });
+      document.addEventListener('keydown', startAfterInteraction, { once: true });
     }
 
     function loadTrack(index, shouldPlay) {
@@ -278,6 +296,20 @@
       player.classList.add('has-error');
       setPlaying(false);
     });
+
+    if (wantsAutoplay) {
+      var autoplayResult = audio.play();
+      if (autoplayResult && typeof autoplayResult.then === 'function') {
+        autoplayResult.then(function(){
+          setPlaying(true);
+        }).catch(function(){
+          setPlaying(false);
+          armInteractionAutoplay();
+        });
+      } else {
+        setPlaying(true);
+      }
+    }
   });
 
   /* ── DAY TABS ── */

@@ -874,7 +874,7 @@ input, textarea, select { font-family: var(--font-body); }
 /* ─── MUSIC PLAYER ─── */
 .fest-music-player {
   position: fixed;
-  left: 24px;
+  right: 24px;
   bottom: 24px;
   z-index: 1200;
   width: min(460px, calc(100vw - 48px));

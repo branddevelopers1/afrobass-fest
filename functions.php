@@ -16,9 +16,9 @@ add_action('after_setup_theme', 'fest_setup');
 
 /* ─── ENQUEUE ─── */
 function fest_enqueue() {
-    wp_enqueue_style('fest-main', get_template_directory_uri() . '/assets/css/main.css', [], '3.2.2');
-    wp_enqueue_style('fest-style', get_stylesheet_uri(), ['fest-main'], '3.2.2');
-    wp_enqueue_script('fest-main', get_template_directory_uri() . '/assets/js/main.js', [], '3.2.2', true);
+    wp_enqueue_style('fest-main', get_template_directory_uri() . '/assets/css/main.css', [], '3.2.3');
+    wp_enqueue_style('fest-style', get_stylesheet_uri(), ['fest-main'], '3.2.3');
+    wp_enqueue_script('fest-main', get_template_directory_uri() . '/assets/js/main.js', [], '3.2.3', true);
     wp_localize_script('fest-main', 'festAjax', [
         'ajaxurl' => admin_url('admin-ajax.php'),
         'nonce'   => wp_create_nonce('fest_nonce'),
