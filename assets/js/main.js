@@ -180,6 +180,7 @@
   document.querySelectorAll('[data-music-player]').forEach(function(player){
     var audio = player.querySelector('[data-music-audio]');
     var toggle = player.querySelector('[data-music-toggle]');
+    var expand = player.querySelector('[data-music-expand]');
     var mute = player.querySelector('[data-music-mute]');
     var prev = player.querySelector('[data-music-prev]');
     var next = player.querySelector('[data-music-next]');
@@ -190,6 +191,7 @@
     var trackIndex = 0;
     var wantsAutoplay = player.getAttribute('data-music-autoplay') === 'true';
     var autoplayArmed = false;
+    var isMobilePlayer = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
     if (!audio || !toggle) return;
 
     try {
@@ -280,6 +282,14 @@
       });
     }
 
+    if (expand) {
+      expand.addEventListener('click', function(){
+        var isCollapsed = player.classList.toggle('is-collapsed');
+        expand.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+        expand.textContent = isCollapsed ? 'Music' : 'Hide';
+      });
+    }
+
     audio.addEventListener('timeupdate', function(){
       if (!progress || !audio.duration) return;
       progress.style.width = Math.min((audio.currentTime / audio.duration) * 100, 100) + '%';
@@ -297,7 +307,7 @@
       setPlaying(false);
     });
 
-    if (wantsAutoplay) {
+    if (wantsAutoplay && !isMobilePlayer) {
       var autoplayResult = audio.play();
       if (autoplayResult && typeof autoplayResult.then === 'function') {
         autoplayResult.then(function(){

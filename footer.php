@@ -62,7 +62,7 @@ if (!$fest_music_tracks && fest_setting('fest_music_url')) {
 $fest_music_first = $fest_music_tracks[0] ?? null;
 ?>
 <?php if ($fest_music_first): ?>
-<div class="fest-music-player" data-music-player data-music-autoplay="true" data-music-tracks="<?php echo esc_attr(wp_json_encode($fest_music_tracks)); ?>">
+<div class="fest-music-player is-collapsed" data-music-player data-music-autoplay="true" data-music-tracks="<?php echo esc_attr(wp_json_encode($fest_music_tracks)); ?>">
   <audio data-music-audio preload="auto" autoplay src="<?php echo esc_url($fest_music_first['url']); ?>"></audio>
   <button class="fest-music-toggle" type="button" data-music-toggle aria-label="Play music" aria-pressed="false">
     <span class="fest-music-play-icon" aria-hidden="true"></span>
@@ -82,6 +82,7 @@ $fest_music_first = $fest_music_tracks[0] ?? null;
   <div class="fest-music-progress" aria-hidden="true">
     <span data-music-progress></span>
   </div>
+  <button class="fest-music-expand" type="button" data-music-expand aria-expanded="false">Music</button>
 </div>
 <?php endif; ?>
 
