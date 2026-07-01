@@ -5,7 +5,7 @@
  */
 get_header();
 $email = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
-$calendar_url = apply_filters('fest_discovery_call_url', '');
+$calendar_url = apply_filters('fest_discovery_call_url', 'https://calendly.com/sponsor-afrobassfest/30min');
 ?>
 
 <style>

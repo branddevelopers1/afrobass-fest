@@ -553,7 +553,9 @@ function fest_handle_submission() {
         wp_send_json_error('Please complete all required brand activation fields.');
     }
 
-    $to      = $type === 'brand_activation' ? 'sponsors@afrobassfest.com' : 'contact@afrobass.com';
+    $to      = $type === 'brand_activation'
+        ? ['sponsor@afrobassfest.com', 'sponsor@afrobass.com']
+        : 'contact@afrobass.com';
     $type_label = $type === 'brand_activation' ? 'Brand Activation' : ucfirst($type);
     $subject = '[' . $type_label . ' Submission] ' . $name . ' — Afrobass Fest 2026';
     $body    = "New {$type} submission from afrobassfestival.com\n\n";
