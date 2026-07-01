@@ -185,6 +185,14 @@ textarea.activation-control { min-height:110px; resize:vertical; line-height:1.6
   text-decoration:none;
   text-transform:uppercase;
 }
+.activation-calendar iframe {
+  display:block;
+  width:100%;
+  min-height:700px;
+  margin-top:20px;
+  border:0;
+  background:#fff;
+}
 .activation-thanks {
   display:none;
   padding:28px;
@@ -326,7 +334,13 @@ textarea.activation-control { min-height:110px; resize:vertical; line-height:1.6
           <strong>Please book a discovery call with the AfroBass Partnerships Team.</strong>
           <?php if ($calendar_url): ?>
             <p>Choose a date and time that works for you using our booking calendar.</p>
-            <a href="<?php echo esc_url($calendar_url); ?>" target="_blank" rel="noopener">Open Booking Calendar &rarr;</a>
+            <iframe
+              src="<?php echo esc_url($calendar_url); ?>?embed_domain=<?php echo esc_attr(wp_parse_url(home_url('/'), PHP_URL_HOST)); ?>&amp;embed_type=Inline"
+              title="Schedule a discovery call with the AfroBass Partnerships Team"
+              loading="lazy"
+              allow="payment"
+            ></iframe>
+            <a href="<?php echo esc_url($calendar_url); ?>" target="_blank" rel="noopener">Open Booking Calendar in a New Window &rarr;</a>
           <?php else: ?>
             <p>The booking calendar link will be provided by the AfroBass Partnerships Team.</p>
           <?php endif; ?>
