@@ -516,25 +516,22 @@ function fest_handle_submission() {
         $extras['Website']          = esc_url_raw($_POST['vendor_website']        ?? '');
         $extras['Instagram']        = esc_url_raw($_POST['instagram']             ?? '');
     } elseif ($type === 'brand_activation') {
-        $requirements = isset($_POST['requirements']) && is_array($_POST['requirements'])
-            ? array_map('sanitize_text_field', wp_unslash($_POST['requirements']))
+        $opportunities = isset($_POST['opportunities']) && is_array($_POST['opportunities'])
+            ? array_map('sanitize_text_field', wp_unslash($_POST['opportunities']))
             : [];
-        $extras['Brand / Company']       = sanitize_text_field($_POST['business_name']         ?? '');
-        $extras['Job Title']             = sanitize_text_field($_POST['job_title']             ?? '');
-        $extras['Brand Website']         = esc_url_raw($_POST['brand_website']                  ?? '');
-        $extras['Social URL']            = esc_url_raw($_POST['social_url']                     ?? '');
-        $extras['Activation Type']       = sanitize_text_field($_POST['activation_type']       ?? '');
-        $extras['Preferred Day']         = sanitize_text_field($_POST['preferred_day']          ?? '');
-        $extras['Activation Concept']    = sanitize_textarea_field($_POST['activation_concept'] ?? '');
-        $extras['Objectives']            = sanitize_textarea_field($_POST['activation_objectives'] ?? '');
-        $extras['Audience Engagement']   = sanitize_textarea_field($_POST['audience_engagement'] ?? '');
-        $extras['Estimated Footprint']   = sanitize_text_field($_POST['footprint']              ?? '');
-        $extras['On-site Staff']         = absint($_POST['staff_count']                         ?? 0);
-        $extras['Requirements']          = implode(', ', $requirements);
-        $extras['Production Notes']      = sanitize_textarea_field($_POST['production_notes']   ?? '');
-        $extras['Budget Range']          = sanitize_text_field($_POST['budget_range']           ?? '');
-        $extras['Insurance Status']      = sanitize_text_field($_POST['insurance_status']       ?? '');
-        $extras['Concept Deck']          = esc_url_raw($_POST['deck_url']                       ?? '');
+        $credentials = isset($_POST['credentials']) && is_array($_POST['credentials'])
+            ? array_map('sanitize_text_field', wp_unslash($_POST['credentials']))
+            : [];
+        $extras['Business / Brand Name'] = sanitize_text_field($_POST['business_name']     ?? '');
+        $extras['Job Title']             = sanitize_text_field($_POST['job_title']         ?? '');
+        $extras['Business Website']      = esc_url_raw($_POST['brand_website']              ?? '');
+        $extras['Instagram Handle']      = sanitize_text_field($_POST['instagram']          ?? '');
+        $extras['Business Type']         = sanitize_text_field($_POST['business_type']      ?? '');
+        $extras['Opportunities']         = implode(', ', $opportunities);
+        $extras['Sales Plan']            = sanitize_text_field($_POST['sales_plan']         ?? '');
+        $extras['Products / Services']   = sanitize_textarea_field($_POST['products_services'] ?? '');
+        $extras['Credentials']           = implode(', ', $credentials);
+        $extras['Meeting Format']        = sanitize_text_field($_POST['meeting_format']     ?? '');
     } elseif ($type === 'volunteer') {
         $extras['Availability']     = sanitize_text_field($_POST['availability']  ?? '');
         $extras['Skills/Experience']= sanitize_textarea_field($_POST['skills']    ?? '');
@@ -546,23 +543,17 @@ function fest_handle_submission() {
 
     if ($type === 'brand_activation' && (
         empty($phone) ||
-        empty($extras['Brand / Company']) ||
+        empty($extras['Business / Brand Name']) ||
         empty($extras['Job Title']) ||
-        empty($extras['Brand Website']) ||
-        empty($extras['Activation Type']) ||
-        empty($extras['Preferred Day']) ||
-        empty($extras['Activation Concept']) ||
-        empty($extras['Objectives']) ||
-        empty($extras['Audience Engagement']) ||
-        empty($extras['Estimated Footprint']) ||
-        empty($extras['Budget Range']) ||
-        empty($extras['Insurance Status']) ||
-        sanitize_text_field($_POST['consent'] ?? '') !== 'yes'
+        empty($extras['Business Type']) ||
+        empty($extras['Opportunities']) ||
+        empty($extras['Sales Plan']) ||
+        empty($extras['Meeting Format'])
     )) {
         wp_send_json_error('Please complete all required brand activation fields.');
     }
 
-    $to      = $type === 'brand_activation' ? 'sponsor@afrobass.com' : 'contact@afrobass.com';
+    $to      = $type === 'brand_activation' ? 'sponsors@afrobassfest.com' : 'contact@afrobass.com';
     $type_label = $type === 'brand_activation' ? 'Brand Activation' : ucfirst($type);
     $subject = '[' . $type_label . ' Submission] ' . $name . ' — Afrobass Fest 2026';
     $body    = "New {$type} submission from afrobassfestival.com\n\n";
@@ -585,6 +576,9 @@ function fest_handle_submission() {
     update_option('fest_submissions', $subs);
 
     wp_mail($to, $subject, $body, $headers);
+    if ($type === 'brand_activation') {
+        wp_send_json_success("Thank you, {$name}! Our team will review your application and contact shortlisted brands and vendors within 5–7 business days.");
+    }
     wp_send_json_success("Thank you, {$name}! We've received your submission and will be in touch.");
 }
 add_action('wp_ajax_fest_submission',        'fest_handle_submission');

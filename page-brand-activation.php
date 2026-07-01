@@ -5,6 +5,7 @@
  */
 get_header();
 $email = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
+$calendar_url = apply_filters('fest_discovery_call_url', '');
 ?>
 
 <style>
@@ -149,6 +150,60 @@ textarea.activation-control { min-height:110px; resize:vertical; line-height:1.6
 }
 .activation-check input { margin-top:3px; accent-color:#FF2D8A; }
 .activation-consent { grid-column:1 / -1; }
+.activation-choice-label {
+  margin-bottom:-14px;
+  color:rgba(255,255,255,.72);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:14px;
+}
+.activation-calendar {
+  padding:22px;
+  border:1px solid rgba(255,45,138,.22);
+  background:rgba(255,45,138,.055);
+}
+.activation-calendar strong {
+  display:block;
+  margin-bottom:8px;
+  color:#fff;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:14px;
+}
+.activation-calendar p {
+  margin:0;
+  color:rgba(255,255,255,.46);
+  font-size:13px;
+  line-height:1.6;
+}
+.activation-calendar a {
+  display:inline-block;
+  margin-top:16px;
+  color:#FF2D8A;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-decoration:none;
+  text-transform:uppercase;
+}
+.activation-thanks {
+  display:none;
+  padding:28px;
+  border-left:2px solid #FF2D8A;
+  background:rgba(255,255,255,.025);
+}
+.activation-thanks h3 {
+  margin:0 0 12px;
+  color:#fff;
+  font-family:'Unbounded',sans-serif;
+  font-size:18px;
+  text-transform:uppercase;
+}
+.activation-thanks p {
+  margin:0;
+  color:rgba(255,255,255,.46);
+  font-size:13px;
+  line-height:1.75;
+}
 .activation-submit {
   padding:19px 32px;
   border:0;
@@ -183,9 +238,9 @@ textarea.activation-control { min-height:110px; resize:vertical; line-height:1.6
   <section class="activation-hero">
     <div class="activation-wrap activation-hero-grid">
       <div class="fest-reveal">
-        <div class="fest-kicker">Partnership Opportunities</div>
-        <h1>Put Your Brand<br><em>in the Culture</em></h1>
-        <p>Create a memorable, audience-first experience at Afrobass Music Fest. Tell us what your brand wants to build and our partnerships team will review the fit.</p>
+        <div class="fest-kicker">Afrobass Fest 2026</div>
+        <h1>Brand Activation<br><em>&amp; Vendor Application</em></h1>
+        <p>Thank you for your interest in becoming part of AfroBass Fest 2026. Our Brand Activation District and Vendor Marketplace are carefully curated to create memorable guest experiences while providing meaningful exposure for our partners.</p>
       </div>
       <div class="activation-date-card fest-reveal fest-d1">
         <span>Afrobass Music Fest 2026</span>
@@ -197,98 +252,101 @@ textarea.activation-control { min-height:110px; resize:vertical; line-height:1.6
   <section class="activation-content">
     <div class="activation-wrap activation-grid">
       <aside class="activation-info fest-reveal">
-        <h2>Brand Activation<br><em>Application</em></h2>
-        <p>We are looking for thoughtful activations that add real value to the festival experience—from sampling and immersive installations to beauty, fashion, technology, and community programming.</p>
-        <div class="activation-note"><strong>Be specific</strong>Share the experience guests will have, not only what your brand sells.</div>
-        <div class="activation-note"><strong>Plan your footprint</strong>Include your estimated space, power, staffing, and setup requirements.</div>
-        <div class="activation-note"><strong>What happens next</strong>Our team will review your application and contact selected brands with availability and partnership details.</div>
+        <h2>Welcome to<br><em>Afrobass</em></h2>
+        <p>AfroBass Fest is more than a music festival. Please complete the application so our team can learn about your business and the opportunity that interests you.</p>
+        <div class="activation-note"><strong>Carefully curated</strong>We select brands and vendors that complement the festival and add value for our guests.</div>
+        <div class="activation-note"><strong>Review timeline</strong>Shortlisted applicants will hear from our team within 5–7 business days.</div>
+        <div class="activation-note"><strong>Discovery call</strong>Selected applicants will be invited to discuss their activation, questions, and next steps.</div>
       </aside>
 
       <form class="activation-form fest-reveal fest-d1" id="brand-activation-form" novalidate>
-        <div class="activation-section-title">Contact &amp; Brand</div>
+        <div class="activation-section-title">Business &amp; Contact Information</div>
         <div class="activation-row">
-          <div class="fform-field"><input type="text" name="full_name" id="ba-name" placeholder=" " required><label for="ba-name">Contact Name *</label></div>
+          <div class="fform-field"><input type="text" name="business_name" id="ba-brand" placeholder=" " required><label for="ba-brand">Business / Brand Name *</label></div>
+          <div class="fform-field"><input type="text" name="full_name" id="ba-name" placeholder=" " required><label for="ba-name">Primary Contact Name *</label></div>
+        </div>
+        <div class="activation-row">
           <div class="fform-field"><input type="text" name="job_title" id="ba-title" placeholder=" " required><label for="ba-title">Job Title *</label></div>
+          <div class="fform-field"><input type="email" name="email" id="ba-email" placeholder=" " required><label for="ba-email">Email Address *</label></div>
         </div>
         <div class="activation-row">
-          <div class="fform-field"><input type="email" name="email" id="ba-email" placeholder=" " required><label for="ba-email">Work Email *</label></div>
-          <div class="fform-field"><input type="tel" name="phone" id="ba-phone" placeholder=" " required><label for="ba-phone">Phone *</label></div>
+          <div class="fform-field"><input type="tel" name="phone" id="ba-phone" placeholder=" " required><label for="ba-phone">Phone Number *</label></div>
+          <div class="fform-field"><input type="url" name="brand_website" id="ba-web" placeholder=" "><label for="ba-web">Business Website</label></div>
         </div>
-        <div class="activation-row">
-          <div class="fform-field"><input type="text" name="business_name" id="ba-brand" placeholder=" " required><label for="ba-brand">Brand / Company *</label></div>
-          <div class="fform-field"><input type="url" name="brand_website" id="ba-web" placeholder=" " required><label for="ba-web">Brand Website *</label></div>
-        </div>
-        <div class="fform-field"><input type="url" name="social_url" id="ba-social" placeholder=" "><label for="ba-social">Instagram or Social URL</label></div>
+        <div class="fform-field"><input type="text" name="instagram" id="ba-social" placeholder=" "><label for="ba-social">Instagram Handle</label></div>
 
-        <div class="activation-section-title">Activation Overview</div>
-        <div class="activation-row">
-          <select name="activation_type" class="activation-control" required aria-label="Activation type">
-            <option value="" disabled selected>Activation type *</option>
-            <option value="Experiential Installation">Experiential Installation</option>
-            <option value="Product Sampling">Product Sampling</option>
-            <option value="Beauty or Wellness">Beauty or Wellness</option>
-            <option value="Fashion or Retail">Fashion or Retail</option>
-            <option value="Food or Beverage">Food or Beverage</option>
-            <option value="Technology or Gaming">Technology or Gaming</option>
-            <option value="Community Programming">Community Programming</option>
+        <div class="activation-section-title">Business &amp; Opportunity</div>
+        <select name="business_type" class="activation-control" required aria-label="Business type">
+            <option value="" disabled selected>Which best describes your business? *</option>
+            <option value="Food Vendor">Food Vendor</option>
+            <option value="Fashion & Apparel">Fashion &amp; Apparel</option>
+            <option value="Beauty & Skincare">Beauty &amp; Skincare</option>
+            <option value="Health & Wellness">Health &amp; Wellness</option>
+            <option value="Technology">Technology</option>
+            <option value="Financial Services">Financial Services</option>
+            <option value="Education">Education</option>
+            <option value="Travel">Travel</option>
+            <option value="Community Organization">Community Organization</option>
+            <option value="Artist / Creative">Artist / Creative</option>
+            <option value="Home & Lifestyle">Home &amp; Lifestyle</option>
             <option value="Other">Other</option>
-          </select>
-          <select name="preferred_day" class="activation-control" required aria-label="Preferred festival day">
-            <option value="" disabled selected>Preferred festival day *</option>
-            <option value="Day 1 - August 15">Day 1 — August 15</option>
-            <option value="Day 2 - August 16">Day 2 — August 16</option>
-            <option value="Both Days">Both Days</option>
-            <option value="Flexible">Flexible</option>
-          </select>
-        </div>
-        <textarea name="activation_concept" class="activation-control" rows="5" placeholder="Describe your activation concept and the guest experience. *" required></textarea>
-        <textarea name="activation_objectives" class="activation-control" rows="4" placeholder="What are your goals and how will you measure success? *" required></textarea>
-        <textarea name="audience_engagement" class="activation-control" rows="4" placeholder="How will guests interact with the activation? *" required></textarea>
+        </select>
 
-        <div class="activation-section-title">Production Requirements</div>
-        <div class="activation-row">
-          <div class="fform-field"><input type="text" name="footprint" id="ba-footprint" placeholder=" " required><label for="ba-footprint">Estimated Footprint (e.g. 10' × 20') *</label></div>
-          <div class="fform-field"><input type="number" min="1" name="staff_count" id="ba-staff" placeholder=" "><label for="ba-staff">On-site Staff Count</label></div>
-        </div>
+        <div class="activation-choice-label">Which opportunity are you interested in? *</div>
         <div class="activation-checks">
-          <label class="activation-check"><input type="checkbox" name="requirements[]" value="Power"> Electrical power required</label>
-          <label class="activation-check"><input type="checkbox" name="requirements[]" value="Water"> Water access required</label>
-          <label class="activation-check"><input type="checkbox" name="requirements[]" value="Wi-Fi"> Wi-Fi required</label>
-          <label class="activation-check"><input type="checkbox" name="requirements[]" value="Vehicle Access"> Vehicle access required</label>
-          <label class="activation-check"><input type="checkbox" name="requirements[]" value="Sampling"> Product sampling planned</label>
-          <label class="activation-check"><input type="checkbox" name="requirements[]" value="Giveaways"> Giveaways or prizes planned</label>
+          <label class="activation-check"><input type="checkbox" name="opportunities[]" value="Pulse Package"> Pulse Package</label>
+          <label class="activation-check"><input type="checkbox" name="opportunities[]" value="Bassline Package"> Bassline Package</label>
+          <label class="activation-check"><input type="checkbox" name="opportunities[]" value="Headliner Package"> Headliner Package</label>
+          <label class="activation-check"><input type="checkbox" name="opportunities[]" value="Food Vendor"> Food Vendor</label>
+          <label class="activation-check"><input type="checkbox" name="opportunities[]" value="In-Kind Sponsorship"> In-Kind Sponsorship</label>
+          <label class="activation-check"><input type="checkbox" name="opportunities[]" value="Not Sure Yet"> Not Sure Yet – I'd Like to Discuss Options</label>
         </div>
-        <textarea name="production_notes" class="activation-control" rows="4" placeholder="Describe power load, equipment, build, delivery, or other production needs."></textarea>
 
-        <div class="activation-section-title">Budget &amp; Readiness</div>
-        <div class="activation-row">
-          <select name="budget_range" class="activation-control" required aria-label="Activation budget">
-            <option value="" disabled selected>Activation budget (CAD) *</option>
-            <option value="Under $5,000">Under $5,000</option>
-            <option value="$5,000-$10,000">$5,000–$10,000</option>
-            <option value="$10,000-$25,000">$10,000–$25,000</option>
-            <option value="$25,000-$50,000">$25,000–$50,000</option>
-            <option value="$50,000+">$50,000+</option>
-            <option value="To Be Determined">To Be Determined</option>
-          </select>
-          <select name="insurance_status" class="activation-control" required aria-label="Insurance status">
-            <option value="" disabled selected>Commercial liability insurance *</option>
-            <option value="Already Insured">Already insured</option>
-            <option value="Can Obtain">Can obtain if selected</option>
-            <option value="Need More Information">Need more information</option>
-          </select>
+        <select name="sales_plan" class="activation-control" required aria-label="Sales plan">
+          <option value="" disabled selected>Will you be selling products or services during the event? *</option>
+          <option value="Yes">Yes</option>
+          <option value="Sampling / Giveaway">Sampling / giveaway</option>
+          <option value="No">No</option>
+          <option value="Both Selling and Promoting">Both selling and promoting</option>
+        </select>
+        <textarea name="products_services" class="activation-control" rows="4" placeholder="If yes, what products or services will you offer?"></textarea>
+
+        <div class="activation-section-title">Business Requirements</div>
+        <div class="activation-choice-label">Do you currently have the following?</div>
+        <div class="activation-checks">
+          <label class="activation-check"><input type="checkbox" name="credentials[]" value="Valid Business Licence"> Valid Business Licence</label>
+          <label class="activation-check"><input type="checkbox" name="credentials[]" value="Food Handler Certificate"> Food Handler Certificate</label>
+          <label class="activation-check"><input type="checkbox" name="credentials[]" value="Liability Insurance"> Liability Insurance</label>
+          <label class="activation-check"><input type="checkbox" name="credentials[]" value="Working Toward Requirements"> Working Toward These Requirements</label>
+          <label class="activation-check"><input type="checkbox" name="credentials[]" value="N/A"> N/A</label>
         </div>
-        <div class="fform-field"><input type="url" name="deck_url" id="ba-deck" placeholder=" "><label for="ba-deck">Concept Deck / Mood Board URL</label></div>
-        <textarea name="message" class="activation-control" rows="4" placeholder="Anything else our partnerships team should know?"></textarea>
-        <label class="activation-check activation-consent">
-          <input type="checkbox" name="consent" value="yes" required>
-          <span>I confirm the information provided is accurate and agree to be contacted about this application. *</span>
-        </label>
+
+        <div class="activation-section-title">Discovery Call</div>
+        <div class="activation-calendar">
+          <strong>Please book a discovery call with the AfroBass Partnerships Team.</strong>
+          <?php if ($calendar_url): ?>
+            <p>Choose a date and time that works for you using our booking calendar.</p>
+            <a href="<?php echo esc_url($calendar_url); ?>" target="_blank" rel="noopener">Open Booking Calendar &rarr;</a>
+          <?php else: ?>
+            <p>The booking calendar link will be provided by the AfroBass Partnerships Team.</p>
+          <?php endif; ?>
+        </div>
+        <div class="activation-choice-label">Preferred Meeting Format *</div>
+        <div class="activation-checks">
+          <label class="activation-check"><input type="radio" name="meeting_format" value="Google Meet" required> Google Meet</label>
+          <label class="activation-check"><input type="radio" name="meeting_format" value="Phone Call" required> Phone Call</label>
+        </div>
+
+        <textarea name="message" class="activation-control" rows="5" placeholder="Is there anything else you'd like us to know?"></textarea>
 
         <input type="hidden" name="submission_type" value="brand_activation">
         <input type="text" name="website" style="display:none;position:absolute;left:-9999px;" tabindex="-1" autocomplete="off">
         <button type="submit" class="activation-submit">Submit Brand Activation Application &rarr;</button>
         <div class="activation-msg" role="alert" aria-live="polite"></div>
+        <div class="activation-thanks">
+          <h3>Thank You!</h3>
+          <p>Thank you for applying to be part of AfroBass Fest 2026. Our team will review your application and contact shortlisted brands and vendors within 5–7 business days. If selected, you'll receive an invitation to a discovery call to discuss your activation, answer questions, and explore how we can create an unforgettable experience together. We look forward to potentially welcoming you to the AfroBass community!</p>
+        </div>
       </form>
     </div>
   </section>
@@ -305,12 +363,16 @@ textarea.activation-control { min-height:110px; resize:vertical; line-height:1.6
     event.preventDefault();
     var button = form.querySelector('.activation-submit');
     var message = form.querySelector('.activation-msg');
+    var thankYou = form.querySelector('.activation-thanks');
+    var opportunity = form.querySelector('[name="opportunities[]"]:checked');
 
-    if (!form.checkValidity()) {
+    if (!form.checkValidity() || !opportunity) {
       form.reportValidity();
       message.style.display = 'block';
       message.style.color = '#ff5a66';
-      message.textContent = 'Please complete all required fields.';
+      message.textContent = opportunity
+        ? 'Please complete all required fields.'
+        : 'Please select at least one opportunity.';
       return;
     }
 
@@ -329,7 +391,11 @@ textarea.activation-control { min-height:110px; resize:vertical; line-height:1.6
         message.style.display = 'block';
         message.style.color = json.success ? '#00e87a' : '#ff5a66';
         message.textContent = json.data;
-        if (json.success) form.reset();
+        if (json.success) {
+          form.reset();
+          thankYou.style.display = 'block';
+          thankYou.scrollIntoView({ behavior:'smooth', block:'center' });
+        }
       })
       .catch(function(){
         message.style.display = 'block';
