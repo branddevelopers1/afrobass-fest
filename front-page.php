@@ -216,9 +216,10 @@ $sponsors = new WP_Query([
       <?php if ($a && !$tba && has_post_thumbnail()): ?>
         <?php
           $img_style = $day_key === 'day2'
-            ? 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;filter:grayscale(10%);'
-            : 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(10%);';
-          $thumb_size = $day_key === 'day2' ? 'full' : 'fest-artist';
+            ? 'position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center center;background:#080808;filter:grayscale(10%);'
+            : 'position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center top;background:#080808;filter:grayscale(10%);';
+          // Use the original aspect ratio; the fest-artist size is hard-cropped.
+          $thumb_size = 'full';
         ?>
         <?php the_post_thumbnail($thumb_size, ['style' => $img_style, 'alt' => get_the_title()]); ?>
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.97) 0%,rgba(8,8,8,0.3) 55%,transparent 100%);"></div>
