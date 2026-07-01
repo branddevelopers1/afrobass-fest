@@ -345,11 +345,6 @@ textarea.activation-control { min-height:110px; resize:vertical; line-height:1.6
             <p>The booking calendar link will be provided by the AfroBass Partnerships Team.</p>
           <?php endif; ?>
         </div>
-        <div class="activation-choice-label">Preferred Meeting Format *</div>
-        <div class="activation-checks">
-          <label class="activation-check"><input type="radio" name="meeting_format" value="Google Meet" required> Google Meet</label>
-          <label class="activation-check"><input type="radio" name="meeting_format" value="Phone Call" required> Phone Call</label>
-        </div>
 
         <textarea name="message" class="activation-control" rows="5" placeholder="Is there anything else you'd like us to know?"></textarea>
 

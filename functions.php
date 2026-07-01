@@ -531,7 +531,6 @@ function fest_handle_submission() {
         $extras['Sales Plan']            = sanitize_text_field($_POST['sales_plan']         ?? '');
         $extras['Products / Services']   = sanitize_textarea_field($_POST['products_services'] ?? '');
         $extras['Credentials']           = implode(', ', $credentials);
-        $extras['Meeting Format']        = sanitize_text_field($_POST['meeting_format']     ?? '');
     } elseif ($type === 'volunteer') {
         $extras['Availability']     = sanitize_text_field($_POST['availability']  ?? '');
         $extras['Skills/Experience']= sanitize_textarea_field($_POST['skills']    ?? '');
@@ -547,8 +546,7 @@ function fest_handle_submission() {
         empty($extras['Job Title']) ||
         empty($extras['Business Type']) ||
         empty($extras['Opportunities']) ||
-        empty($extras['Sales Plan']) ||
-        empty($extras['Meeting Format'])
+        empty($extras['Sales Plan'])
     )) {
         wp_send_json_error('Please complete all required brand activation fields.');
     }
