@@ -24,7 +24,7 @@ $prices = [
 
 $days_meta = [
   'day1' => ['label' => 'Day 1', 'name' => "Obi's House + The Cavemen. + More!", 'date' => 'Aug 15', 'full_date' => 'Saturday, August 15', 'hours' => '8pm - 3am', 'venue' => 'Rebel Entertainment Complex', 'color' => '#FF4500'],
-  'day2' => ['label' => 'Day 2', 'name' => 'Day Party w/ DBN Gogo',              'date' => 'Aug 16', 'full_date' => 'Sunday, August 16',   'hours' => '5pm - 11pm', 'venue' => 'Noir',                        'color' => '#FF2D8A'],
+  'day2' => ['label' => 'Day 2', 'name' => 'Day Party w/ DBN Gogo',              'date' => 'Aug 16', 'full_date' => 'Sunday, August 16',   'hours' => '5pm - 11pm', 'venue' => 'Acqua Supper Club',           'color' => '#FF2D8A'],
 ];
 $ticket_days = [
   'day1',
@@ -156,7 +156,7 @@ $ticket_days = [
     <?php foreach([
       ['Dates',      'Aug 15-16, 2026'],
       ['Day 1 Venue', 'Rebel Entertainment Complex'],
-      ['Day 2 Venue', 'Noir - 11 Polson St, Toronto'],
+      ['Day 2 Venue', 'Acqua Supper Club - 50 Prince Edward Island Crescent, Toronto, ON M6K 3C3'],
       ['Age',         '19+ Valid ID Required'],
     ] as $d): ?>
       <div>

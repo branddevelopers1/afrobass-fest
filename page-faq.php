@@ -33,7 +33,7 @@ $faqs = [
   'The Event' => [
     [
       'q' => 'When and where is Afrobass Music Fest?',
-      'a' => 'August 15–16, 2026, Toronto. Day 1: Obi\'s House at Rebel, 11 Polson St (8pm–3am). Day 2: Day Party w/ DBN Gogo at Noir, 11 Polson St (5pm–11pm).'
+      'a' => 'August 15–16, 2026, Toronto. Day 1: Obi\'s House at Rebel, 11 Polson St (8pm–3am). Day 2: Day Party w/ DBN Gogo at Acqua Supper Club, 50 Prince Edward Island Crescent (5pm–11pm).'
     ],
     [
       'q' => 'What time do doors open?',
@@ -56,6 +56,10 @@ $faqs = [
     [
       'q' => 'Where is Rebel Entertainment Complex?',
       'a' => '11 Polson St, Toronto, ON M5A 1A4.'
+    ],
+    [
+      'q' => 'Where is Acqua Supper Club?',
+      'a' => '50 Prince Edward Island Crescent, Toronto, ON M6K 3C3.'
     ],
     [
       'q' => 'Is there parking at the venue?',

@@ -398,6 +398,7 @@ function fest_route_templates($template) {
             'lineup'      => 'page-lineup.php',
             'tickets'     => 'page-tickets.php',
             'vendors'     => 'page-vendors.php',
+            'brand-activation' => 'page-brand-activation.php',
             'sponsors'    => 'page-sponsors.php',
             'about'       => 'page-about.php',
             'the-festival'=> 'page-about.php',
@@ -424,6 +425,7 @@ function fest_route_templates($template) {
         'lineup'      => 'page-lineup.php',
         'tickets'     => 'page-tickets.php',
         'vendors'     => 'page-vendors.php',
+        'brand-activation' => 'page-brand-activation.php',
         'sponsors'    => 'page-sponsors.php',
         'about'       => 'page-about.php',
         'schedule'    => 'page-schedule.php',
@@ -513,6 +515,26 @@ function fest_handle_submission() {
         $extras['Vendor Type']      = sanitize_text_field($_POST['vendor_type']   ?? '');
         $extras['Website']          = esc_url_raw($_POST['vendor_website']        ?? '');
         $extras['Instagram']        = esc_url_raw($_POST['instagram']             ?? '');
+    } elseif ($type === 'brand_activation') {
+        $requirements = isset($_POST['requirements']) && is_array($_POST['requirements'])
+            ? array_map('sanitize_text_field', wp_unslash($_POST['requirements']))
+            : [];
+        $extras['Brand / Company']       = sanitize_text_field($_POST['business_name']         ?? '');
+        $extras['Job Title']             = sanitize_text_field($_POST['job_title']             ?? '');
+        $extras['Brand Website']         = esc_url_raw($_POST['brand_website']                  ?? '');
+        $extras['Social URL']            = esc_url_raw($_POST['social_url']                     ?? '');
+        $extras['Activation Type']       = sanitize_text_field($_POST['activation_type']       ?? '');
+        $extras['Preferred Day']         = sanitize_text_field($_POST['preferred_day']          ?? '');
+        $extras['Activation Concept']    = sanitize_textarea_field($_POST['activation_concept'] ?? '');
+        $extras['Objectives']            = sanitize_textarea_field($_POST['activation_objectives'] ?? '');
+        $extras['Audience Engagement']   = sanitize_textarea_field($_POST['audience_engagement'] ?? '');
+        $extras['Estimated Footprint']   = sanitize_text_field($_POST['footprint']              ?? '');
+        $extras['On-site Staff']         = absint($_POST['staff_count']                         ?? 0);
+        $extras['Requirements']          = implode(', ', $requirements);
+        $extras['Production Notes']      = sanitize_textarea_field($_POST['production_notes']   ?? '');
+        $extras['Budget Range']          = sanitize_text_field($_POST['budget_range']           ?? '');
+        $extras['Insurance Status']      = sanitize_text_field($_POST['insurance_status']       ?? '');
+        $extras['Concept Deck']          = esc_url_raw($_POST['deck_url']                       ?? '');
     } elseif ($type === 'volunteer') {
         $extras['Availability']     = sanitize_text_field($_POST['availability']  ?? '');
         $extras['Skills/Experience']= sanitize_textarea_field($_POST['skills']    ?? '');
@@ -522,8 +544,27 @@ function fest_handle_submission() {
         wp_send_json_error('Please fill in all required fields with a valid email.');
     }
 
-    $to      = 'contact@afrobass.com';
-    $subject = '[' . ucfirst($type) . ' Submission] ' . $name . ' — Afrobass Fest 2026';
+    if ($type === 'brand_activation' && (
+        empty($phone) ||
+        empty($extras['Brand / Company']) ||
+        empty($extras['Job Title']) ||
+        empty($extras['Brand Website']) ||
+        empty($extras['Activation Type']) ||
+        empty($extras['Preferred Day']) ||
+        empty($extras['Activation Concept']) ||
+        empty($extras['Objectives']) ||
+        empty($extras['Audience Engagement']) ||
+        empty($extras['Estimated Footprint']) ||
+        empty($extras['Budget Range']) ||
+        empty($extras['Insurance Status']) ||
+        sanitize_text_field($_POST['consent'] ?? '') !== 'yes'
+    )) {
+        wp_send_json_error('Please complete all required brand activation fields.');
+    }
+
+    $to      = $type === 'brand_activation' ? 'sponsor@afrobass.com' : 'contact@afrobass.com';
+    $type_label = $type === 'brand_activation' ? 'Brand Activation' : ucfirst($type);
+    $subject = '[' . $type_label . ' Submission] ' . $name . ' — Afrobass Fest 2026';
     $body    = "New {$type} submission from afrobassfestival.com\n\n";
     $body   .= "Name:    {$name}\n";
     $body   .= "Email:   {$email}\n";
@@ -632,6 +673,10 @@ function fest_seo_meta() {
     } elseif (is_page('vendors')) {
         $title       = 'Vendor Applications — Afrobass Music Fest Toronto 2026';
         $description = 'Apply to vend at Afrobass Music Fest Toronto 2026. Food, beverage, merchandise, lifestyle, cultural, and community vendors are welcome.';
+        $url         = get_permalink();
+    } elseif (is_page('brand-activation')) {
+        $title       = 'Brand Activation Application — Afrobass Music Fest Toronto 2026';
+        $description = 'Apply to create a brand activation at Afrobass Music Fest Toronto 2026. Share your experiential concept, production needs, and partnership goals.';
         $url         = get_permalink();
     } elseif (is_page('sponsors')) {
         $title       = 'Sponsorship — Afrobass Music Fest Toronto 2026';

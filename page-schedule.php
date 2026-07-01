@@ -56,7 +56,7 @@ $days = [
     'flyer'  => $day2_flyer,
     'color'  => '#FF2D8A',
     'active' => false,
-    'venue'  => 'Noir',
+    'venue'  => 'Acqua Supper Club',
     'hours'  => '5pm – 11pm',
   ],
 ];
@@ -226,7 +226,7 @@ $days = [
     <?php
     $facts = [
       ['Dates', 'August 15–16, 2026'],
-      ['Venue', 'Rebel (Day 1) · Noir (Day 2)'],
+      ['Venue', 'Rebel (Day 1) · Acqua Supper Club (Day 2)'],
       ['City',  'Toronto, Ontario'],
       ['Age',   '19+ Event'],
     ];
