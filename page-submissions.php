@@ -141,6 +141,97 @@ $email = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
   background: rgba(255,255,255,0.05);
 }
 
+/* Full-width brand activation row */
+.join-brand-row {
+  display: grid;
+  grid-template-columns: 210px 1fr auto;
+  align-items: center;
+  gap: 40px;
+  min-height: 220px;
+  padding: 44px 56px;
+  border-top: 2px solid #00c2ff;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background:
+    radial-gradient(circle at 82% 20%, rgba(0,194,255,0.12), transparent 32%),
+    linear-gradient(110deg, rgba(255,45,138,0.08), transparent 45%),
+    #080808;
+  color: #fff;
+  text-decoration: none;
+  transition: background .25s;
+}
+.join-brand-row:hover {
+  background:
+    radial-gradient(circle at 82% 20%, rgba(0,194,255,0.18), transparent 36%),
+    linear-gradient(110deg, rgba(255,45,138,0.11), transparent 48%),
+    #0b0b0b;
+}
+.join-brand-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.join-brand-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00c2ff;
+  box-shadow: 0 0 18px rgba(0,194,255,.65);
+}
+.join-brand-meta span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #00c2ff;
+}
+.join-brand-copy h2 {
+  margin: 0 0 12px;
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(28px,4vw,56px);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: .95;
+  text-transform: uppercase;
+}
+.join-brand-copy h2 em { color: #00c2ff; font-style: italic; }
+.join-brand-copy p {
+  max-width: 690px;
+  margin: 0;
+  color: rgba(255,255,255,.43);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+}
+.join-brand-action {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.join-brand-arrow {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(0,194,255,.35);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00c2ff;
+  font-size: 18px;
+  transition: transform .2s, background .2s;
+}
+.join-brand-row:hover .join-brand-arrow {
+  transform: translateX(4px);
+  background: rgba(0,194,255,.08);
+}
+
 /* Form section */
 .join-form-section {
   padding: 100px 56px;
@@ -242,6 +333,8 @@ $email = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
 /* Responsive */
 @media (max-width: 900px) {
   .join-cards { grid-template-columns: 1fr; }
+  .join-brand-row { grid-template-columns: 1fr; gap: 24px; padding: 40px 24px; }
+  .join-brand-action { justify-content: space-between; }
   .join-hero { padding: 120px 24px 60px; }
   .join-form-section { padding: 72px 24px; }
   .join-form-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -342,6 +435,22 @@ $email = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
     </div>
 
   </div>
+
+  <!-- ── BRAND ACTIVATION & VENDOR APPLICATION ── -->
+  <a href="<?php echo esc_url(home_url('/brand-activation')); ?>" class="join-brand-row fest-reveal" aria-label="Open the Brand Activation and Vendor Application">
+    <div class="join-brand-meta">
+      <span class="join-brand-dot"></span>
+      <span>Featured Opportunity · 04</span>
+    </div>
+    <div class="join-brand-copy">
+      <h2>Brand Activation<br><em>&amp; Vendor Application</em></h2>
+      <p>Apply for the Brand Activation District, Vendor Marketplace, sponsorship packages, food vending, or an in-kind partnership at AfroBass Fest 2026.</p>
+    </div>
+    <div class="join-brand-action">
+      Start Application
+      <span class="join-brand-arrow">&rarr;</span>
+    </div>
+  </a>
 
   <!-- ── FORM SECTIONS (shown on card click) ── -->
 

@@ -89,7 +89,7 @@ $faqs = [
   'Press & Media' => [
     [
       'q' => 'How do I apply for press credentials?',
-      'a' => 'Send media enquiries to ' . $email . ' with the subject line "Press Enquiry — Afrobass Fest 2026". Include your publication or platform details.'
+      'a' => 'Send media enquiries to media@afrobassfest.com with the subject line "Press Enquiry — Afrobass Fest 2026". Include your publication or platform details.'
     ],
   ],
 ];
