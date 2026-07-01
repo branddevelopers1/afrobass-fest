@@ -72,12 +72,8 @@ $faqs = [
   ],
   'Vendors & Sponsors' => [
     [
-      'q' => 'How do I become a vendor?',
-      'a' => 'Submit via the Submissions page.'
-    ],
-    [
-      'q' => 'How do I become a sponsor?',
-      'a' => 'Platinum, Gold, Silver, Bronze, and In-Kind packages available. Email sponsor@afrobassfest.com.'
+      'q' => 'How do I become a vendor or brand partner?',
+      'a' => 'Complete the Brand Activation & Vendor Application to apply for the Vendor Marketplace, a brand activation package, or an in-kind sponsorship. For partnership questions, email sponsor@afrobassfest.com.'
     ],
   ],
   'Artists & Performers' => [
