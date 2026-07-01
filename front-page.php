@@ -385,8 +385,9 @@ $sponsors = new WP_Query([
       ['Volunteer', 'Help build the experience from the inside and earn fest access.',  home_url('/apply'),    '#a855f7', 'Volunteer Application'],
       ['Vendors',   'Food, merch, lifestyle, beauty, cultural, and community vendors.', home_url('/vendors'),  '#FF6B1A', 'Vendor Application'],
       ['Work',      'Want to be part of the team behind the festival?',                 'mailto:' . $contact_email . '?subject=Afrobass%20Team%20Application', '#00c2ff', 'Contact the Team'],
+      ['Brand Activation', 'Create an audience-first activation, explore a partnership package, or join us through an in-kind sponsorship.', home_url('/brand-activation'), '#00c2ff', 'Brand Activation & Vendor Application'],
     ] as $i => $item): ?>
-      <a href="<?php echo esc_url($item[2]); ?>" class="fp-apply-card fest-reveal" style="--apply-color: <?php echo esc_attr($item[3]); ?>;">
+      <a href="<?php echo esc_url($item[2]); ?>" class="fp-apply-card<?php echo $i === 4 ? ' fp-apply-card-featured' : ''; ?> fest-reveal" style="--apply-color: <?php echo esc_attr($item[3]); ?>;">
         <span><?php echo str_pad($i + 1, 2, '0', STR_PAD_LEFT); ?></span>
         <h3><?php echo esc_html($item[0]); ?></h3>
         <p><?php echo esc_html($item[1]); ?></p>
@@ -486,6 +487,16 @@ $sponsors = new WP_Query([
   text-transform: uppercase;
   color: var(--apply-color);
 }
+.fp-apply-card-featured {
+  grid-column: 1 / -1;
+  min-height: 220px;
+  background:
+    radial-gradient(circle at 84% 20%, rgba(0,194,255,.13), transparent 30%),
+    linear-gradient(110deg, rgba(255,45,138,.07), transparent 45%),
+    #080808;
+}
+.fp-apply-card-featured h3 { max-width: 760px; }
+.fp-apply-card-featured p { max-width: 760px; }
 @media (max-width: 1024px) {
   .fp-apply-grid { grid-template-columns: repeat(2, 1fr); }
 }
