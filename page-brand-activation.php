@@ -229,6 +229,77 @@ textarea.activation-control { min-height:110px; resize:vertical; line-height:1.6
 .activation-submit:hover { transform:translateY(-1px); box-shadow:0 10px 34px rgba(255,45,138,.32); }
 .activation-submit:disabled { cursor:wait; opacity:.65; }
 .activation-msg { display:none; font-size:13px; line-height:1.5; }
+.activation-progress { margin-bottom:8px; }
+.activation-progress-copy {
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+  color:rgba(255,255,255,.36);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+.activation-progress-track {
+  height:3px;
+  overflow:hidden;
+  background:rgba(255,255,255,.08);
+}
+.activation-progress-bar {
+  width:0;
+  height:100%;
+  background:#FF2D8A;
+  transition:width .3s ease;
+}
+.activation-step { display:none; min-height:260px; }
+.activation-step.is-active {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:28px;
+  animation:activationStepIn .28s ease both;
+}
+.activation-step .activation-section-title { margin-top:0; }
+.activation-step .fform-field,
+.activation-step .activation-control { width:100%; }
+.activation-nav {
+  display:flex;
+  gap:12px;
+  margin-top:10px;
+}
+.activation-next,
+.activation-back {
+  padding:16px 26px;
+  border-radius:100px;
+  cursor:pointer;
+  font-family:'Unbounded',sans-serif;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+.activation-next {
+  flex:1;
+  border:0;
+  background:#FF2D8A;
+  color:#fff;
+}
+.activation-back {
+  border:1px solid rgba(255,255,255,.14);
+  background:transparent;
+  color:rgba(255,255,255,.62);
+}
+.activation-step-error {
+  display:none;
+  margin-top:-14px;
+  color:#ff5a66;
+  font-size:12px;
+}
+@keyframes activationStepIn {
+  from { opacity:0; transform:translateX(12px); }
+  to { opacity:1; transform:translateX(0); }
+}
 @media (max-width:900px) {
   .activation-hero { padding:104px 24px 64px; }
   .activation-hero-grid, .activation-grid { grid-template-columns:1fr; gap:48px; }
@@ -367,12 +438,137 @@ textarea.activation-control { min-height:110px; resize:vertical; line-height:1.6
   if (!form) return;
   var ajaxUrl = <?php echo wp_json_encode(admin_url('admin-ajax.php')); ?>;
   var nonce = <?php echo wp_json_encode(wp_create_nonce('fest_nonce')); ?>;
+  var submitButton = form.querySelector('.activation-submit');
+  var formMessage = form.querySelector('.activation-msg');
+  var thankYouPanel = form.querySelector('.activation-thanks');
+  var hiddenField = form.querySelector('input[type="hidden"]');
+  var nodes = Array.prototype.slice.call(form.children);
+  var steps = [];
+  var currentSection = '';
+  var consumed = [];
+
+  function makeStep(contentNodes) {
+    var step = document.createElement('div');
+    step.className = 'activation-step';
+    if (currentSection) {
+      var heading = document.createElement('div');
+      heading.className = 'activation-section-title';
+      heading.textContent = currentSection;
+      step.appendChild(heading);
+    }
+    contentNodes.forEach(function(node){
+      step.appendChild(node);
+      consumed.push(node);
+    });
+    var error = document.createElement('div');
+    error.className = 'activation-step-error';
+    error.setAttribute('role', 'alert');
+    step.appendChild(error);
+    steps.push(step);
+  }
+
+  nodes.forEach(function(node, index){
+    if (consumed.indexOf(node) !== -1) return;
+    if (node.classList.contains('activation-section-title')) {
+      currentSection = node.textContent;
+      node.remove();
+      return;
+    }
+    if (node.classList.contains('activation-row')) {
+      Array.prototype.slice.call(node.children).forEach(function(child){
+        makeStep([child]);
+      });
+      node.remove();
+      return;
+    }
+    if (node.classList.contains('activation-choice-label')) {
+      var choices = nodes[index + 1];
+      if (choices && choices.classList.contains('activation-checks')) {
+        makeStep([node, choices]);
+      }
+      return;
+    }
+    if (
+      node.classList.contains('fform-field') ||
+      node.classList.contains('activation-control') ||
+      node.classList.contains('activation-calendar')
+    ) {
+      makeStep([node]);
+    }
+  });
+
+  var progress = document.createElement('div');
+  progress.className = 'activation-progress';
+  progress.innerHTML =
+    '<div class="activation-progress-copy"><span>Application Progress</span><span class="activation-progress-count"></span></div>' +
+    '<div class="activation-progress-track"><div class="activation-progress-bar"></div></div>';
+  form.insertBefore(progress, form.firstChild);
+
+  steps.forEach(function(step, index){
+    var nav = document.createElement('div');
+    nav.className = 'activation-nav';
+    if (index > 0) {
+      var back = document.createElement('button');
+      back.type = 'button';
+      back.className = 'activation-back';
+      back.textContent = 'Back';
+      back.addEventListener('click', function(){ showStep(index - 1); });
+      nav.appendChild(back);
+    }
+    if (index < steps.length - 1) {
+      var next = document.createElement('button');
+      next.type = 'button';
+      next.className = 'activation-next';
+      next.textContent = 'Continue →';
+      next.addEventListener('click', function(){
+        if (validateStep(step)) showStep(index + 1);
+      });
+      nav.appendChild(next);
+    } else {
+      nav.appendChild(submitButton);
+    }
+    step.appendChild(nav);
+    form.insertBefore(step, hiddenField);
+  });
+
+  function validateStep(step) {
+    var error = step.querySelector('.activation-step-error');
+    var fields = Array.prototype.slice.call(step.querySelectorAll('input, select, textarea'));
+    var invalid = fields.find(function(field){ return !field.checkValidity(); });
+    var opportunityFields = step.querySelectorAll('[name="opportunities[]"]');
+    var missingOpportunity = opportunityFields.length &&
+      !step.querySelector('[name="opportunities[]"]:checked');
+
+    if (invalid || missingOpportunity) {
+      error.style.display = 'block';
+      error.textContent = missingOpportunity
+        ? 'Please select at least one opportunity.'
+        : 'Please complete this question before continuing.';
+      if (invalid) invalid.reportValidity();
+      return false;
+    }
+    error.style.display = 'none';
+    return true;
+  }
+
+  function showStep(index) {
+    steps.forEach(function(step, stepIndex){
+      step.classList.toggle('is-active', stepIndex === index);
+    });
+    progress.querySelector('.activation-progress-count').textContent =
+      (index + 1) + ' of ' + steps.length;
+    progress.querySelector('.activation-progress-bar').style.width =
+      (((index + 1) / steps.length) * 100) + '%';
+    form.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  if (steps.length) showStep(0);
 
   form.addEventListener('submit', function(event){
     event.preventDefault();
-    var button = form.querySelector('.activation-submit');
-    var message = form.querySelector('.activation-msg');
-    var thankYou = form.querySelector('.activation-thanks');
+    var button = submitButton;
+    var message = formMessage;
+    var thankYou = thankYouPanel;
     var opportunity = form.querySelector('[name="opportunities[]"]:checked');
 
     if (!form.checkValidity() || !opportunity) {
@@ -402,6 +598,8 @@ textarea.activation-control { min-height:110px; resize:vertical; line-height:1.6
         message.textContent = json.data;
         if (json.success) {
           form.reset();
+          steps.forEach(function(step){ step.classList.remove('is-active'); });
+          progress.style.display = 'none';
           thankYou.style.display = 'block';
           thankYou.scrollIntoView({ behavior:'smooth', block:'center' });
         }
