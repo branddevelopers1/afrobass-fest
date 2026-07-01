@@ -444,67 +444,41 @@ textarea.activation-control { min-height:110px; resize:vertical; line-height:1.6
   var hiddenField = form.querySelector('input[type="hidden"]');
   var nodes = Array.prototype.slice.call(form.children);
   var steps = [];
-  var currentSection = '';
-  var consumed = [];
+  var currentStep = null;
 
-  function makeStep(contentNodes) {
-    var step = document.createElement('div');
-    step.className = 'activation-step';
-    if (currentSection) {
-      var heading = document.createElement('div');
-      heading.className = 'activation-section-title';
-      heading.textContent = currentSection;
-      step.appendChild(heading);
-    }
-    contentNodes.forEach(function(node){
-      step.appendChild(node);
-      consumed.push(node);
-    });
-    var error = document.createElement('div');
-    error.className = 'activation-step-error';
-    error.setAttribute('role', 'alert');
-    step.appendChild(error);
-    steps.push(step);
-  }
-
-  nodes.forEach(function(node, index){
-    if (consumed.indexOf(node) !== -1) return;
+  nodes.forEach(function(node){
     if (node.classList.contains('activation-section-title')) {
-      currentSection = node.textContent;
-      node.remove();
+      currentStep = document.createElement('div');
+      currentStep.className = 'activation-step';
+      currentStep.appendChild(node);
+      steps.push(currentStep);
       return;
     }
-    if (node.classList.contains('activation-row')) {
-      Array.prototype.slice.call(node.children).forEach(function(child){
-        makeStep([child]);
-      });
-      node.remove();
-      return;
-    }
-    if (node.classList.contains('activation-choice-label')) {
-      var choices = nodes[index + 1];
-      if (choices && choices.classList.contains('activation-checks')) {
-        makeStep([node, choices]);
-      }
-      return;
-    }
-    if (
+    if (currentStep && (
+      node.classList.contains('activation-row') ||
       node.classList.contains('fform-field') ||
       node.classList.contains('activation-control') ||
+      node.classList.contains('activation-choice-label') ||
+      node.classList.contains('activation-checks') ||
       node.classList.contains('activation-calendar')
-    ) {
-      makeStep([node]);
+    )) {
+      currentStep.appendChild(node);
     }
   });
 
   var progress = document.createElement('div');
   progress.className = 'activation-progress';
   progress.innerHTML =
-    '<div class="activation-progress-copy"><span>Application Progress</span><span class="activation-progress-count"></span></div>' +
+    '<div class="activation-progress-copy"><span>Application Sections</span><span class="activation-progress-count"></span></div>' +
     '<div class="activation-progress-track"><div class="activation-progress-bar"></div></div>';
   form.insertBefore(progress, form.firstChild);
 
   steps.forEach(function(step, index){
+    var error = document.createElement('div');
+    error.className = 'activation-step-error';
+    error.setAttribute('role', 'alert');
+    step.appendChild(error);
+
     var nav = document.createElement('div');
     nav.className = 'activation-nav';
     if (index > 0) {
@@ -556,7 +530,7 @@ textarea.activation-control { min-height:110px; resize:vertical; line-height:1.6
       step.classList.toggle('is-active', stepIndex === index);
     });
     progress.querySelector('.activation-progress-count').textContent =
-      (index + 1) + ' of ' + steps.length;
+      'Section ' + (index + 1) + ' of ' + steps.length;
     progress.querySelector('.activation-progress-bar').style.width =
       (((index + 1) / steps.length) * 100) + '%';
     form.scrollIntoView({ behavior:'smooth', block:'start' });
