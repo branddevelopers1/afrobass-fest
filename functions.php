@@ -469,11 +469,11 @@ function fest_contact_form() {
     }
 
     if ($subject === 'Press') {
-        $to = 'media@afrobass.com';
+        $to = 'media@afrobassfest.com';
     } elseif ($subject === 'Sponsorship') {
-        $to = 'sponsor@afrobass.com';
+        $to = 'sponsor@afrobassfest.com';
     } else {
-        $to = 'contact@afrobass.com';
+        $to = 'contact@afrobassfest.com';
     }
     $subj    = "[{$subject}] {$first} {$last} — Afrobass Fest 2026";
     $body    = "New contact form submission\n\nName:    {$first} {$last}\nEmail:   {$email}\nPhone:   {$phone}\nTopic:   {$subject}\n\nMessage:\n{$message}\n";
@@ -551,9 +551,9 @@ function fest_handle_submission() {
         wp_send_json_error('Please complete all required brand activation fields.');
     }
 
-    $to      = $type === 'brand_activation'
-        ? ['sponsor@afrobassfest.com', 'sponsor@afrobass.com']
-        : 'contact@afrobass.com';
+    $to      = in_array($type, ['brand_activation', 'vendor'], true)
+        ? 'sponsor@afrobassfest.com'
+        : 'contact@afrobassfest.com';
     $type_label = $type === 'brand_activation' ? 'Brand Activation' : ucfirst($type);
     $subject = '[' . $type_label . ' Submission] ' . $name . ' — Afrobass Fest 2026';
     $body    = "New {$type} submission from afrobassfestival.com\n\n";
