@@ -44,28 +44,6 @@ $email = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
 }
 .join-card:hover { background: #0a0a0a; }
 
-/* Card image */
-.join-card-img {
-  width: 100%;
-  aspect-ratio: 4/3;
-  overflow: hidden;
-  position: relative;
-  background: #111;
-  flex-shrink: 0;
-}
-.join-card-img-placeholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.join-card-img-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(8,8,8,0.7) 0%, transparent 60%);
-}
-
 /* Accent line — different color per card */
 .join-card-accent {
   position: absolute;
@@ -355,12 +333,6 @@ $email = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
     <!-- VOLUNTEERS -->
     <div class="join-card fest-reveal" onclick="showForm('volunteer')" role="button" tabindex="0">
       <div class="join-card-accent" style="background:#a855f7;"></div>
-      <div class="join-card-img">
-        <div class="join-card-img-overlay"></div>
-        <div style="position:absolute;bottom:20px;left:24px;">
-          <div style="font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(168,85,247,0.8);">Free Entry</div>
-        </div>
-      </div>
       <div class="join-card-body">
         <div class="join-card-number">01</div>
         <div class="join-card-title">Volunteers</div>
@@ -377,12 +349,6 @@ $email = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
     <!-- BRAND ACTIVATION & VENDORS -->
     <a href="<?php echo esc_url(home_url('/brand-activation')); ?>" class="join-card fest-reveal fest-d1" aria-label="Open the Brand Activation and Vendor Application">
       <div class="join-card-accent" style="background:#00c2ff;"></div>
-      <div class="join-card-img">
-        <div class="join-card-img-overlay"></div>
-        <div style="position:absolute;bottom:20px;left:24px;">
-          <div style="font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(0,194,255,0.8);">Featured · Limited Spots</div>
-        </div>
-      </div>
       <div class="join-card-body">
         <div class="join-card-number">02</div>
         <div class="join-card-title">Brand Activation &amp; Vendors</div>
