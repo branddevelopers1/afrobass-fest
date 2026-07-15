@@ -72,6 +72,39 @@ $sponsors = new WP_Query([
 <!-- ═══════════════════════════════════════════
      1. HERO
 ════════════════════════════════════════════ -->
+<?php
+// Hero data — split Day 1 / Day 2. Links confirmed to existing Showpass + Tablelist.
+$hero_day1_url   = $ticket_url ?: 'https://show.ps/l/581f9fa7/';
+$hero_day2_url   = $day2_ticket_url ?: 'https://show.ps/l/0c3f4a74/';
+$hero_bottle_url = $table_ticket_url; // Rebel bottle service (Tablelist)
+
+$hero_days = [
+  'day1' => [
+    'label'    => 'Day 1',
+    'date'     => 'Sat · Aug 15, 2026',
+    'name'     => "The Cavemen. · Victony · Obi's House Toronto + More",
+    'venue'    => 'Rebel Toronto',
+    'hours'    => '8pm – 3am',
+    'color'    => '#FF4500',
+    'url'      => $hero_day1_url,
+    'flyer'    => 'day1-flyer.jpg',
+    'bottle'   => true,
+    // Price tiers (shown on /tickets): GA $60 · Crew Package $200 (4 GA) · VIP Balcony Booth $1,400 · Stage Booth $2,500
+  ],
+  'day2' => [
+    'label'    => 'Day 2',
+    'date'     => 'Sun · Aug 16, 2026',
+    'name'     => 'DBN Gogo · Day Party',
+    'venue'    => 'Acqua Supper Club',
+    'hours'    => '5pm – 11pm',
+    'color'    => '#FF2D8A',
+    'url'      => $hero_day2_url,
+    'flyer'    => 'day2-flyer.jpg',
+    'bottle'   => false,
+    // Price tiers (shown on /tickets): GA $40 · Table Reservation $750 ($150 deposit, 5 tickets, $600 min bottle spend)
+  ],
+];
+?>
 <section class="fhero" id="home">
 
   <div class="fghost fg-1" aria-hidden="true">AFROBEATS</div>
@@ -111,11 +144,9 @@ $sponsors = new WP_Query([
       <a href="<?php echo esc_url($ticket_url ?: 'https://show.ps/l/581f9fa7/'); ?>" class="fbtn-main">
         Buy Tickets Now &rarr;
       </a>
-      <?php /* commented out
-      <a href="<?= esc_url(home_url('/lineup')) ?>" class="fbtn-ghost">
+      <a href="<?php echo esc_url(home_url('/lineup')); ?>" class="fbtn-ghost">
         See the Lineup
       </a>
-      */ ?>
     </div>
   </div>
 
@@ -124,6 +155,157 @@ $sponsors = new WP_Query([
     <span class="fscroll-txt">Scroll</span>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════════
+     1b. PICK YOUR DAY — split Day 1 / Day 2 flyer cards
+════════════════════════════════════════════ -->
+<section class="fhero-split" id="pick-your-day">
+
+  <div class="fbg-lines" aria-hidden="true" style="position:absolute;inset:0;"></div>
+
+  <!-- Intro band -->
+  <div class="fhs-intro">
+    <div class="fhs-eyebrow">Two Days · One City · All Bass</div>
+    <h2 class="fhs-title">
+      PICK YOUR <span class="fhs-title-accent">DAY</span>
+    </h2>
+    <div class="fhs-sub">
+      <span class="fhs-sub-item">Aug 15–16, 2026</span>
+      <span class="fhs-sub-dot"></span>
+      <a href="<?php echo esc_url(home_url('/lineup')); ?>" class="fhs-sub-link">See Full Lineup &rarr;</a>
+    </div>
+    <div class="fhs-twoday">
+      <span>2-Day Pass</span>
+      <strong>$90</strong>
+      <a href="<?php echo esc_url($hero_day1_url); ?>" class="fhs-twoday-btn">Get 2-Day &rarr;</a>
+    </div>
+  </div>
+
+  <!-- Split cards -->
+  <div class="fhs-grid">
+    <?php foreach ($hero_days as $dk => $d): ?>
+    <div class="fhs-card fhs-<?php echo esc_attr($dk); ?>" style="--day-color:<?php echo esc_attr($d['color']); ?>;background-image:url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/' . $d['flyer']); ?>');">
+
+      <div class="fhs-card-overlay">
+        <div class="fhs-card-actions">
+          <a href="<?php echo esc_url($d['url']); ?>" target="_blank" rel="noopener" class="fhs-btn fhs-btn-primary">
+            Get <?php echo esc_html($d['label']); ?> Tickets &rarr;
+          </a>
+          <?php if (!empty($d['bottle'])): ?>
+          <a href="<?php echo esc_url($hero_bottle_url); ?>" target="_blank" rel="noopener" class="fhs-btn fhs-btn-ghost">
+            Bottle Service &amp; Booths &rarr;
+          </a>
+          <?php endif; ?>
+        </div>
+      </div>
+
+    </div>
+    <?php endforeach; ?>
+  </div>
+
+</section>
+
+<style>
+/* ── SPLIT HERO ── */
+.fhero-split {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 90px 56px 90px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+.fhs-intro { text-align: center; max-width: 1100px; margin: 0 auto 48px; position: relative; z-index: 2; }
+.fhs-eyebrow {
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 600;
+  letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.4);
+  margin-bottom: 22px;
+}
+.fhs-title {
+  font-family: 'Unbounded', sans-serif; font-weight: 900;
+  font-size: clamp(34px, 6vw, 72px); line-height: 0.92; letter-spacing: -2px;
+  text-transform: uppercase; color: #fff; margin-bottom: 26px;
+}
+.fhs-title-accent { color: #FF2D8A; }
+.fhs-sub {
+  display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
+  gap: 16px; margin-bottom: 30px;
+}
+.fhs-sub-item {
+  font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55);
+}
+.fhs-sub-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+.fhs-sub-link {
+  font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; color: #FF2D8A; text-decoration: none;
+  transition: opacity 0.2s;
+}
+.fhs-sub-link:hover { opacity: 0.7; }
+.fhs-twoday {
+  display: inline-flex; align-items: center; gap: 16px;
+  padding: 12px 14px 12px 24px; border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 100px; background: rgba(255,255,255,0.02);
+}
+.fhs-twoday span {
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.5);
+}
+.fhs-twoday strong {
+  font-family: 'Unbounded', sans-serif; font-size: 20px; font-weight: 900; color: #fff;
+}
+.fhs-twoday-btn {
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; color: #0a0608; text-decoration: none;
+  background: #fff; padding: 12px 22px; border-radius: 100px; transition: transform 0.2s;
+}
+.fhs-twoday-btn:hover { transform: translateX(3px); }
+
+.fhs-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  max-width: 1200px; margin: 0 auto; width: 100%;
+  position: relative; z-index: 2;
+}
+.fhs-card {
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top: 3px solid var(--day-color);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  aspect-ratio: 1 / 1;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.fhs-card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-4px); }
+.fhs-card-overlay {
+  position: absolute; inset: 0; z-index: 2;
+  padding: 20px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  background: linear-gradient(to top, rgba(8,6,8,0.94) 0%, rgba(8,6,8,0.72) 20%, rgba(8,6,8,0.15) 36%, transparent 50%);
+}
+.fhs-card-actions { display: flex; flex-direction: column; gap: 10px; }
+.fhs-btn {
+  display: block; text-align: center;
+  font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+  padding: 16px 20px; transition: opacity 0.2s, transform 0.2s;
+}
+.fhs-btn-primary { background: var(--day-color); color: #fff; }
+.fhs-btn-primary:hover { opacity: 0.88; transform: translateX(3px); }
+.fhs-btn-ghost {
+  background: rgba(0,0,0,0.4); color: #fff;
+  border: 1px solid rgba(255,255,255,0.28);
+}
+.fhs-btn-ghost:hover { border-color: rgba(255,255,255,0.6); background: rgba(0,0,0,0.55); }
+
+@media (max-width: 860px) {
+  .fhero-split { padding: 60px 20px 60px; }
+  .fhs-grid { grid-template-columns: 1fr; gap: 16px; }
+  .fhs-sub { gap: 10px; }
+  .fhs-intro { margin-bottom: 36px; }
+}
+</style>
 
 <!-- ── TICKER ── -->
 <div class="fticker" aria-hidden="true">
@@ -160,6 +342,7 @@ $sponsors = new WP_Query([
 <?php endif; ?>
 <?php endif; ?>
 
+<?php if (false): // hidden — now handled by the split hero above ?>
 <div style="position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:2px;">
   <a href="<?php echo esc_url($ticket_url ?: 'https://show.ps/l/581f9fa7/'); ?>"
      style="display:flex;align-items:center;justify-content:center;gap:12px;padding:22px;background:#FF4500;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff;text-decoration:none;transition:opacity 0.2s;"
@@ -172,10 +355,12 @@ $sponsors = new WP_Query([
     Day 2 — Aug 16 &nbsp; Get Tickets &rarr;
   </a>
 </div>
+<?php endif; ?>
 
 <!-- ═══════════════════════════════════════════
-     LINEUP
+     LINEUP  (hidden on front page — lives on /lineup)
 ════════════════════════════════════════════ -->
+<?php if (false): ?>
 <section style="position:relative;z-index:2;padding:0 0 100px;border-top:1px solid rgba(255,255,255,0.04);" id="lineup">
 
   <?php foreach ($fp_lineup_days as $day_key => $day):
@@ -279,10 +464,12 @@ $sponsors = new WP_Query([
   .fday-header    { padding: 16px 20px !important; }
 }
 </style>
+<?php endif; // end hidden LINEUP section ?>
 
 <!-- ═══════════════════════════════════════════
-     TICKET TIERS
+     TICKET TIERS  (hidden on front page — lives on /tickets)
 ════════════════════════════════════════════ -->
+<?php if (false): ?>
 <section style="position:relative;z-index:2;padding:100px 56px;border-top:1px solid rgba(255,255,255,0.04);" id="tickets">
 
   <div class="fest-section-hdr fest-reveal" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;">
@@ -366,6 +553,7 @@ $sponsors = new WP_Query([
   .fp-ticket-tiers { grid-template-columns: 1fr !important; }
 }
 </style>
+<?php endif; // end hidden TICKET TIERS section ?>
 
 <!-- ═══════════════════════════════════════════
      APPLY CTA
@@ -522,8 +710,9 @@ $sponsors = new WP_Query([
 </div>
 
 <!-- ═══════════════════════════════════════════
-     8. EMAIL SIGNUP
+     8. EMAIL SIGNUP  (hidden on front page)
 ════════════════════════════════════════════ -->
+<?php if (false): ?>
 <section style="position:relative;z-index:2;padding:100px 56px;border-top:1px solid rgba(255,255,255,0.04);" id="notify">
   <div class="fsignup-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1200px;margin:0 auto;">
 
@@ -568,5 +757,6 @@ $sponsors = new WP_Query([
 
   </div>
 </section>
+<?php endif; // end hidden EMAIL SIGNUP section ?>
 
 <?php get_footer(); ?>
