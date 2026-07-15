@@ -356,11 +356,6 @@ $email = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
     <div class="join-card fest-reveal" onclick="showForm('volunteer')" role="button" tabindex="0">
       <div class="join-card-accent" style="background:#a855f7;"></div>
       <div class="join-card-img">
-        <div class="join-card-img-placeholder">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(168,85,247,0.15)" stroke-width="0.75">
-            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
-          </svg>
-        </div>
         <div class="join-card-img-overlay"></div>
         <div style="position:absolute;bottom:20px;left:24px;">
           <div style="font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(168,85,247,0.8);">Free Entry</div>
@@ -383,11 +378,6 @@ $email = fest_setting('fest_email') ?: 'contact@afrobassfest.com';
     <a href="<?php echo esc_url(home_url('/brand-activation')); ?>" class="join-card fest-reveal fest-d1" aria-label="Open the Brand Activation and Vendor Application">
       <div class="join-card-accent" style="background:#00c2ff;"></div>
       <div class="join-card-img">
-        <div class="join-card-img-placeholder">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(0,194,255,0.15)" stroke-width="0.75">
-            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
-          </svg>
-        </div>
         <div class="join-card-img-overlay"></div>
         <div style="position:absolute;bottom:20px;left:24px;">
           <div style="font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(0,194,255,0.8);">Featured · Limited Spots</div>
