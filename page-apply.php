@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Submissions Page
+ * Template Name: Apply Page
  * Template Post Type: page
  */
 get_header();

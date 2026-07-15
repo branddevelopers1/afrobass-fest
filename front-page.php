@@ -565,18 +565,15 @@ $hero_days = [
       <div class="fest-kicker">Be Part of Afrobass</div>
       <h2>Apply to Join<br><em>the Festival</em></h2>
     </div>
-    <p>Perform on stage, volunteer with the crew, work with the team, or bring your food, merch, lifestyle, or cultural brand to the fest.</p>
+    <p>Volunteer with the crew and earn fest access, or bring your food, merch, lifestyle, or cultural brand to the fest through a vendor spot or brand activation.</p>
   </div>
 
   <div class="fp-apply-grid">
     <?php foreach ([
-      ['Perform',   'Artists and DJs ready for the Afrobass stage.',                    home_url('/apply'),    '#FF2D8A', 'Artist Application'],
       ['Volunteer', 'Help build the experience from the inside and earn fest access.',  home_url('/apply'),    '#a855f7', 'Volunteer Application'],
-      ['Vendors',   'Food, merch, lifestyle, beauty, cultural, and community vendors.', home_url('/vendors'),  '#FF6B1A', 'Vendor Application'],
-      ['Work',      'Want to be part of the team behind the festival?',                 'mailto:' . $contact_email . '?subject=Afrobass%20Team%20Application', '#00c2ff', 'Contact the Team'],
-      ['Brand Activation', 'Create an audience-first activation, explore a partnership package, or join us through an in-kind sponsorship.', home_url('/brand-activation'), '#00c2ff', 'Brand Activation & Vendor Application'],
+      ['Brand Activation & Vendors', 'Create an audience-first activation, explore a partnership package, bring your food, merch, lifestyle, or cultural brand, or join us through an in-kind sponsorship.', home_url('/brand-activation'), '#00c2ff', 'Brand Activation & Vendor Application'],
     ] as $i => $item): ?>
-      <a href="<?php echo esc_url($item[2]); ?>" class="fp-apply-card<?php echo $i === 4 ? ' fp-apply-card-featured' : ''; ?> fest-reveal" style="--apply-color: <?php echo esc_attr($item[3]); ?>;">
+      <a href="<?php echo esc_url($item[2]); ?>" class="fp-apply-card fest-reveal" style="--apply-color: <?php echo esc_attr($item[3]); ?>;">
         <span><?php echo str_pad($i + 1, 2, '0', STR_PAD_LEFT); ?></span>
         <h3><?php echo esc_html($item[0]); ?></h3>
         <p><?php echo esc_html($item[1]); ?></p>
@@ -622,7 +619,7 @@ $hero_days = [
 }
 .fp-apply-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2px;
   background: rgba(255,255,255,0.05);
 }
