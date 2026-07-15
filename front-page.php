@@ -156,30 +156,29 @@ $hero_days = [
   </div>
 </section>
 
+<!-- ── TICKER ── -->
+<div class="fticker" aria-hidden="true">
+  <div class="fticker-track">
+    <?php for($i=0;$i<2;$i++): ?>
+    <div class="fti hot">Afrobeats <div class="ftdot"></div></div>
+    <div class="fti">Amapiano <div class="ftdot"></div></div>
+    <div class="fti">Aug 15–16, 2026 <div class="ftdot"></div></div>
+    <div class="fti hot">2-Day Fest <div class="ftdot"></div></div>
+    <div class="fti">Toronto <div class="ftdot"></div></div>
+    <div class="fti hot">Rebel Entertainment Complex <div class="ftdot"></div></div>
+    <div class="fti hot">First Edition <div class="ftdot"></div></div>
+    <div class="fti">19+ Event <div class="ftdot"></div></div>
+    <div class="fti hot">International Artists &amp; DJs <div class="ftdot"></div></div>
+    <?php endfor; ?>
+  </div>
+</div>
+
 <!-- ═══════════════════════════════════════════
      1b. PICK YOUR DAY — split Day 1 / Day 2 flyer cards
 ════════════════════════════════════════════ -->
 <section class="fhero-split" id="pick-your-day">
 
   <div class="fbg-lines" aria-hidden="true" style="position:absolute;inset:0;"></div>
-
-  <!-- Intro band -->
-  <div class="fhs-intro">
-    <div class="fhs-eyebrow">Two Days · One City · All Bass</div>
-    <h2 class="fhs-title">
-      PICK YOUR <span class="fhs-title-accent">DAY</span>
-    </h2>
-    <div class="fhs-sub">
-      <span class="fhs-sub-item">Aug 15–16, 2026</span>
-      <span class="fhs-sub-dot"></span>
-      <a href="<?php echo esc_url(home_url('/lineup')); ?>" class="fhs-sub-link">See Full Lineup &rarr;</a>
-    </div>
-    <div class="fhs-twoday">
-      <span>2-Day Pass</span>
-      <strong>$90</strong>
-      <a href="<?php echo esc_url($hero_day1_url); ?>" class="fhs-twoday-btn">Get 2-Day &rarr;</a>
-    </div>
-  </div>
 
   <!-- Split cards -->
   <div class="fhs-grid">
@@ -203,6 +202,24 @@ $hero_days = [
     <?php endforeach; ?>
   </div>
 
+  <!-- Intro band (now below the cards) -->
+  <div class="fhs-intro fhs-intro-below">
+    <div class="fhs-eyebrow">Two Days · One City · All Bass</div>
+    <h2 class="fhs-title">
+      PICK YOUR <span class="fhs-title-accent">DAY</span>
+    </h2>
+    <div class="fhs-sub">
+      <span class="fhs-sub-item">Aug 15–16, 2026</span>
+      <span class="fhs-sub-dot"></span>
+      <a href="<?php echo esc_url(home_url('/lineup')); ?>" class="fhs-sub-link">See Full Lineup &rarr;</a>
+    </div>
+    <div class="fhs-twoday">
+      <span>2-Day Pass</span>
+      <strong>$90</strong>
+      <a href="<?php echo esc_url($hero_day1_url); ?>" class="fhs-twoday-btn">Get 2-Day &rarr;</a>
+    </div>
+  </div>
+
 </section>
 
 <style>
@@ -215,6 +232,7 @@ $hero_days = [
   overflow: hidden;
 }
 .fhs-intro { text-align: center; max-width: 1100px; margin: 0 auto 48px; position: relative; z-index: 2; }
+.fhs-intro-below { margin: 48px auto 0; }
 .fhs-eyebrow {
   font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 600;
   letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.4);
@@ -306,23 +324,6 @@ $hero_days = [
   .fhs-intro { margin-bottom: 36px; }
 }
 </style>
-
-<!-- ── TICKER ── -->
-<div class="fticker" aria-hidden="true">
-  <div class="fticker-track">
-    <?php for($i=0;$i<2;$i++): ?>
-    <div class="fti hot">Afrobeats <div class="ftdot"></div></div>
-    <div class="fti">Amapiano <div class="ftdot"></div></div>
-    <div class="fti">Aug 15–16, 2026 <div class="ftdot"></div></div>
-    <div class="fti hot">2-Day Fest <div class="ftdot"></div></div>
-    <div class="fti">Toronto <div class="ftdot"></div></div>
-    <div class="fti hot">Rebel Entertainment Complex <div class="ftdot"></div></div>
-    <div class="fti hot">First Edition <div class="ftdot"></div></div>
-    <div class="fti">19+ Event <div class="ftdot"></div></div>
-    <div class="fti hot">International Artists &amp; DJs <div class="ftdot"></div></div>
-    <?php endfor; ?>
-  </div>
-</div>
 
 <!-- ═══════════════════════════════════════════
      3. LINEUP IMAGE
