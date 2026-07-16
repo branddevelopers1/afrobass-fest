@@ -520,7 +520,7 @@ input, textarea, select { font-family: var(--font-body); }
 .fest-tickets-section { padding: 72px 56px 96px; }
 .fest-ticket-day-section + .fest-ticket-day-section { margin-top: 72px; }
 .fest-tickets-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2px; background: var(--dark3); margin-top: 28px;
 }
 .fest-ticket-tier {

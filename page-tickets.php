@@ -11,19 +11,19 @@ $table_ticket_url = fest_setting('fest_table_ticket_url') ?: 'https://buy.tablel
 
 $prices = [
     'day1' => [
-        'ga'    => fest_setting('fest_day1_ga_price')  ?: '$40',
-        'vip'   => fest_setting('fest_day1_vip_price') ?: '$80',
+        'ga'    => fest_setting('fest_day1_ga_price')  ?: '$60 + applicable fees',
+        'vip'   => fest_setting('fest_day1_vip_price') ?: 'Sold Out',
         'table' => fest_setting('fest_day1_table_price') ?: 'TBA',
     ],
     'day2' => [
-        'ga'    => fest_setting('fest_day2_ga_price')    ?: 'TBA',
+        'ga'    => fest_setting('fest_day2_ga_price')    ?: '$40 + applicable fees',
         'vip'   => fest_setting('fest_day2_vip_price')   ?: 'TBA',
-        'table' => fest_setting('fest_day2_table_price') ?: 'TBA',
+        'table' => fest_setting('fest_day2_table_price') ?: '$750',
     ],
 ];
 
 $days_meta = [
-  'day1' => ['label' => 'Day 1', 'name' => "Obi's House + The Cavemen. + More!", 'date' => 'Aug 15', 'full_date' => 'Saturday, August 15', 'hours' => '8pm - 3am', 'venue' => 'Rebel Entertainment Complex', 'color' => '#FF4500'],
+  'day1' => ['label' => 'Day 1', 'name' => "Obi's House + Victony + The Cavemen. + & More!", 'date' => 'Aug 15', 'full_date' => 'Saturday, August 15', 'hours' => '8pm - 3am', 'venue' => 'Rebel Entertainment Complex', 'color' => '#FF4500'],
   'day2' => ['label' => 'Day 2', 'name' => 'Day Party w/ DBN Gogo',              'date' => 'Aug 16', 'full_date' => 'Sunday, August 16',   'hours' => '5pm - 11pm', 'venue' => 'Acqua Supper Club',           'color' => '#FF2D8A'],
 ];
 $ticket_days = [
@@ -75,10 +75,7 @@ $ticket_days = [
           <span class="fest-tier-badge">General</span>
           <div class="fest-tier-name">General Admission</div>
           <div class="fest-tier-price">
-            <?php if ($day_key === 'day1'): ?>
-            <span class="fest-tier-price-note">Starts at</span>
             <strong><?php echo esc_html($prices[$day_key]['ga']); ?></strong>
-            <?php else: echo esc_html($prices[$day_key]['ga']); endif; ?>
           </div>
           <div class="fest-tier-desc"><?php echo $is_day_party ? 'Full access to the day party, all performances, and vendor areas.' : 'Full access to the fest grounds, all performances, and vendor areas.'; ?></div>
           <div class="fest-tier-perks">
@@ -97,15 +94,13 @@ $ticket_days = [
           <?php endif; ?>
         </div>
 
-        <!-- VIP -->
+        <!-- VIP (Day 1 only) -->
+        <?php if ($day_key === 'day1'): ?>
         <div class="fest-ticket-tier featured fest-reveal">
           <span class="fest-tier-badge">Most Popular</span>
           <div class="fest-tier-name">VIP Experience</div>
           <div class="fest-tier-price">
-            <?php if ($day_key === 'day1'): ?>
-            <span class="fest-tier-price-note">Starts at</span>
             <strong><?php echo esc_html($prices[$day_key]['vip']); ?></strong>
-            <?php else: echo esc_html($prices[$day_key]['vip']); endif; ?>
           </div>
           <div class="fest-tier-desc">Premium access with exclusive areas, dedicated bar, and priority entry.</div>
           <div class="fest-tier-perks">
@@ -114,7 +109,9 @@ $ticket_days = [
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Priority entry &mdash; skip the line</div>
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Exclusive VIP lounge access</div>
           </div>
-          <?php if ($day_url): ?>
+          <?php if (stripos($prices[$day_key]['vip'], 'sold') !== false): ?>
+          <div class="fest-tier-btn fest-tier-btn-fill fest-tier-btn-disabled">Sold Out</div>
+          <?php elseif ($day_url): ?>
           <a href="<?php echo esc_url($day_url); ?>"
              class="fest-tier-btn fest-tier-btn-fill">
             Buy Tickets &rarr;
@@ -123,6 +120,7 @@ $ticket_days = [
           <div class="fest-tier-btn fest-tier-btn-fill fest-tier-btn-disabled">Tickets Coming Soon</div>
           <?php endif; ?>
         </div>
+        <?php endif; ?>
 
         <!-- Table Package -->
         <div class="fest-ticket-tier fest-reveal">
