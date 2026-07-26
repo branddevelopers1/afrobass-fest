@@ -105,6 +105,73 @@ $hero_days = [
   ],
 ];
 ?>
+
+<!-- ═══════════════════════════════════════════
+     1b. PICK YOUR DAY — split Day 1 / Day 2 flyer cards
+════════════════════════════════════════════ -->
+<section class="fhero-split" id="pick-your-day">
+
+  <div class="fbg-lines" aria-hidden="true" style="position:absolute;inset:0;"></div>
+
+  <!-- Split cards -->
+  <div class="fhs-grid">
+    <?php foreach ($hero_days as $dk => $d): ?>
+    <div class="fhs-card fhs-<?php echo esc_attr($dk); ?>" style="--day-color:<?php echo esc_attr($d['color']); ?>;background-image:url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/' . $d['flyer']); ?>');">
+
+      <div class="fhs-card-overlay">
+        <div class="fhs-card-actions">
+          <a href="<?php echo esc_url($d['url']); ?>" target="_blank" rel="noopener" class="fhs-btn fhs-btn-primary">
+            Get <?php echo esc_html($d['label']); ?> Tickets &rarr;
+          </a>
+          <?php if (!empty($d['bottle'])): ?>
+          <a href="<?php echo esc_url($hero_bottle_url); ?>" target="_blank" rel="noopener" class="fhs-btn fhs-btn-ghost">
+            Bottle Service &amp; Booths &rarr;
+          </a>
+          <?php endif; ?>
+        </div>
+      </div>
+
+    </div>
+    <?php endforeach; ?>
+  </div>
+
+  <!-- Intro band (now below the cards) -->
+  <div class="fhs-intro fhs-intro-below">
+    <div class="fhs-eyebrow">Two Days · One City · All Bass</div>
+    <h2 class="fhs-title">
+      PICK YOUR <span class="fhs-title-accent">DAY</span>
+    </h2>
+    <div class="fhs-sub">
+      <span class="fhs-sub-item">Aug 15–16, 2026</span>
+      <span class="fhs-sub-dot"></span>
+      <a href="<?php echo esc_url(home_url('/lineup')); ?>" class="fhs-sub-link">See Full Lineup &rarr;</a>
+    </div>
+    <div class="fhs-twoday">
+      <span>2-Day Pass</span>
+      <strong>$90</strong>
+      <a href="<?php echo esc_url($hero_day1_url); ?>" class="fhs-twoday-btn">Get 2-Day &rarr;</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── TICKER ── -->
+<div class="fticker" aria-hidden="true">
+  <div class="fticker-track">
+    <?php for($i=0;$i<2;$i++): ?>
+    <div class="fti hot">Afrobeats <div class="ftdot"></div></div>
+    <div class="fti">Amapiano <div class="ftdot"></div></div>
+    <div class="fti">Aug 15–16, 2026 <div class="ftdot"></div></div>
+    <div class="fti hot">2-Day Fest <div class="ftdot"></div></div>
+    <div class="fti">Toronto <div class="ftdot"></div></div>
+    <div class="fti hot">Rebel Entertainment Complex <div class="ftdot"></div></div>
+    <div class="fti hot">First Edition <div class="ftdot"></div></div>
+    <div class="fti">19+ Event <div class="ftdot"></div></div>
+    <div class="fti hot">International Artists &amp; DJs <div class="ftdot"></div></div>
+    <?php endfor; ?>
+  </div>
+</div>
+
 <section class="fhero" id="home">
 
   <div class="fghost fg-1" aria-hidden="true">AFROBEATS</div>
@@ -156,79 +223,12 @@ $hero_days = [
   </div>
 </section>
 
-<!-- ── TICKER ── -->
-<div class="fticker" aria-hidden="true">
-  <div class="fticker-track">
-    <?php for($i=0;$i<2;$i++): ?>
-    <div class="fti hot">Afrobeats <div class="ftdot"></div></div>
-    <div class="fti">Amapiano <div class="ftdot"></div></div>
-    <div class="fti">Aug 15–16, 2026 <div class="ftdot"></div></div>
-    <div class="fti hot">2-Day Fest <div class="ftdot"></div></div>
-    <div class="fti">Toronto <div class="ftdot"></div></div>
-    <div class="fti hot">Rebel Entertainment Complex <div class="ftdot"></div></div>
-    <div class="fti hot">First Edition <div class="ftdot"></div></div>
-    <div class="fti">19+ Event <div class="ftdot"></div></div>
-    <div class="fti hot">International Artists &amp; DJs <div class="ftdot"></div></div>
-    <?php endfor; ?>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     1b. PICK YOUR DAY — split Day 1 / Day 2 flyer cards
-════════════════════════════════════════════ -->
-<section class="fhero-split" id="pick-your-day">
-
-  <div class="fbg-lines" aria-hidden="true" style="position:absolute;inset:0;"></div>
-
-  <!-- Split cards -->
-  <div class="fhs-grid">
-    <?php foreach ($hero_days as $dk => $d): ?>
-    <div class="fhs-card fhs-<?php echo esc_attr($dk); ?>" style="--day-color:<?php echo esc_attr($d['color']); ?>;background-image:url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/' . $d['flyer']); ?>');">
-
-      <div class="fhs-card-overlay">
-        <div class="fhs-card-actions">
-          <a href="<?php echo esc_url($d['url']); ?>" target="_blank" rel="noopener" class="fhs-btn fhs-btn-primary">
-            Get <?php echo esc_html($d['label']); ?> Tickets &rarr;
-          </a>
-          <?php if (!empty($d['bottle'])): ?>
-          <a href="<?php echo esc_url($hero_bottle_url); ?>" target="_blank" rel="noopener" class="fhs-btn fhs-btn-ghost">
-            Bottle Service &amp; Booths &rarr;
-          </a>
-          <?php endif; ?>
-        </div>
-      </div>
-
-    </div>
-    <?php endforeach; ?>
-  </div>
-
-  <!-- Intro band (now below the cards) -->
-  <div class="fhs-intro fhs-intro-below">
-    <div class="fhs-eyebrow">Two Days · One City · All Bass</div>
-    <h2 class="fhs-title">
-      PICK YOUR <span class="fhs-title-accent">DAY</span>
-    </h2>
-    <div class="fhs-sub">
-      <span class="fhs-sub-item">Aug 15–16, 2026</span>
-      <span class="fhs-sub-dot"></span>
-      <a href="<?php echo esc_url(home_url('/lineup')); ?>" class="fhs-sub-link">See Full Lineup &rarr;</a>
-    </div>
-    <div class="fhs-twoday">
-      <span>2-Day Pass</span>
-      <strong>$90</strong>
-      <a href="<?php echo esc_url($hero_day1_url); ?>" class="fhs-twoday-btn">Get 2-Day &rarr;</a>
-    </div>
-  </div>
-
-</section>
-
 <style>
 /* ── SPLIT HERO ── */
 .fhero-split {
   position: relative; z-index: 2;
   display: flex; flex-direction: column; justify-content: center;
-  padding: 90px 56px 90px;
-  border-top: 1px solid rgba(255,255,255,0.04);
+  padding: 140px 56px 90px;
   overflow: hidden;
 }
 .fhs-intro { text-align: center; max-width: 1100px; margin: 0 auto 48px; position: relative; z-index: 2; }
@@ -318,7 +318,7 @@ $hero_days = [
 .fhs-btn-ghost:hover { border-color: rgba(255,255,255,0.6); background: rgba(0,0,0,0.55); }
 
 @media (max-width: 860px) {
-  .fhero-split { padding: 60px 20px 60px; }
+  .fhero-split { padding: 110px 20px 60px; }
   .fhs-grid { grid-template-columns: 1fr; gap: 16px; }
   .fhs-sub { gap: 10px; }
   .fhs-intro { margin-bottom: 36px; }

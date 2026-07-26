@@ -15,7 +15,11 @@ $faqs = [
     ],
     [
       'q' => 'What ticket types are available?',
-      'a' => 'General Admission, VIP Experience, and Table Packages for 10 guests with bottle service.'
+      'a' => 'Day 1: General Admission, The Crew Package (4 GA tickets), VIP Experience, and Table Packages. Day 2: General Admission, The Crew Package (4 GA tickets), and Table Reservations for 5 guests with bottle service.'
+    ],
+    [
+      'q' => 'How much are tickets?',
+      'a' => 'Day 1 — General Admission $70 (+ applicable fees); The Crew Package $200 for 4 General Admission tickets; VIP is sold out. Day 2 — General Admission $40 (+ applicable fees); The Crew Package $140 for 4 General Admission tickets; Table Reservation $750 (table for 5 guests, $150 deposit, $600 minimum bottle spend). A 2-Day Pass is $90.'
     ],
     [
       'q' => 'Is there an age requirement?',

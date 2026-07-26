@@ -11,14 +11,16 @@ $table_ticket_url = fest_setting('fest_table_ticket_url') ?: 'https://buy.tablel
 
 $prices = [
     'day1' => [
-        'ga'    => fest_setting('fest_day1_ga_price')  ?: '$60 + applicable fees',
+        'ga'    => fest_setting('fest_day1_ga_price')  ?: '$70 + applicable fees',
         'vip'   => fest_setting('fest_day1_vip_price') ?: 'Sold Out',
         'table' => fest_setting('fest_day1_table_price') ?: 'TBA',
+        'crew'  => fest_setting('fest_day1_crew_price') ?: '$200',
     ],
     'day2' => [
         'ga'    => fest_setting('fest_day2_ga_price')    ?: '$40 + applicable fees',
         'vip'   => fest_setting('fest_day2_vip_price')   ?: 'TBA',
         'table' => fest_setting('fest_day2_table_price') ?: '$750',
+        'crew'  => fest_setting('fest_day2_crew_price') ?: '$140',
     ],
 ];
 
@@ -94,7 +96,29 @@ $ticket_days = [
           <?php endif; ?>
         </div>
 
-        <!-- VIP (Day 1 only) -->
+        <!-- The Crew Package -->
+        <div class="fest-ticket-tier fest-reveal">
+          <span class="fest-tier-badge">Groups</span>
+          <div class="fest-tier-name">The Crew Package</div>
+          <div class="fest-tier-price">
+            <strong><?php echo esc_html($prices[$day_key]['crew']); ?></strong>
+          </div>
+          <div class="fest-tier-desc">4 General Admission tickets for <?php echo esc_html($days_meta[$day_key]['label']); ?> at a discounted group rate. Roll deep with the crew.</div>
+          <div class="fest-tier-perks">
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>4 General Admission tickets</div>
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Discounted vs. buying individually</div>
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>All performances &amp; vendor access</div>
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>19+ valid ID required</div>
+          </div>
+          <?php if ($day_url): ?>
+          <a href="<?php echo esc_url($day_url); ?>"
+             class="fest-tier-btn fest-tier-btn-outline">
+            Buy Tickets &rarr;
+          </a>
+          <?php else: ?>
+          <div class="fest-tier-btn fest-tier-btn-outline fest-tier-btn-disabled">Tickets Coming Soon</div>
+          <?php endif; ?>
+        </div>
         <?php if ($day_key === 'day1'): ?>
         <div class="fest-ticket-tier featured fest-reveal">
           <span class="fest-tier-badge">Most Popular</span>
@@ -127,9 +151,9 @@ $ticket_days = [
           <span class="fest-tier-badge">Groups</span>
           <div class="fest-tier-name">Table Package</div>
           <div class="fest-tier-price"><?php echo esc_html($prices[$day_key]['table']); ?></div>
-          <div class="fest-tier-desc">Reserved table for your group with bottle service and a dedicated host.</div>
+          <div class="fest-tier-desc"><?php echo $day_key === 'day2' ? 'Reserved table for 5 guests. $150 deposit, $600 minimum bottle spend. Bottle service and a dedicated host included.' : 'Reserved table for your group with bottle service and a dedicated host.'; ?></div>
           <div class="fest-tier-perks">
-            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Table for 6&ndash;10 guests</div>
+            <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div><?php echo $day_key === 'day2' ? 'Table for 5 guests' : 'Table for 6&ndash;10 guests'; ?></div>
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Bottle service included</div>
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Dedicated event host</div>
             <div class="fest-tier-perk"><div class="fest-tier-perk-dot"></div>Best views of the stage</div>
